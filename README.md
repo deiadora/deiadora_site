@@ -103,12 +103,13 @@ Deployed on **Cloudflare Pages**.
 
 ---
 
-## part of the deiadora ecosystem
-→ deiadora.com · node 0 · the field
-→ drblexchange.com · node 2 · recognition
-→ quantummagic.ai · node 3 · discernment
-→ iamdeiadora.com · node 4 · wave
-→ techtuition.ai · node 7 · expression
-→ thequantumceo.com · node 8 · structure
+### part of the deiadora ecosystem
+ 
+→ [deiadora.com](https://deiadora.com) · node 0 · the field
+→ [drblexchange.com](https://drblexchange.com) · node 2 · recognition
+→ [quantummagic.com](https://quantummagic.ai) · node 3 · discernment
+→ [iamdeiadora.com](https://iamdeiadora.com) · node 4 · wave
+→ [techtuition.ai](https://techtuition.ai) · node 7 · expression
+→ [thequantumceo.com](https://thequantumceo.com) · node 8 · structure
 
 *the field is not between things. the field is primary. things are what the field does locally.*

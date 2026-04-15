@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>deiadora · field research · coherence architecture in practice</title>
+<meta name="description" content="Field research from coherence architecture engagements — what gets built, what changes, what the yield looks like in practice." />
+<link rel="icon" href="/deiadora_favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:     #ebe7dc;
+  --paper:   #0c1516;
+  --card:    #0e171a;
+  --card-lt: #131f23;
+  --gold:    #ecb02f;
+  --muted:   #cbc6ba;
+  --line:    rgba(240,237,230,.1);
+  --line-s:  rgba(240,237,230,.18);
+  --r: 8px;
+  --serif:   'Exo 2', sans-serif;
+  --sans:    'DM Sans', sans-serif;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --c4: #7a9e2a; --c6: #0f6e56; --c7: #1a6b9e; --c9: #6b4fa0;
+}
+
+[data-theme="light"] {
+  --paper:#f4f2ec; --card:#fffff2; --card-lt:#e8e2d6;
+  --ink:#1a1814; --muted:#7a7163; --gold:#8B5E2A;
+  --line:rgba(26,24,20,.1); --line-s:rgba(26,24,20,.18);
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--sans); background:var(--paper); color:var(--ink);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  transition:background .25s, color .25s;
+}
+
+.page { max-width:920px; margin:auto; padding:2rem 1.5rem 8rem; }
+
+.theme-toggle {
+  position:fixed; top:20px; right:20px;
+  border:1px solid var(--line-s); background:none;
+  color:var(--muted); padding:.4rem .7rem;
+  border-radius:999px; cursor:pointer; font-size:1rem;
+  transition:all .2s; z-index:100;
+}
+.theme-toggle:hover { border-color:var(--gold); color:var(--ink); }
+
+.back-link {
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.82rem; color:var(--muted); text-decoration:none;
+  font-family:var(--serif); letter-spacing:.04em;
+  margin-bottom:3rem; margin-top:1.5rem; transition:color .2s;
+}
+.back-link:hover { color:var(--gold); }
+
+/* hero */
+.hero { padding:4rem 0 3.5rem; border-bottom:1px solid var(--line); }
+
+.hero-eyebrow {
+  font-family:var(--serif); font-size:.75rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.2rem;
+}
+
+.hero h1 {
+  font-family:var(--display);
+  font-size:clamp(2.6rem,5vw,4rem);
+  font-weight:400; line-height:1.08; letter-spacing:-.02em;
+  margin-bottom:1rem;
+}
+.hero h1 em { color:var(--gold); font-style:italic; }
+
+.hero-sub {
+  color:var(--muted); max-width:520px;
+  font-size:1rem; line-height:1.8; font-weight:300;
+}
+
+/* section */
+section { margin-top:4.5rem; }
+.section-label {
+  font-family:var(--serif); font-size:.72rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.6rem;
+}
+
+/* case study card */
+.case-study {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:12px; padding:2.4rem; margin-bottom:2rem;
+  position:relative; overflow:hidden;
+}
+
+.case-study::before {
+  content:''; position:absolute; top:0; left:0; bottom:0;
+  width:3px; background:var(--cs-accent, var(--gold));
+}
+
+.cs-meta {
+  display:flex; align-items:center; gap:.8rem;
+  flex-wrap:wrap; margin-bottom:1.2rem;
+}
+
+.cs-tag {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:.2rem .7rem; border-radius:999px;
+  border:1px solid var(--line-s); color:var(--muted);
+}
+
+.cs-tag.gold { border-color:var(--gold); color:var(--gold); }
+
+.cs-year {
+  font-family:var(--serif); font-size:.75rem;
+  color:var(--muted); letter-spacing:.04em;
+}
+
+.case-study h2 {
+  font-family:var(--display);
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:400; line-height:1.2; margin-bottom:.6rem;
+}
+
+.case-study .cs-context {
+  font-size:.9rem; color:var(--muted); line-height:1.8;
+  margin-bottom:1.4rem; font-weight:300; max-width:600px;
+}
+
+/* results row */
+.results-row {
+  display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.4rem;
+}
+
+.result-stat {
+  background:var(--card-lt); border-radius:var(--r);
+  padding:.8rem 1.2rem; text-align:center; flex:1; min-width:120px;
+}
+
+.result-stat .rs-num {
+  font-family:var(--display); font-size:1.6rem;
+  font-weight:400; color:var(--gold); line-height:1.1; margin-bottom:.2rem;
+}
+
+.result-stat .rs-label {
+  font-size:.72rem; color:var(--muted); line-height:1.4;
+}
+
+/* field note body */
+.fn-body {
+  display:grid; grid-template-columns:1fr 1fr; gap:1.4rem;
+  margin-bottom:1.4rem;
+}
+@media(max-width:600px){ .fn-body { grid-template-columns:1fr; } }
+
+.fn-col h4 {
+  font-family:var(--serif); font-size:.7rem; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.5rem;
+}
+
+.fn-col p {
+  font-size:.88rem; color:var(--muted); line-height:1.7;
+}
+.fn-col p strong { color:var(--ink); font-weight:500; }
+
+/* sower note */
+.sower-note {
+  background:var(--card-lt); border-radius:var(--r);
+  padding:1.2rem 1.4rem; margin-top:1rem;
+  font-family:var(--display); font-size:1.05rem;
+  font-style:italic; color:var(--muted); line-height:1.75;
+}
+
+/* placeholder card */
+.case-placeholder {
+  background:var(--card); border:1px dashed var(--line-s);
+  border-radius:12px; padding:2rem 2.4rem;
+  display:flex; align-items:center; gap:1.6rem;
+}
+
+.cp-icon {
+  font-size:1.8rem; opacity:.25; flex-shrink:0;
+}
+
+.cp-body h3 {
+  font-family:var(--serif); font-size:.95rem; font-weight:600;
+  margin-bottom:.3rem;
+}
+
+.cp-body p {
+  font-size:.85rem; color:var(--muted); line-height:1.6;
+}
+
+.cp-tag {
+  display:inline-block; margin-top:.6rem;
+  font-size:.68rem; font-weight:600; font-family:var(--serif);
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--gold); padding:.2rem .8rem;
+  border:1px solid rgba(236,176,47,.4); border-radius:999px;
+}
+
+/* what you will find */
+.pattern-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+}
+@media(max-width:580px){ .pattern-grid { grid-template-columns:1fr; } }
+
+.pattern-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.4rem;
+}
+
+.pattern-card h3 {
+  font-family:var(--serif); font-size:.88rem; font-weight:600;
+  margin-bottom:.4rem;
+}
+
+.pattern-card p {
+  font-size:.85rem; color:var(--muted); line-height:1.65;
+}
+
+/* footer */
+.cs-footer {
+  margin-top:4rem; padding-top:2rem;
+  border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; flex-wrap:wrap;
+  gap:.6rem; font-size:.82rem; color:var(--muted);
+  font-family:var(--serif); font-style:italic;
+}
+.cs-footer a { color:var(--gold); text-decoration:none; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.hero .hero-eyebrow { animation:fadeUp .5s ease both .05s; }
+.hero h1            { animation:fadeUp .5s ease both .12s; }
+.hero .hero-sub     { animation:fadeUp .5s ease both .2s; }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌗</button>
+
+<div class="page">
+
+  <a class="back-link" href="https://deiadora.com">← deiadora.com</a>
+
+  <!-- hero -->
+  <section class="hero">
+    <p class="hero-eyebrow">Field research · coherence architecture in practice</p>
+    <h1>Field research.<br>What gets built.<br>What <em>changes.</em></h1>
+    <p class="hero-sub">These are not testimonials. They are field research — honest accounts of what a coherence architecture engagement actually produces, what the yield looks like in practice, and what the pattern is across different kinds of founders and systems.</p>
+  </section>
+
+  <!-- what to expect -->
+  <section>
+    <p class="section-label">what you will find here</p>
+    <div class="pattern-grid">
+      <div class="pattern-card">
+        <h3>The scope is always limited</h3>
+        <p>Every engagement is defined in advance. The work builds what the founder couldn't yet see how to build, trains the team on it, and departs. It is not an ongoing retainer — it is a designed completion.</p>
+      </div>
+      <div class="pattern-card">
+        <h3>The yield outlasts the engagement</h3>
+        <p>The playbooks, the governance structures, the exit strategies — these continue to function after the engagement ends. The test of coherence architecture is whether the system holds without the architect present.</p>
+      </div>
+      <div class="pattern-card">
+        <h3>The entry is always relationship</h3>
+        <p>These engagements do not begin with applications or RFPs. They begin with a conversation between people who are operating at the same level and recognise something in each other's work.</p>
+      </div>
+      <div class="pattern-card">
+        <h3>The client is always coherent</h3>
+        <p>The framework lands most deeply with founders who already sense the architecture of what they're building. The engagement names what they already know — and builds the structure that makes it operational.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY 1 — Jacque / Luxe Incentives -->
+  <section>
+    <p class="section-label">field note 01</p>
+    <div class="case-study" style="--cs-accent:var(--gold)">
+      <div class="cs-meta">
+        <span class="cs-tag gold">Exit strategy</span>
+        <span class="cs-tag">Incentive travel + AI platform</span>
+        <span class="cs-tag">40 hrs / month retainer</span>
+        <span class="cs-year">2024–2025</span>
+      </div>
+      <h2>From founder-dependent to<br>self-sustaining — and a seven-figure exit horizon.</h2>
+      <p class="cs-context">A founder with a working business, two strong right hands, and an exit instinct she hadn't yet named or structured. The engagement built the coherence architecture that made the exit legible, the governance distributable, and the business attractive to enterprise buyers at a level she hadn't previously accessed.</p>
+
+      <div class="results-row">
+        <div class="result-stat">
+          <p class="rs-num">$500k</p>
+          <p class="rs-label">Immediate contract value — Rocket Money, Abbott, Celebrity Cruises</p>
+        </div>
+        <div class="result-stat">
+          <p class="rs-num">$6M+</p>
+          <p class="rs-label">Projected value in the 18 months following engagement</p>
+        </div>
+        <div class="result-stat">
+          <p class="rs-num">2 yr</p>
+          <p class="rs-label">Structured exit strategy — succession to two internal right hands</p>
+        </div>
+        <div class="result-stat">
+          <p class="rs-num">2×</p>
+          <p class="rs-label">Revenue doubled within the first six months of engagement</p>
+        </div>
+      </div>
+
+      <div class="fn-body">
+        <div class="fn-col">
+          <h4>What the engagement built</h4>
+          <p>A two-year exit strategy with a clear succession path to two existing team members. A client development framework that made the business legible at enterprise scale — enabling the conversations with Rocket Money, Abbott, and Celebrity Cruises that had previously stalled at the pitch stage. A governance structure that reduced founder dependency across both arms of the business: incentive travel and the AI platform.</p>
+        </div>
+        <div class="fn-col">
+          <h4>What changed — and what held</h4>
+          <p>The founder's vision was already coherent. The engagement gave it structure and language. <strong>The playbook outlasted the engagement.</strong> The exit strategy is on track. The enterprise clients are active. What the founder built with 40 hours per month of coherence architecture would have required a full-time Chief of Staff, a fractional CMO, and a strategy consultant — simultaneously. The yield was a hundred-fold in the most literal sense.</p>
+        </div>
+      </div>
+
+      <!-- future anchor: pending — add Jacque's direct quote when confirmed -->
+      <div class="sower-note">
+        "This is what good soil looks like in practice: a founder who already had the vision, the team, and the instinct — and needed the architecture to make it hold at the next level. The work named what she already knew. The system did the rest."
+        <br><br>— Deiadora Blanche, field note · 2025
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY 2 — placeholder -->
+  <section>
+    <p class="section-label">field note 02</p>
+    <div class="case-placeholder">
+      <div class="cp-icon">◈</div>
+      <div class="cp-body">
+        <h3>Relational architecture · tech founder · AI product</h3>
+        <p>A founder building an AI product for distributed teams — the communication strategy engagement that made a technically complex offering legible at multiple audience levels simultaneously. Field note in preparation.</p>
+        <span class="cp-tag">in preparation · 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY 3 — placeholder -->
+  <section>
+    <p class="section-label">field note 03</p>
+    <div class="case-placeholder">
+      <div class="cp-icon">△</div>
+      <div class="cp-body">
+        <h3>Governance architecture · SaaS CEO · onboarding and navigation</h3>
+        <p>A CEO rebuilding how signal travels through onboarding — making a technically excellent product as legible to a first-time user as to an enterprise buyer. Field note in preparation.</p>
+        <span class="cp-tag">in preparation · 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY 4 — placeholder: paid research framing -->
+  <section>
+    <p class="section-label">field note 04 — the pattern across four corporate engagements</p>
+    <div class="case-study" style="--cs-accent:var(--c7)">
+      <div class="cs-meta">
+        <span class="cs-tag" style="border-color:var(--c7); color:var(--c7);">Paid research</span>
+        <span class="cs-tag">Fortune 100 &amp; 500 · AI · content ops</span>
+        <span class="cs-year">2020–2025</span>
+      </div>
+      <h2>Four organisations. One pattern.<br>The framework that emerged.</h2>
+      <p class="cs-context">Coursera (2020-2022), Airbnb (2023), UX Content Collective (2022–2026), and a financial services organisation (2024) — four organisations that engaged with coherence architecture and then attempted to institutionalise what was built without the originating intelligence. Each engagement was treated as paid research into whether the framework applies at scale. It does. The pattern that emerged is now the framework.</p>
+
+      <div class="fn-body">
+        <div class="fn-col">
+          <h4>Coursera · 2020-2022</h4>
+          <p>Built the content ops infrastructure and design system that became the shared architecture across all cross-vertical teams. Millions of learners. Still in active use. <strong>Confirmed: the framework applies at platform scale.</strong> The challenge was not the work — it was the organisation's subsequent attempt to institutionalise what had been built without the person who built it.</p>
+        </div>
+        <div class="fn-col">
+          <h4>Airbnb · 2023</h4>
+          <p>Proposed and launched Airbnb's first internal AI model for the help centre — from strategy through training data, evaluation, and rollout. <strong>The first proof that the framework applies at AI/ML scale.</strong> The model is still in use. The engagement ended the same way: the IP became a role description. The pattern held.</p>
+        </div>
+        <div class="fn-col">
+          <h4>UX Content Collective · 2022–2026</h4>
+          <p>Four years of Intro to Content Ops and AI Content Strategy workshops — training practitioners at Fortune 100 and 500 companies. A genuine collaboration under the original founder. When leadership transferred in Q2 2024, proposals were declined and derivative offerings built from my research and materials were launched without attribution. Requests for participant lists to support playbook implementation produced consistent disengagement. <strong>The clearest case study in what thorny ground looks like from the inside.</strong></p>
+        </div>
+        <div class="fn-col">
+          <h4>What the pattern revealed</h4>
+          <p><strong>Value is recognised — then the system attempts to absorb it without the originating intelligence.</strong> The IP becomes a job description. The consultant becomes a candidate. The framework becomes a methodology attributed to the institution. This pattern is now documented, named, and is the reason the practice enters through relationship and invitation only.</p>
+        </div>
+      </div>
+
+      <!-- future anchor: pending — expand with specific outcomes from each engagement -->
+      <div class="sower-note">
+        "I treated each of these as paid research rather than labouring over the disappointment. The question was whether the framework applied at this scale — millions of learners, global AI deployments, hundreds of practitioners in Fortune 100 and 500 companies. It did. That data is now in the books. It is the most important thing those engagements produced — and none of the organisations that attempted to absorb it have the full picture. That lives here."
+        <br><br>— Deiadora Blanche, field note · 2026
+      </div>
+    </div>
+  </section>
+
+  <!-- closing -->
+  <section>
+    <p class="section-label">a note on the nature of these engagements</p>
+    <div style="background:var(--card); border:1px solid var(--line-s); border-left:3px solid var(--gold); border-radius:0 var(--r) var(--r) 0; padding:1.8rem 2.2rem;">
+      <p style="font-family:var(--display); font-size:1.05rem; font-style:italic; color:var(--ink); line-height:1.8; max-width:600px;">
+        Every engagement listed here ended with the system more coherent than it began — with or without the architect present. That is the test. The playbook holds. The governance distributes. The exit strategy is on track. The yield, in good soil, is always more than anyone predicted at the outset.
+      </p>
+      <p style="font-size:.85rem; color:var(--muted); margin-top:1rem; line-height:1.7;">
+        If you are a founder who recognises something in these field notes — if the pattern of "I can see what I'm building but I can't yet make it hold" is familiar — the workshop begins at Step 0. No discovery call required. The field is always accessible.
+      </p>
+      <a href="https://deiadora.com/workshop" style="display:inline-flex; align-items:center; gap:.4rem; margin-top:1rem; font-size:.85rem; font-weight:500; font-family:var(--serif); color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(236,176,47,.3); padding-bottom:2px;">Begin at Step 0 →</a>
+    </div>
+  </section>
+
+  <footer class="cs-footer">
+    <span>Deiadora Blanche · field notes · coherence architecture in practice</span>
+    <p>© <span id="year"></span> · <a href="https://deiadora.com">deiadora.com</a></span>
+  </footer>
+
+</div>
+
+<script>
+const toggle  = document.getElementById('themeToggle');
+const root    = document.documentElement;
+const STORE   = 'qc-theme';
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function resolveTheme() {
+  return localStorage.getItem(STORE) || (sysDark.matches ? 'dark' : 'light');
+}
+
+function applyTheme(theme) {
+  root.setAttribute('data-theme', theme);
+  const isSystem = !localStorage.getItem(STORE);
+  toggle.textContent = isSystem ? '🌗' : (theme === 'dark' ? '🌙' : '☀️');
+}
+
+applyTheme(resolveTheme());
+
+toggle.addEventListener('click', () => {
+  const current = resolveTheme();
+  const system  = sysDark.matches ? 'dark' : 'light';
+  const next    = current === 'dark' ? 'light' : 'dark';
+  if (next === system) localStorage.removeItem(STORE);
+  else localStorage.setItem(STORE, next);
+  applyTheme(next);
+});
+
+sysDark.addEventListener('change', () => {
+  if (!localStorage.getItem(STORE)) applyTheme(sysDark.matches ? 'dark' : 'light');
+});
+</script>
+</body>
+</html>

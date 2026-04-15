@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>deiadora · the ecosystem · coherence architecture in practice</title>
+<meta name="description" content="Four books. Ten workshop steps. A coherence architecture practice. This is how the work is structured, who it is for, and how to find your way in." />
+<meta property="og:title" content="deiadora · coherence architecture in practice" />
+<meta property="og:description" content="The field is primary. The ecosystem is already built. This is how it works." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://deiadora.com/ecosystem" />
+<link rel="icon" href="/deiadora_favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:     #ebe7dc;
+  --paper:   #0c1516;
+  --card:    #0e171a;
+  --card-lt: #131f23;
+  --gold:    #ecb02f;
+  --muted:   #cbc6ba;
+  --line:    rgba(240,237,230,.1);
+  --line-s:  rgba(240,237,230,.18);
+  --r: 8px;
+  --serif:   'Exo 2', sans-serif;
+  --sans:    'DM Sans', sans-serif;
+  --display: 'Cormorant Garamond', Georgia, serif;
+
+  --c0:#0c1516; --c1:#a9292a; --c2:#9d4418;
+  --c3:#c49a3c; --c4:#7a9e2a; --c5:#2d6a1f;
+  --c6:#0f6e56; --c7:#1a6b9e; --c8:#7b72d8;
+  --c9:#6b4fa0;
+}
+
+[data-theme="light"] {
+  --paper:   #f4f2ec;
+  --card:    #fffff2;
+  --card-lt: #e8e2d6;
+  --ink:     #1a1814;
+  --muted:   #7a7163;
+  --gold:    #8B5E2A;
+  --line:    rgba(26,24,20,.1);
+  --line-s:  rgba(26,24,20,.18);
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family:var(--sans);
+  background:var(--paper); color:var(--ink);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  transition:background .25s, color .25s;
+}
+
+.page { max-width:920px; margin:auto; padding:2rem 1.5rem 8rem; }
+
+/* theme toggle */
+.theme-toggle {
+  position:fixed; top:20px; right:20px;
+  border:1px solid var(--line-s); background:none;
+  color:var(--muted); padding:.4rem .7rem;
+  border-radius:999px; cursor:pointer; font-size:1rem;
+  transition:all .2s; z-index:100;
+}
+.theme-toggle:hover { border-color:var(--gold); color:var(--ink); }
+
+/* back link */
+.back-link {
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.82rem; color:var(--muted); text-decoration:none;
+  font-family:var(--serif); letter-spacing:.04em;
+  margin-bottom:3rem; margin-top:1.5rem;
+  transition:color .2s;
+}
+.back-link:hover { color:var(--gold); }
+
+/* ── hero ── */
+.hero {
+  padding:4rem 0 3.5rem;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+
+.hero-eyebrow {
+  font-family:var(--serif); font-size:.75rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.2rem;
+}
+
+.hero h1 {
+  font-family:var(--display);
+  font-size:clamp(2.8rem,5.5vw,4.4rem);
+  font-weight:400; line-height:1.06; letter-spacing:-.02em;
+  margin-bottom:1.2rem; max-width:700px;
+}
+
+.hero h1 em { color:var(--gold); font-style:italic; }
+
+.hero-sub {
+  color:var(--muted); max-width:540px;
+  font-size:1rem; line-height:1.8; font-weight:300;
+  margin-bottom:1.6rem;
+}
+
+.hero-pull {
+  font-family:var(--display);
+  font-size:1.2rem; font-style:italic; font-weight:400;
+  color:var(--ink); max-width:560px; line-height:1.7;
+  border-left:2px solid var(--gold);
+  padding:4px 0 4px 18px;
+}
+
+/* ── section structure ── */
+section { margin-top:5rem; }
+
+.section-label {
+  font-family:var(--serif); font-size:.72rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.6rem;
+}
+
+/* ── what this is ── */
+.what-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+}
+@media(max-width:640px){ .what-grid { grid-template-columns:1fr; } }
+
+.what-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.6rem;
+  position:relative; overflow:hidden;
+}
+
+.what-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:var(--wc-color, var(--gold));
+}
+
+.what-card .wc-eyebrow {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--wc-color, var(--gold)); margin-bottom:.6rem;
+}
+
+.what-card h3 {
+  font-family:var(--serif); font-size:1rem; font-weight:600;
+  margin-bottom:.5rem; letter-spacing:-.01em;
+}
+
+.what-card p {
+  font-size:.88rem; color:var(--muted); line-height:1.7;
+}
+
+/* ── who it is for ── */
+.who-intro {
+  font-size:.97rem; color:var(--muted); line-height:1.8;
+  max-width:620px; margin-bottom:1.6rem; font-weight:300;
+}
+.who-intro strong { color:var(--ink); font-weight:500; }
+
+.who-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;
+}
+@media(max-width:680px){ .who-grid { grid-template-columns:1fr; } }
+
+.who-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.5rem;
+}
+
+.who-card h3 {
+  font-family:var(--serif); font-size:.92rem; font-weight:600;
+  margin-bottom:.4rem;
+}
+
+.who-card .who-signal {
+  font-size:.78rem; color:var(--muted); font-style:italic;
+  line-height:1.5; margin-bottom:.8rem;
+}
+
+.who-step {
+  font-size:.82rem; color:var(--muted); padding:.3rem 0;
+  border-bottom:1px solid var(--line);
+  display:flex; align-items:baseline; gap:.5rem;
+}
+.who-step:last-child { border-bottom:none; }
+.who-num {
+  font-family:var(--serif); font-size:.7rem; font-weight:600;
+  color:var(--gold); flex-shrink:0;
+}
+
+/* ── how it works ── */
+.how-intro {
+  font-size:.97rem; color:var(--muted); line-height:1.8;
+  max-width:620px; margin-bottom:2rem; font-weight:300;
+}
+.how-intro strong { color:var(--ink); font-weight:500; }
+
+.steps-row {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:6px;
+  margin-bottom:6px;
+}
+@media(max-width:640px){ .steps-row { grid-template-columns:repeat(2,1fr); } }
+
+.step-chip {
+  border-radius:var(--r); padding:12px;
+  text-align:center; text-decoration:none;
+  display:block; transition:opacity .2s;
+}
+.step-chip:hover { opacity:.8; }
+
+.step-chip .sc-num {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.06em; margin-bottom:4px;
+}
+
+.step-chip .sc-name {
+  font-size:.75rem; font-weight:500; line-height:1.3;
+}
+
+.step-chip .sc-geo {
+  font-size:.65rem; opacity:.7; margin-top:3px; line-height:1.3;
+}
+
+.steps-legend {
+  display:flex; gap:1.2rem; flex-wrap:wrap;
+  margin-top:.8rem; font-size:.78rem; color:var(--muted);
+}
+
+.legend-item { display:flex; align-items:center; gap:.4rem; }
+.legend-dot {
+  width:8px; height:8px; border-radius:50%; flex-shrink:0;
+}
+
+/* ── four lenses ── */
+.lens-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+}
+@media(max-width:580px){ .lens-grid { grid-template-columns:1fr; } }
+
+.lens-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.5rem;
+  position:relative; overflow:hidden;
+}
+
+.lens-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px;
+}
+
+.lens-card h3 {
+  font-family:var(--serif); font-size:.95rem; font-weight:600;
+  margin-bottom:.3rem;
+}
+
+.lens-card .lens-status {
+  font-size:.68rem; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; margin-bottom:.6rem;
+}
+
+.lens-card p {
+  font-size:.85rem; color:var(--muted); line-height:1.65;
+}
+
+/* ── case study ── */
+.case-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-left:3px solid var(--gold);
+  border-radius:0 var(--r) var(--r) 0;
+  padding:2rem 2.4rem;
+}
+
+.case-eyebrow {
+  font-family:var(--serif); font-size:.7rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:.8rem;
+}
+
+.case-card h3 {
+  font-family:var(--display); font-size:1.6rem; font-weight:400;
+  margin-bottom:.6rem; line-height:1.2;
+}
+
+.case-card .case-sub {
+  font-size:.95rem; color:var(--muted); line-height:1.8;
+  margin-bottom:1.4rem; font-weight:300; max-width:580px;
+}
+
+.case-results {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
+  margin:1.4rem 0;
+}
+@media(max-width:580px){ .case-results { grid-template-columns:1fr; } }
+
+.cr-stat {
+  background:var(--card-lt); border-radius:var(--r);
+  padding:1rem; text-align:center;
+}
+
+.cr-stat .cr-num {
+  font-family:var(--display); font-size:1.8rem;
+  font-weight:400; color:var(--gold); line-height:1.1;
+  margin-bottom:.2rem;
+}
+
+.cr-stat .cr-label {
+  font-size:.75rem; color:var(--muted); line-height:1.4;
+}
+
+.case-link {
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.85rem; font-weight:500; font-family:var(--serif);
+  color:var(--gold); text-decoration:none;
+  border-bottom:1px solid rgba(236,176,47,.3);
+  padding-bottom:2px; transition:opacity .2s;
+}
+.case-link:hover { opacity:.7; }
+
+/* ── how to work together ── */
+.work-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;
+}
+@media(max-width:680px){ .work-grid { grid-template-columns:1fr; } }
+
+.work-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.5rem;
+}
+
+.work-card .wk-num {
+  font-family:var(--display); font-size:2rem; font-weight:400;
+  color:var(--gold); opacity:.4; line-height:1;
+  margin-bottom:.5rem;
+}
+
+.work-card h3 {
+  font-family:var(--serif); font-size:.92rem; font-weight:600;
+  margin-bottom:.4rem;
+}
+
+.work-card p {
+  font-size:.85rem; color:var(--muted); line-height:1.65;
+}
+
+.work-card .wk-note {
+  font-size:.75rem; color:var(--muted); font-style:italic;
+  margin-top:.6rem;
+}
+
+/* ── closing ── */
+.closing {
+  margin-top:5rem; padding:3rem 2.4rem;
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:12px; text-align:center;
+}
+
+.closing h2 {
+  font-family:var(--display);
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:400; line-height:1.2;
+  margin-bottom:1rem;
+}
+.closing h2 em { color:var(--gold); font-style:italic; }
+
+.closing p {
+  font-size:.95rem; color:var(--muted); line-height:1.8;
+  max-width:480px; margin:0 auto 1.6rem;
+}
+
+.closing-links {
+  display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+}
+
+.btn {
+  display:inline-flex; align-items:center;
+  padding:.65rem 1.4rem; border-radius:var(--r);
+  font-family:var(--sans); font-size:.88rem; font-weight:500;
+  text-decoration:none; cursor:pointer;
+  transition:all .2s; border:1.5px solid transparent;
+}
+.btn-gold { background:var(--gold); color:var(--paper); border-color:var(--gold); }
+.btn-gold:hover { opacity:.85; }
+.btn-ghost { background:transparent; color:var(--ink); border-color:var(--line-s); }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ── footer ── */
+.eco-footer {
+  margin-top:4rem; padding-top:2rem;
+  border-top:1px solid var(--line);
+  display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:.6rem;
+  font-size:.82rem; color:var(--muted);
+  font-family:var(--serif); font-style:italic;
+}
+.eco-footer a { color:var(--gold); text-decoration:none; }
+.eco-footer a:hover { opacity:.7; }
+
+/* animations */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero .hero-eyebrow { animation:fadeUp .5s ease both .05s; }
+.hero h1            { animation:fadeUp .5s ease both .12s; }
+.hero .hero-sub     { animation:fadeUp .5s ease both .2s; }
+.hero .hero-pull    { animation:fadeUp .5s ease both .28s; }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌗</button>
+
+<div class="page">
+
+  <a class="back-link" href="https://deiadora.com">← deiadora.com</a>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <p class="hero-eyebrow">Deiadora Blanche · coherence architecture in practice</p>
+    <h1>The work is architectural.<br>The entry point is<br><em>peer-to-peer.</em></h1>
+    <p class="hero-sub">Thirteen years of field research. Seven years of applied practice across Fortune 500 teams, early-stage founders, and multidisciplinary creative work. Four books. Ten workshop steps across ten sites. This page maps how it all fits together — and how to find your way in.</p>
+    <p class="hero-pull">"I help founders build what they are already envisioning into something coherent enough to communicate — to their team, their clients, and their own next chapter."</p>
+  </section>
+
+  <!-- ── WHAT THIS IS ── -->
+  <section>
+    <p class="section-label">what this is</p>
+    <div class="what-grid">
+      <div class="what-card" style="--wc-color:var(--c6)">
+        <p class="wc-eyebrow">The research</p>
+        <h3>Quantum Currency — a framework for coherent systems</h3>
+        <p>A multiscalar, quantum-sequenced approach to how individuals, teams, and organisations actually cohere — with practical implications for operations, collaboration, governance, and exit. Built on 13 years of field research; formalised in four volumes.</p>
+      </div>
+      <div class="what-card" style="--wc-color:var(--c7)">
+        <p class="wc-eyebrow">The practice</p>
+        <h3>Coherence architecture — the research made operational</h3>
+        <p>Working with founders and their teams to design the conditions under which their systems generate rather than deplete their own energy. Not consulting in the conventional sense — a limited-scope engagement that builds the thing the founder couldn't yet see how to build, trains everyone on it, and departs.</p>
+      </div>
+      <div class="what-card" style="--wc-color:var(--c9)">
+        <p class="wc-eyebrow">The workshop</p>
+        <h3>Ten steps across ten sites — the framework as playbook</h3>
+        <p>A ten-step interactive workshop built across the ten-site ecosystem — from zero point field to sovereign exit strategy. Steps 0–3 are open and free. Steps 4–9 are available by cohort enrolment or direct engagement. Four lenses: one per book.</p>
+      </div>
+      <div class="what-card" style="--wc-color:var(--c3)">
+        <p class="wc-eyebrow">The creative work</p>
+        <h3>Fiction, music, and the field notes that started it all</h3>
+        <p>Five novellas. Five albums. Thirteen years of field notes that became the books. The fiction and music series at deiadorebel.life and deiadorebel.com embody the framework in narrative form — an earlier, different way of making the research legible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO IT IS FOR ── -->
+  <section>
+    <p class="section-label">who this is for</p>
+    <p class="who-intro">The framework applies at every scale. But the work lands most deeply with <strong>intellectual, cultured, and coherent founders</strong> — people who already sense the architecture of what they're building but haven't yet had language for it. The entry is always relationship first.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>The founder or CEO</h3>
+        <p class="who-signal">You're building something real and you know it — but the vision keeps outpacing the system's ability to hold it. You want a peer, not a vendor.</p>
+        <div class="who-step"><span class="who-num">1</span>Relationship · speaking · workshop Step 0</div>
+        <div class="who-step"><span class="who-num">2</span>Embedded education · Steps 4–9</div>
+        <div class="who-step"><span class="who-num">3</span>Coherence architecture · full engagement</div>
+      </div>
+      <div class="who-card">
+        <h3>The practitioner or reader</h3>
+        <p class="who-signal">You found the ecosystem through the research, the fiction, or the 13 keys. You're building something of your own and the framework is giving it language.</p>
+        <div class="who-step"><span class="who-num">1</span>Fiction · music · open keys · workshop</div>
+        <div class="who-step"><span class="who-num">2</span>Steps 0–3 free · at your own pace</div>
+        <div class="who-step"><span class="who-num">3</span>Mentorship · community · cohort</div>
+      </div>
+      <div class="who-card">
+        <h3>The organisation</h3>
+        <p class="who-signal">A team that has outgrown its current operating model and needs something more than another methodology — a framework that describes how coherent systems actually work.</p>
+        <div class="who-step"><span class="who-num">1</span>Speaking · keynote · team workshop</div>
+        <div class="who-step"><span class="who-num">2</span>Full Steps 0–9 · custom playbook</div>
+        <div class="who-step"><span class="who-num">3</span>Licensing · Quantum Magic platform</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW THE WORKSHOP WORKS ── -->
+  <section>
+    <p class="section-label">how the workshop works</p>
+    <p class="how-intro">Ten steps, ten sites, ten geometric anchors — each step hosted on a different site in the ecosystem, each site a different node in the same field. <strong>Steps 0–3 are open and free.</strong> They are the invitation. Steps 4–9 are where the implementation happens.</p>
+
+    <!-- row 1: steps 0–4 -->
+    <div class="steps-row">
+      <a class="step-chip" href="https://deiadora.com/workshop" style="background:#0f6e5618; color:var(--c6)">
+        <p class="sc-num">Step 0</p>
+        <p class="sc-name">Field · Zero point</p>
+        <p class="sc-geo">deiadora.com</p>
+      </a>
+      <a class="step-chip" href="https://deiadorebel.life/workshop" style="background:#a9292a18; color:var(--c1)">
+        <p class="sc-num">Step 1</p>
+        <p class="sc-name">Coherence · Torus</p>
+        <p class="sc-geo">deiadorebel.life</p>
+      </a>
+      <a class="step-chip" href="https://drblexchange.com/workshop" style="background:#9d441818; color:var(--c2)">
+        <p class="sc-num">Step 2</p>
+        <p class="sc-name">Recognition · Vesica piscis</p>
+        <p class="sc-geo">drblexchange.com</p>
+      </a>
+      <a class="step-chip" href="https://quantummagic.ai/workshop" style="background:#c49a3c18; color:var(--c3)">
+        <p class="sc-num">Step 3</p>
+        <p class="sc-name">Discernment · Tetrahedron</p>
+        <p class="sc-geo">quantummagic.ai</p>
+      </a>
+      <a class="step-chip" href="https://iamdeiadora.com/workshop" style="background:#7a9e2a18; color:var(--c4)">
+        <p class="sc-num">Step 4</p>
+        <p class="sc-name">Wave · First cube</p>
+        <p class="sc-geo">iamdeiadora.com</p>
+      </a>
+    </div>
+    <!-- row 2: steps 5–9 -->
+    <div class="steps-row">
+      <a class="step-chip" href="https://rebelevolve.com/workshop" style="background:#2d6a1f18; color:var(--c5)">
+        <p class="sc-num">Step 5</p>
+        <p class="sc-name">Direction · Second cube</p>
+        <p class="sc-geo">rebelevolve.com</p>
+      </a>
+      <a class="step-chip" href="https://deiadorebel.com/workshop" style="background:#0f6e5618; color:var(--c6)">
+        <p class="sc-num">Step 6</p>
+        <p class="sc-name">Transmission · Dodecahedron</p>
+        <p class="sc-geo">deiadorebel.com</p>
+      </a>
+      <a class="step-chip" href="https://techtuition.ai/workshop" style="background:#1a6b9e18; color:var(--c7)">
+        <p class="sc-num">Step 7</p>
+        <p class="sc-name">Expression · Egg of life</p>
+        <p class="sc-geo">techtuition.ai</p>
+      </a>
+      <a class="step-chip" href="https://thequantumceo.com/workshop" style="background:#7b72d818; color:var(--c8)">
+        <p class="sc-num">Step 8</p>
+        <p class="sc-name">Structure · Octagon</p>
+        <p class="sc-geo">thequantumceo.com</p>
+      </a>
+      <a class="step-chip" href="https://deiadora.live/workshop" style="background:#6b4fa018; color:var(--c9)">
+        <p class="sc-num">Step 9</p>
+        <p class="sc-name">Source · Nonagon</p>
+        <p class="sc-geo">deiadora.live</p>
+      </a>
+    </div>
+    <div class="steps-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c6)"></div><span>Steps 0–3 · open and free</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div><span>Steps 4–9 · by cohort or direct engagement</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c9)"></div><span>Four lenses · one per book · each step</span></div>
+    </div>
+  </section>
+
+  <!-- ── THE FOUR BOOKS ── -->
+  <section>
+    <p class="section-label">the four books — four lenses on one framework</p>
+    <div class="lens-grid">
+      <div class="lens-card" style="--lc:var(--c6)">
+        <div style="height:2px; background:var(--c6); border-radius:2px; margin-bottom:1rem;"></div>
+        <p class="lens-status" style="color:var(--c6); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">Publishing 2026</p>
+        <h3>Quantum Currency</h3>
+        <p>Field Research on Human Coherence — the foundational framework. The quantum sequence 0–9, the geometric anchors, the physiological centres, the Sower lens applied to financial systems. The theory that makes everything else legible.</p>
+      </div>
+      <div class="lens-card">
+        <div style="height:2px; background:var(--c7); border-radius:2px; margin-bottom:1rem;"></div>
+        <p class="lens-status" style="color:var(--c7); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">In composition</p>
+        <h3>Relational Currency</h3>
+        <p>The human-AI collaboration dimension — how the field between people and systems either generates or depletes relational energy. The vesica piscis applied to every relationship the system depends on.</p>
+      </div>
+      <div class="lens-card">
+        <div style="height:2px; background:var(--c3); border-radius:2px; margin-bottom:1rem;"></div>
+        <p class="lens-status" style="color:var(--c3); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">In composition</p>
+        <h3>Encoded Currency</h3>
+        <p>The historical and informational layer — how currency has been encoded across cultures and epochs, and what those encoding patterns reveal about the systems we are building now.</p>
+      </div>
+      <div class="lens-card">
+        <div style="height:2px; background:var(--c9); border-radius:2px; margin-bottom:1rem;"></div>
+        <p class="lens-status" style="color:var(--c9); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">In composition</p>
+        <h3>Sovereign Currency</h3>
+        <p>The self-empowerment architecture — what it means to stand in one's own ground, design a system that generates its own energy, and hand it forward on one's own terms. The nonagon applied to a life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CASE STUDY ── -->
+  <section>
+    <p class="section-label">field note — coherence architecture in practice</p>
+    <div class="case-card">
+      <p class="case-eyebrow">Client · incentive travel + AI platform · exit strategy engagement</p>
+      <h3>From six-figure retainer to<br>a seven-figure exit horizon.</h3>
+      <p class="case-sub">A founder came to the engagement with a working business, two strong right hands, and an exit instinct she hadn't yet named or structured. Over a limited-scope retainer, the work built the coherence architecture that made the exit legible — and the business attractive to the right enterprise buyers.</p>
+      <div class="case-results">
+        <div class="cr-stat">
+          <p class="cr-num">$500k</p>
+          <p class="cr-label">Immediate new contract value — Rocket Money, Abbott, Celebrity Cruises</p>
+        </div>
+        <div class="cr-stat">
+          <p class="cr-num">$6M+</p>
+          <p class="cr-label">Projected contract value in the 18 months following engagement</p>
+        </div>
+        <div class="cr-stat">
+          <p class="cr-num">2 yr</p>
+          <p class="cr-label">Structured exit strategy — succession to two internal right hands</p>
+        </div>
+      </div>
+      <p style="font-size:.88rem; color:var(--muted); line-height:1.75; margin-bottom:1rem; max-width:580px;">The work was not strategy consulting. It was coherence architecture: making the founder's vision legible to her team, her buyers, and herself — and building the governance structure that allowed her to step back without the system collapsing. The playbook outlasted the engagement. The exit strategy is on track.</p>
+      <a class="case-link" href="/case-studies">Read the full field note →</a>
+    </div>
+  </section>
+
+  <!-- ── HOW TO WORK TOGETHER ── */
+  <section>
+    <p class="section-label">how to work together</p>
+    <div class="work-grid">
+      <div class="work-card">
+        <p class="wk-num">01</p>
+        <h3>Begin at Step 0</h3>
+        <p>The workshop is the proposal. Start at deiadora.com/workshop — it is free, open, and designed to help you understand whether this framework is the right one for where you are.</p>
+        <p class="wk-note">No discovery call required to begin.</p>
+      </div>
+      <div class="work-card">
+        <p class="wk-num">02</p>
+        <h3>Speak or write</h3>
+        <p>If Steps 0–3 resonated and you want to discuss what a direct engagement would look like — a speaking invitation, an embedded education proposal, or a coherence architecture retainer — reach out directly.</p>
+        <p class="wk-note">Peer-to-peer. No application process.</p>
+      </div>
+      <div class="work-card">
+        <p class="wk-num">03</p>
+        <h3>Join the waitlist</h3>
+        <p>The next cohort for Steps 4–9 runs through techtuition.ai. Small groups of founders and their teams. Live, facilitated, with a custom playbook at the end.</p>
+        <p class="wk-note">Limited places. Good soil only.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLOSING ── -->
+  <div class="closing">
+    <h2>The field is<br><em>always accessible.</em></h2>
+    <p>The sequence is open. The workshop begins at Step 0. The entry is relationship. The yield, in good soil, is hundred-fold.</p>
+    <div class="closing-links">
+      <a class="btn btn-gold" href="https://deiadora.com/workshop">Begin at Step 0 →</a>
+      <a class="btn btn-ghost" href="https://deiadora.com">Return to the ecosystem</a>
+    </div>
+  </div>
+
+  <footer class="eco-footer">
+    <span>Deiadora Blanche · coherence architect · researcher · author</span>
+    <span>© 2026 · <a href="https://deiadora.com">deiadora.com</a></span>
+  </footer>
+
+</div>
+
+<script>
+const toggle  = document.getElementById('themeToggle');
+const root    = document.documentElement;
+const STORE   = 'qc-theme';
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function resolveTheme() {
+  return localStorage.getItem(STORE) || (sysDark.matches ? 'dark' : 'light');
+}
+
+function applyTheme(theme) {
+  root.setAttribute('data-theme', theme);
+  const isSystem = !localStorage.getItem(STORE);
+  toggle.textContent = isSystem ? '🌗' : (theme === 'dark' ? '🌙' : '☀️');
+}
+
+applyTheme(resolveTheme());
+
+toggle.addEventListener('click', () => {
+  const current = resolveTheme();
+  const system  = sysDark.matches ? 'dark' : 'light';
+  const next    = current === 'dark' ? 'light' : 'dark';
+  if (next === system) localStorage.removeItem(STORE);
+  else localStorage.setItem(STORE, next);
+  applyTheme(next);
+});
+
+sysDark.addEventListener('change', () => {
+  if (!localStorage.getItem(STORE)) applyTheme(sysDark.matches ? 'dark' : 'light');
+});
+</script>
+</body>
+</html>

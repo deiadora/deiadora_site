@@ -390,13 +390,12 @@ section { margin-top:5rem; }
 .eco-footer {
   margin-top:4rem; padding-top:2rem;
   border-top:1px solid var(--line);
-  display:flex; justify-content:space-between;
-  align-items:center; flex-wrap:wrap; gap:.6rem;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:.6rem;
   font-size:.82rem; color:var(--muted);
-  font-family:var(--serif); font-style:italic;
 }
 .eco-footer a { color:var(--gold); text-decoration:none; }
-.eco-footer a:hover { opacity:.7; }
+.eco-footer a:hover { opacity:.75; }
 
 /* animations */
 @keyframes fadeUp {
@@ -415,7 +414,7 @@ section { margin-top:5rem; }
 
 <div class="page">
 
-  <a class="back-link" href="https://deiadora.com">← deiadora.com</a>
+  <a class="back-link" href="https://deiadora.com">← return home</a>
 
   <!-- ── HERO ── -->
   <section class="hero">
@@ -643,12 +642,14 @@ section { margin-top:5rem; }
 
   <footer class="eco-footer">
     <span>Deiadora Blanche · coherence architect · researcher · author</span>
-    <span>© 2026 · <a href="https://deiadora.com">deiadora.com</a></span>
+    <p>© <span id="year"></span> · part of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
   </footer>
 
 </div>
 
 <script>
+document.getElementById('year').textContent = new Date().getFullYear(); 
+
 const toggle  = document.getElementById('themeToggle');
 const root    = document.documentElement;
 const STORE   = 'qc-theme';

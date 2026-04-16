@@ -228,11 +228,12 @@ section { margin-top:4.5rem; }
 .cs-footer {
   margin-top:4rem; padding-top:2rem;
   border-top:1px solid var(--line);
-  display:flex; justify-content:space-between; flex-wrap:wrap;
-  gap:.6rem; font-size:.82rem; color:var(--muted);
-  font-family:var(--serif); font-style:italic;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:.6rem;
+  font-size:.82rem; color:var(--muted);
 }
 .cs-footer a { color:var(--gold); text-decoration:none; }
+.cs-footer a:hover { opacity:.75; }
 
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(14px); }
@@ -387,7 +388,7 @@ section { margin-top:4.5rem; }
 
   <footer class="cs-footer">
     <span>Deiadora Blanche · field notes · coherence architecture in practice</span>
-    <p>© <span id="year"></span> · home of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
+    <p>© <span id="year"></span> · part of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
   </footer>
 
 </div>

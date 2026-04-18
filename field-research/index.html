@@ -26,15 +26,31 @@
   --c4: #7a9e2a; --c6: #0f6e56; --c7: #1a6b9e; --c9: #6b4fa0;
 }
 
+[data-theme="dark"] {
+  --ink:     #f4f2ec;
+  --paper:   #010003;
+  --card:    #151515;
+  --card-lt: #20211e;
+  --gold:    #e6c47d;
+  --muted:   #b5ad9e;
+  --line:    rgba(240,237,230,.1);
+  --line-s:  rgba(240,237,230,.18);
+}
+[data-theme="dark"]  .nav        { background: #010003; }
+[data-theme="dark"]  .case-study { background: #151515; }
+[data-theme="dark"]  .pattern-card { background: #151515; }
+[data-theme="dark"]  .case-placeholder { background: #151515; }
+
 [data-theme="light"] {
   --paper:#f4f2ec; --card:#fffff2; --card-lt:#e8e2d6;
   --ink:#1a1814; --muted:#7a7163; --gold:#8B5E2A;
   --line:rgba(26,24,20,.1); --line-s:rgba(26,24,20,.18);
 }
+[data-theme="light"] .nav { background: #f4f2ec; }
 
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 html { scrollbar-gutter: stable; }
-  body {
+body {
   font-family:var(--sans); background:var(--paper); color:var(--ink);
   line-height:1.6; -webkit-font-smoothing:antialiased;
   transition:background .25s, color .25s;
@@ -42,7 +58,7 @@ html { scrollbar-gutter: stable; }
 
 .page { max-width:920px; margin:auto; padding:2rem 1.5rem 8rem; }
 
-  .nav {
+.nav {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: .9rem 2rem;
@@ -51,8 +67,6 @@ html { scrollbar-gutter: stable; }
   backdrop-filter: blur(8px);
   transition: background .25s;
 }
-[data-theme="dark"]  .nav { background: #0c1516; }
-[data-theme="light"] .nav { background: #f4f2ec; }
 
 .brand {
   font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
@@ -76,20 +90,12 @@ html { scrollbar-gutter: stable; }
 .navlinks .pill:hover { opacity: .85; }
 
 .theme-toggle {
-  background: none; border: 1.5px solid var(--line-s);
+  background: none; border: 1.5px solid var(--line);
   border-radius: 100px; cursor: pointer;
   padding: .35rem .6rem; font-size: 1rem; line-height: 1;
   color: var(--muted); transition: border-color .2s, color .2s;
 }
 .theme-toggle:hover { border-color: var(--gold); color: var(--ink); }
-  
-.back-link {
-  display:inline-flex; align-items:center; gap:.4rem;
-  font-size:.82rem; color:var(--muted); text-decoration:none;
-  font-family:var(--serif); letter-spacing:.04em;
-  margin-bottom:3rem; margin-top:1.5rem; transition:color .2s;
-}
-.back-link:hover { color:var(--gold); }
 
 /* hero */
 .hero { padding:4rem 0 3.5rem; border-bottom:1px solid var(--line); }
@@ -281,13 +287,13 @@ section { margin-top:4.5rem; }
 <header class="nav">
   <a class="brand" href="/">deiadora<span>.</span></a>
   <nav class="navlinks">
-    <a href="/field-research">field research</a>
+    <a href="/">home</a>
     <a href="/ecosystem">ecosystem</a>
     <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
   </nav>
 </header>
 
-  <div class="page">
+<div class="page">
 
   <!-- hero -->
   <section class="hero">
@@ -370,7 +376,7 @@ section { margin-top:4.5rem; }
     </div>
   </section>
 
-  <!-- CASE STUDY 2 — placeholder: paid research framing -->
+  <!-- CASE STUDY 2 — four corporate engagements -->
   <section>
     <p class="section-label">field note 02 — the pattern across four corporate engagements</p>
     <div class="case-study" style="--cs-accent:var(--c7)">
@@ -417,7 +423,7 @@ section { margin-top:4.5rem; }
         Every engagement listed here ended with the system more coherent than it began — with or without the architect present. That is the test. The playbook holds. The governance distributes. The exit strategy is on track. The yield, in good soil, is always more than anyone predicted at the outset.
       </p>
       <p style="font-size:.85rem; color:var(--muted); margin-top:1rem; line-height:1.7;">
-        If you are a founder who recognises something in these field notes — the workshop begins at Step 0. No discovery call required. Steps 0 through 3 live on Techtuition. The field is always accessible. 
+        If you are a founder who recognises something in these field notes — the workshop begins at Step 0. No discovery call required. Steps 0 through 3 live on Techtuition. The field is always accessible.
       </p>
       <a href="https://techtuition.ai" style="display:inline-flex; align-items:center; gap:.4rem; margin-top:1rem; font-size:.85rem; font-weight:500; font-family:var(--serif); color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(236,176,47,.3); padding-bottom:2px;">Visit techtuition.ai →</a>
     </div>
@@ -432,7 +438,7 @@ section { margin-top:4.5rem; }
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-  
+
 const toggle  = document.getElementById('themeToggle');
 const root    = document.documentElement;
 const STORE   = 'qc-theme';
@@ -446,6 +452,7 @@ function applyTheme(theme) {
   root.setAttribute('data-theme', theme);
   const isSystem = !localStorage.getItem(STORE);
   toggle.textContent = isSystem ? '🌗' : (theme === 'dark' ? '🌙' : '☀️');
+  toggle.setAttribute('aria-label', theme === 'dark' ? 'switch to light mode' : 'switch to dark mode');
 }
 
 applyTheme(resolveTheme());

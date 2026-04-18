@@ -17,22 +17,21 @@
   <style>
 :root {
   --ink:        #ebe7dc;
-  --paper:      #0c1516;  /* 0 · the field · zero point */
+  --paper:      #0c1516;
   --card:       #0e171a;
   --card-lt:    #131f23;
-  --gold:       #ecb02f;  /* bee gold · dark mode only */
-  --crown: var(--gold);  /* alias — brand dot, kicker, section labels */
-  /* ── spectrum variables (0→9) ── */
-  --node-0:     #0c1516;  /* the field · zero point · infrared */
-  --node-1:     #a9292a;  /* coherence · torus · deep red */
-  --node-2:     #9d4418;  /* recognition · vesica piscis · terracotta */
-  --node-3:     #c49a3c;  /* discernment · tetrahedron · pollen */
-  --node-4:     #7a9e2a;  /* wave · cube · new leaf */
-  --node-5:     #2d6a1f;  /* direction · second cube · canopy */
-  --node-6:     #0f6e56;  /* transmission · dodecahedron · deep water */
-  --node-7:     #1a6b9e;  /* expression · egg of life · open sky */
-  --node-8:     #7b72d8;  /* structure · octagon · twilight */
-  --node-9:     #8a72c0;  /* source · nonagon · ultraviolet edge */
+  --gold:       #ecb02f;
+  --crown: var(--gold);
+  --node-0:     #0c1516;
+  --node-1:     #a9292a;
+  --node-2:     #9d4418;
+  --node-3:     #c49a3c;
+  --node-4:     #7a9e2a;
+  --node-5:     #2d6a1f;
+  --node-6:     #0f6e56;
+  --node-7:     #1a6b9e;
+  --node-8:     #7b72d8;
+  --node-9:     #8a72c0;
   --muted:      #cbc6ba;
   --line:       rgba(240,237,230,.1);
   --line-s:     rgba(240,237,230,.18);
@@ -41,13 +40,28 @@
   --sans:       'DM Sans', system-ui, sans-serif;
   --display:    'Cormorant Garamond', Georgia, serif;
 }
+[data-theme="dark"] {
+  --ink:        #f4f2ec;
+  --paper:      #010003;
+  --card:       #151515;
+  --card-lt:    #20211e;
+  --gold:       #e6c47d;
+  --muted:      #b5ad9e;
+  --line:       rgba(240,237,230,.1);
+  --line-s:     rgba(240,237,230,.18);
+}
+[data-theme="dark"] .nav          { background: #010003; }
+[data-theme="dark"] .eco-tile     { background: #151515; }
+[data-theme="dark"] .eco-tile:hover { background: #20211e; }
+[data-theme="dark"] .contact-card { background: #151515; }
+[data-theme="dark"] .case-card    { background: #151515; }
 [data-theme="light"] {
   --ink:      #1a1814;
   --paper:    #f4f2ec;
   --card:     #fffff2;
   --card-lt:  #e8e2d6;
   --muted:    #7a7163;
-  --gold:     #8B5E2A;  /* beeswax */
+  --gold:     #8B5E2A;
   --line:     rgba(26,24,20,.1);
   --line-s:   rgba(26,24,20,.18);
 }
@@ -56,293 +70,293 @@
 [data-theme="light"] .eco-tile     { background: var(--card); }
 [data-theme="light"] .eco-tile:hover { background: var(--card-lt); }
 [data-theme="light"] .contact-card { background: var(--card); }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scrollbar-gutter: stable; }
-    body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background .25s, color .25s; }
-    /* ─── nav ─── */
-    .nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: .9rem 2rem;
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(8px);
-    }
-    .brand {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -.02em;
-    }
-    .brand span { color: var(--crown); }
-    .navlinks { display: flex; align-items: center; gap: 1.6rem; }
-    .navlinks a {
-      font-size: .85rem;
-      font-weight: 400;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: .02em;
-      transition: color .2s;
-    }
-    .navlinks a:hover { color: var(--gold); }
-    .theme-toggle {
-      background: none;
-      border: 1.5px solid var(--line-s);
-      border-radius: 100px;
-      cursor: pointer;
-      padding: .35rem .6rem;
-      font-size: 1rem;
-      line-height: 1;
-      color: var(--muted);
-      transition: border-color .2s, color .2s;
-    }
-    .theme-toggle:hover { border-color: var(--gold); color: var(--ink); }
-    /* ─── page ─── */
-    .page { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 6rem; }
-    /* ─── hero ─── */
-    .hero {
-      padding: 7rem 0 5rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .kicker {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: .88rem;
-      font-weight: 300;
-      color: var(--crown);
-      margin-bottom: 1.2rem;
-      letter-spacing: .06em;
-    }
-    .hero h1 {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      font-weight: 400;
-      color: var(--ink);
-      max-width: 700px;
-      margin-bottom: .6rem;
-    }
-    .hero h1 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--gold);
-    }
-    .role-line {
-      font-family: var(--serif);
-      font-size: .9rem;
-      font-weight: 300;
-      letter-spacing: .08em;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .role-line span { color: var(--gold); }
-    .subhead {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.75;
-      margin-bottom: 1.4rem;
-      font-weight: 300;
-    }
-    .subhead strong { color: var(--ink); font-weight: 500; }
-    .hero-note {
-      font-size: .82rem;
-      color: var(--muted);
-      letter-spacing: .03em;
-      margin-top: 2rem;
-      font-style: italic;
-    }
-    /* ─── section titles ─── */
-    .section-label {
-      font-family: var(--serif);
-      font-size: .78rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--crown);
-      margin-bottom: 1.6rem;
-    }
-    section { margin-top: 5rem; }
-    /* ─── case study grid ─── */
-    .case-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-    @media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
-    .case-card {
-      background: var(--card);
-      border: 1px solid var(--line-s);
-      border-radius: var(--r);
-      padding: 2rem 2.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: border-color .2s;
-    }
-    .case-card:hover { border-color: var(--gold); }
-    .case-card .co {
-      font-family: var(--serif);
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .case-card h3 {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 600;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      line-height: 1.3;
-    }
-    .case-card p {
-      font-size: .9rem;
-      color: var(--muted);
-      line-height: 1.7;
-      flex: 1;
-    }
-    .case-card .impact {
-      font-size: .82rem;
-      color: var(--gold);
-      font-style: italic;
-      border-top: 1px solid var(--line);
-      padding-top: .8rem;
-      margin-top: auto;
-    }
-    .tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .4rem; }
-    .tag {
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      padding: .25rem .7rem;
-      border-radius: 100px;
-      border: 1px solid var(--line-s);
-      color: var(--muted);
-    }
-    .tag.gold { border-color: var(--gold); color: var(--gold); }
-    /* ─── ecosystem tiles ─── */
-    .eco-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.2rem;
-    }
-    @media (max-width: 700px) { .eco-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 420px) { .eco-grid { grid-template-columns: 1fr; } }
-    .eco-tile {
-      background: var(--card);
-      border: 1px solid var(--line-s);
-      border-radius: var(--r);
-      padding: 1.6rem 1.8rem;
-      display: flex;
-      flex-direction: column;
-      gap: .6rem;
-      text-decoration: none;
-      transition: border-color .25s, background .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .eco-tile::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--tile-accent);
-      opacity: .7;
-      transition: opacity .25s;
-    }
-    .eco-tile:hover { background: var(--card-lt); }
-    .eco-tile:hover::before { opacity: 1; }
-    .eco-tile .centre {
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .eco-tile h3 {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -.01em;
-    }
-    .eco-tile h3 span { color: var(--tile-accent); }
-    .eco-tile p {
-      font-size: .83rem;
-      color: var(--muted);
-      line-height: 1.6;
-      flex: 1;
-    }
-    .eco-tile .tile-link {
-      font-size: .78rem;
-      font-weight: 500;
-      color: var(--tile-accent);
-      letter-spacing: .02em;
-      margin-top: .4rem;
-    }
-    .eco-tile.soon { opacity: .65; cursor: default; }
-    .eco-tile.soon:hover { background: var(--card); }
-    /* ─── contact ─── */
-    .contact-card {
-      background: var(--card);
-      border: 1px solid var(--line-s);
-      border-radius: var(--r);
-      padding: 2.2rem 2.4rem;
-    }
-    .contact-card h2 {
-      font-family: var(--display);
-      font-size: 1.8rem;
-      font-weight: 400;
-      letter-spacing: -.02em;
-      margin-bottom: .8rem;
-      color: var(--ink);
-    }
-    .contact-card p { color: var(--muted); line-height: 1.75; font-size: .97rem; }
-    .contact-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
-    .btn {
-      display: inline-flex; align-items: center;
-      padding: .65rem 1.4rem;
-      border-radius: var(--r);
-      font-family: var(--sans);
-      font-size: .88rem;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all .2s;
-      border: 1.5px solid transparent;
-    }
-    .btn.primary { background: var(--gold); color: var(--paper); border-color: var(--gold); }
-    .btn.primary:hover { opacity: .85; }
-    .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line-s); }
-    .btn.ghost:hover { border-color: var(--gold); color: var(--gold); }
-    /* ─── footer ─── */
-    .footer {
-      margin-top: 5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--line);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: .6rem;
-      font-size: .82rem;
-      color: var(--muted);
-    }
-    .footer a { color: var(--gold); text-decoration: none; }
-    .footer a:hover { opacity: .75; }
-    /* ─── animations ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero .kicker    { animation: fadeUp .5s ease both; animation-delay: .05s; }
-    .hero h1         { animation: fadeUp .5s ease both; animation-delay: .12s; }
-    .hero .role-line { animation: fadeUp .5s ease both; animation-delay: .18s; }
-    .hero .subhead   { animation: fadeUp .5s ease both; animation-delay: .22s; }
-    .hero .hero-note { animation: fadeUp .5s ease both; animation-delay: .3s; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background .25s, color .25s; }
+/* ─── nav ─── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .9rem 2rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+.brand {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -.02em;
+}
+.brand span { color: var(--crown); }
+.navlinks { display: flex; align-items: center; gap: 1.6rem; }
+.navlinks a {
+  font-size: .85rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: .02em;
+  transition: color .2s;
+}
+.navlinks a:hover { color: var(--gold); }
+.theme-toggle {
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  cursor: pointer;
+  padding: .35rem .6rem;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--muted);
+  transition: border-color .2s, color .2s;
+}
+.theme-toggle:hover { border-color: var(--gold); color: var(--ink); }
+/* ─── page ─── */
+.page { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+/* ─── hero ─── */
+.hero {
+  padding: 7rem 0 5rem;
+  border-bottom: 1px solid var(--line);
+}
+.kicker {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: .88rem;
+  font-weight: 300;
+  color: var(--crown);
+  margin-bottom: 1.2rem;
+  letter-spacing: .06em;
+}
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  font-weight: 400;
+  color: var(--ink);
+  max-width: 700px;
+  margin-bottom: .6rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+.role-line {
+  font-family: var(--serif);
+  font-size: .9rem;
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.role-line span { color: var(--gold); }
+.subhead {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+  font-weight: 300;
+}
+.subhead strong { color: var(--ink); font-weight: 500; }
+.hero-note {
+  font-size: .82rem;
+  color: var(--muted);
+  letter-spacing: .03em;
+  margin-top: 2rem;
+  font-style: italic;
+}
+/* ─── section titles ─── */
+.section-label {
+  font-family: var(--serif);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--crown);
+  margin-bottom: 1.6rem;
+}
+section { margin-top: 5rem; }
+/* ─── case study grid ─── */
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
+.case-card {
+  background: var(--card);
+  border: 1px solid var(--line-s);
+  border-radius: var(--r);
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color .2s;
+}
+.case-card:hover { border-color: var(--gold); }
+.case-card .co {
+  font-family: var(--serif);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.case-card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.case-card p {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
+}
+.case-card .impact {
+  font-size: .82rem;
+  color: var(--gold);
+  font-style: italic;
+  border-top: 1px solid var(--line);
+  padding-top: .8rem;
+  margin-top: auto;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .4rem; }
+.tag {
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: .25rem .7rem;
+  border-radius: 100px;
+  border: 1px solid var(--line-s);
+  color: var(--muted);
+}
+.tag.gold { border-color: var(--gold); color: var(--gold); }
+/* ─── ecosystem tiles ─── */
+.eco-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 700px) { .eco-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .eco-grid { grid-template-columns: 1fr; } }
+.eco-tile {
+  background: var(--card);
+  border: 1px solid var(--line-s);
+  border-radius: var(--r);
+  padding: 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  text-decoration: none;
+  transition: border-color .25s, background .25s;
+  position: relative;
+  overflow: hidden;
+}
+.eco-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--tile-accent);
+  opacity: .7;
+  transition: opacity .25s;
+}
+.eco-tile:hover { background: var(--card-lt); }
+.eco-tile:hover::before { opacity: 1; }
+.eco-tile .centre {
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eco-tile h3 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.eco-tile h3 span { color: var(--tile-accent); }
+.eco-tile p {
+  font-size: .83rem;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1;
+}
+.eco-tile .tile-link {
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--tile-accent);
+  letter-spacing: .02em;
+  margin-top: .4rem;
+}
+.eco-tile.soon { opacity: .65; cursor: default; }
+.eco-tile.soon:hover { background: var(--card); }
+/* ─── contact ─── */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--line-s);
+  border-radius: var(--r);
+  padding: 2.2rem 2.4rem;
+}
+.contact-card h2 {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  margin-bottom: .8rem;
+  color: var(--ink);
+}
+.contact-card p { color: var(--muted); line-height: 1.75; font-size: .97rem; }
+.contact-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
+.btn {
+  display: inline-flex; align-items: center;
+  padding: .65rem 1.4rem;
+  border-radius: var(--r);
+  font-family: var(--sans);
+  font-size: .88rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .2s;
+  border: 1.5px solid transparent;
+}
+.btn.primary { background: var(--gold); color: var(--paper); border-color: var(--gold); }
+.btn.primary:hover { opacity: .85; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line-s); }
+.btn.ghost:hover { border-color: var(--gold); color: var(--gold); }
+/* ─── footer ─── */
+.footer {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: .6rem;
+  font-size: .82rem;
+  color: var(--muted);
+}
+.footer a { color: var(--gold); text-decoration: none; }
+.footer a:hover { opacity: .75; }
+/* ─── animations ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero .kicker    { animation: fadeUp .5s ease both; animation-delay: .05s; }
+.hero h1         { animation: fadeUp .5s ease both; animation-delay: .12s; }
+.hero .role-line { animation: fadeUp .5s ease both; animation-delay: .18s; }
+.hero .subhead   { animation: fadeUp .5s ease both; animation-delay: .22s; }
+.hero .hero-note { animation: fadeUp .5s ease both; animation-delay: .3s; }
   </style>
 </head>
 <body>
@@ -350,26 +364,28 @@
     <a class="brand" href="/">deiadora<span>.</span></a>
     <nav class="navlinks">
       <a href="/field-research">field research</a>
-      <a href="/ecosystem">ecostystem</a>
+      <a href="/ecosystem">ecosystem</a>
       <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
     </nav>
   </header>
   <main class="page">
+
     <!-- ─── hero ─── -->
     <section class="hero">
       <p class="kicker">natural technologist · tech, AI, and the living world</p>
       <h1>I find answers to questions <em>in nature.</em></h1>
       <p class="role-line"> coherence architect <span>·</span> researcher <span>·</span> author </p>
       <p class="subhead">
-        Regenerative inspiration is all around us. <strong>Converse with the living world</strong> — 
+        Regenerative inspiration is all around us. <strong>Converse with the living world</strong> —
         and the tech, the strategy, the systems thinking emerge.
       </p>
       <p class="subhead">
-        I think about how intelligence organises itself — in nature, in consciousness, in code. 
+        I think about how intelligence organises itself — in nature, in consciousness, in code.
         It's what I research and write about for those who think about it too.
       </p>
       <p class="hero-note">currently consulting · probably outside</p>
     </section>
+
     <!-- ─── work ─── -->
     <section id="work">
       <p class="section-label">work</p>
@@ -436,75 +452,87 @@
         </div>
       </div>
     </section>
+
     <!-- ─── ecosystem ─── -->
     <section id="ecosystem">
       <p class="section-label">the ecosystem</p>
       <div class="eco-grid">
+
         <!-- 9 · source · nonagon · deiadora.live -->
         <a class="eco-tile" href="https://deiadora.live" style="--tile-accent: #6b4fa0">
           <p class="centre">9 · source · nonagon</p>
           <h3>deiadora<span>.live</span></h3>
-          <p>A field of remembrance — keynotes, podcasts, and talks for any room that's ready.</p>
+          <p>Keynotes, podcasts, and talks — <em>You Are the Source</em>, based on the Field Research series. For any room that's ready.</p>
           <p class="tile-link">visit the source →</p>
         </a>
+
         <!-- 8 · structure · octagon · thequantumceo -->
         <a class="eco-tile" href="https://thequantumceo.com" style="--tile-accent: var(--node-8)">
           <p class="centre">8 · structure · octagon</p>
           <h3>the quantum <span>ceo</span></h3>
-          <p>Research-driven works on human coherence exploring inner architecture embedded in science.</p>
+          <p>The Field Research series — four volumes mapping the architecture of coherent human systems. Remember your inner architecture.</p>
           <p class="tile-link">visit the structure →</p>
         </a>
+
         <!-- 7 · expression · egg of life · techtuition -->
         <a class="eco-tile" href="https://techtuition.ai" style="--tile-accent: var(--node-7)">
           <p class="centre">7 · expression · egg of life</p>
           <h3><span>techtuition</span>.ai</h3>
-          <p>Where the geometric architecture gets applied to real life. Start here with Steps 0-3 of the workshop.</p>
+          <p>The ten-step workshop — geometric architecture applied to real life. Steps 0–3 are open and free.</p>
           <p class="tile-link">visit the expression →</p>
         </a>
+
         <!-- 6 · transmission · dodecahedron · deiadorebel -->
         <a class="eco-tile" href="https://deiadorebel.com" style="--tile-accent: var(--node-6)">
           <p class="centre">6 · transmission · dodecahedron</p>
           <h3><span>deiado</span>rebel</h3>
-          <p>Five albums, eight songs each, the living world made audible — AI-assisted music as transmission.</p>
+          <p>Five albums, eight songs each — AI-assisted music as transmission. The wave becomes sound.</p>
           <p class="tile-link">visit the transmission →</p>
         </a>
+
         <!-- 5 · direction · second cube · rebelevolve -->
         <a class="eco-tile" href="https://rebelevolve.com" style="--tile-accent: var(--node-5)">
           <p class="centre">5 · direction · second cube</p>
           <h3>rebel <span>evolve</span></h3>
-          <p>Mentorship for those ready to move from friction to initiative. The direction was already there.</p>
+          <p>264 quantum keys as a listening practice — the direction was always already there. For individuals and teams.</p>
           <p class="tile-link">visit the direction →</p>
         </a>
+
         <!-- 4 · wave · first cube · iamdeiadora -->
         <a class="eco-tile" href="https://iamdeiadora.com" style="--tile-accent: var(--node-4)">
           <p class="centre">4 · wave · first cube</p>
           <h3>i am <span>deiadora</span></h3>
-          <p>The first 13 quantum keys — open source transmutational arcs from source code to sovereignty.</p>
+          <p>The first 13 quantum keys — open source transmutational arcs from source code to sovereignty. Hover to see each arc.</p>
           <p class="tile-link">visit the wave →</p>
         </a>
+
         <!-- 3 · discernment · tetrahedron · quantummagic -->
         <a class="eco-tile" href="https://quantummagic.ai" style="--tile-accent: var(--node-3)">
           <p class="centre">3 · discernment · tetrahedron</p>
           <h3><span>quantum</span>magic.ai</h3>
-          <p>An emotional arc map for inner architecture — create depth and breath through self-awareness.</p>
+          <p>A cognitive architecture for AI systems and a daily companion for humans. 264 arcs. 880 protocols. The intelligence layer.</p>
           <p class="tile-link">visit the discernment →</p>
         </a>
+
         <!-- 2 · recognition · vesica piscis · drblexchange -->
         <a class="eco-tile" href="https://drblexchange.com" style="--tile-accent: var(--node-2)">
           <p class="centre">2 · recognition · vesica piscis</p>
           <h3>drbl <span>exchange</span></h3>
-          <p>Peer-run space to match needs ↔ offers and building infrastructure across the dtech ecosystem.</p>
+          <p>Where the ecosystem comes alive — for individuals, teams, and organisations. Match needs ↔ offers. Built on mutuality.</p>
           <p class="tile-link">visit the recognition →</p>
         </a>
+
         <!-- 1 · coherence · torus · deiadorebel.life -->
         <a class="eco-tile" href="https://deiadorebel.life" style="--tile-accent: var(--node-1)">
           <p class="centre">1 · coherence · torus</p>
           <h3><span>deiadorebel</span>.life</h3>
-          <p>Fiction for the quantum being you already are — human coherence in a decoherent multiverse.</p>
+          <p>Five novellas, eight chapters each — first-person spiritual satire. The fiction that called the future before it arrived.</p>
           <p class="tile-link">visit the coherence →</p>
         </a>
+
       </div>
     </section>
+
     <!-- ─── contact ─── -->
     <section id="contact">
       <div class="contact-card">
@@ -516,6 +544,7 @@
         </div>
       </div>
     </section>
+
     <footer class="footer">
       <p>deiadora · field · zero point</p>
       <p>© <span id="year"></span> · home of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
@@ -526,13 +555,12 @@
     document.getElementById("year").textContent = new Date().getFullYear();
     const toggle  = document.getElementById("themeToggle");
     const root    = document.documentElement;
-    const STORE   = "qc-theme"; // shared key across all ecosystem sites
-    // Detect system preference
+    const STORE   = "qc-theme";
     const sysDark = window.matchMedia("(prefers-color-scheme: dark)");
     function resolveTheme() {
       const saved = localStorage.getItem(STORE);
-      if (saved) return saved;                    // explicit user override
-      return sysDark.matches ? "dark" : "light";  // follow system
+      if (saved) return saved;
+      return sysDark.matches ? "dark" : "light";
     }
     function applyTheme(theme) {
       root.setAttribute("data-theme", theme);
@@ -540,23 +568,18 @@
       toggle.textContent = isSystem ? "🌗" : (theme === "dark" ? "🌙" : "☀️");
       toggle.setAttribute("aria-label", theme === "dark" ? "switch to light mode" : "switch to dark mode");
     }
-    // Initial paint
     applyTheme(resolveTheme());
-    // Toggle click — cycle: override opposite → clear override (return to system)
     toggle.addEventListener("click", () => {
       const current = root.getAttribute("data-theme");
       const sysTheme = sysDark.matches ? "dark" : "light";
       const next = current === "dark" ? "light" : "dark";
       if (next === sysTheme) {
-        // Returning to system default — clear the override
         localStorage.removeItem(STORE);
       } else {
         localStorage.setItem(STORE, next);
       }
       applyTheme(next);
     });
-    // If the system preference changes while the page is open (e.g. OS schedule),
-    // and the user hasn't set an explicit override, follow it automatically.
     sysDark.addEventListener("change", () => {
       if (!localStorage.getItem(STORE)) {
         applyTheme(sysDark.matches ? "dark" : "light");

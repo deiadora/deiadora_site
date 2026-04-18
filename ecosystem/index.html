@@ -34,6 +34,23 @@
   --c9:#6b4fa0;
 }
 
+[data-theme="dark"] {
+  --ink:     #f4f2ec;
+  --paper:   #010003;
+  --card:    #151515;
+  --card-lt: #20211e;
+  --gold:    #e6c47d;
+  --muted:   #b5ad9e;
+  --line:    rgba(240,237,230,.1);
+  --line-s:  rgba(240,237,230,.18);
+}
+[data-theme="dark"]  .nav        { background: #010003; }
+[data-theme="dark"]  .what-card  { background: #151515; }
+[data-theme="dark"]  .who-card   { background: #151515; }
+[data-theme="dark"]  .work-card  { background: #151515; }
+[data-theme="dark"]  .lens-card  { background: #151515; }
+[data-theme="dark"]  .closing    { background: #151515; }
+
 [data-theme="light"] {
   --paper:   #f4f2ec;
   --card:    #fffff2;
@@ -44,10 +61,11 @@
   --line:    rgba(26,24,20,.1);
   --line-s:  rgba(26,24,20,.18);
 }
+[data-theme="light"] .nav { background: #f4f2ec; }
 
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-  html { scrollbar-gutter: stable; }
-  body {
+html { scrollbar-gutter: stable; }
+body {
   font-family:var(--sans);
   background:var(--paper); color:var(--ink);
   line-height:1.6; -webkit-font-smoothing:antialiased;
@@ -63,8 +81,6 @@
   border-bottom:1px solid var(--line); backdrop-filter:blur(8px);
   transition:background .25s;
 }
-[data-theme="dark"]  .nav { background:#0c1516; }
-[data-theme="light"] .nav { background:#f4f2ec; }
 .brand { font-family:var(--serif); font-size:1.1rem; font-weight:600; color:var(--ink); text-decoration:none; letter-spacing:-.02em; }
 .brand span { color:var(--gold); }
 .navlinks { display:flex; align-items:center; gap:1.6rem; }
@@ -72,18 +88,8 @@
 .navlinks a:hover { color:var(--gold); }
 .navlinks .pill { background:var(--gold); color:#1a1814; padding:.42rem 1rem; border-radius:100px; font-weight:500; transition:opacity .2s; }
 .navlinks .pill:hover { opacity:.85; }
-.theme-toggle { background:none; border:1.5px solid var(--line-s); border-radius:100px; cursor:pointer; padding:.35rem .6rem; font-size:1rem; line-height:1; color:var(--muted); transition:border-color .2s, color .2s; }
+.theme-toggle { background:none; border:1.5px solid var(--line); border-radius:100px; cursor:pointer; padding:.35rem .6rem; font-size:1rem; line-height:1; color:var(--muted); transition:border-color .2s, color .2s; }
 .theme-toggle:hover { border-color:var(--gold); color:var(--ink); }
-  
-/* back link */
-.back-link {
-  display:inline-flex; align-items:center; gap:.4rem;
-  font-size:.82rem; color:var(--muted); text-decoration:none;
-  font-family:var(--serif); letter-spacing:.04em;
-  margin-bottom:3rem; margin-top:1.5rem;
-  transition:color .2s;
-}
-.back-link:hover { color:var(--gold); }
 
 /* ── hero ── */
 .hero {
@@ -255,11 +261,6 @@ section { margin-top:5rem; }
   position:relative; overflow:hidden;
 }
 
-.lens-card::before {
-  content:''; position:absolute; top:0; left:0; right:0;
-  height:2px;
-}
-
 .lens-card h3 {
   font-family:var(--serif); font-size:.95rem; font-weight:600;
   margin-bottom:.3rem;
@@ -273,60 +274,6 @@ section { margin-top:5rem; }
 .lens-card p {
   font-size:.85rem; color:var(--muted); line-height:1.65;
 }
-
-/* ── case study ── */
-.case-card {
-  background:var(--card); border:1px solid var(--line-s);
-  border-left:3px solid var(--gold);
-  border-radius:0 var(--r) var(--r) 0;
-  padding:2rem 2.4rem;
-}
-
-.case-eyebrow {
-  font-family:var(--serif); font-size:.7rem; font-weight:600;
-  letter-spacing:.1em; text-transform:uppercase;
-  color:var(--gold); margin-bottom:.8rem;
-}
-
-.case-card h3 {
-  font-family:var(--display); font-size:1.6rem; font-weight:400;
-  margin-bottom:.6rem; line-height:1.2;
-}
-
-.case-card .case-sub {
-  font-size:.95rem; color:var(--muted); line-height:1.8;
-  margin-bottom:1.4rem; font-weight:300; max-width:580px;
-}
-
-.case-results {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
-  margin:1.4rem 0;
-}
-@media(max-width:580px){ .case-results { grid-template-columns:1fr; } }
-
-.cr-stat {
-  background:var(--card-lt); border-radius:var(--r);
-  padding:1rem; text-align:center;
-}
-
-.cr-stat .cr-num {
-  font-family:var(--display); font-size:1.8rem;
-  font-weight:400; color:var(--gold); line-height:1.1;
-  margin-bottom:.2rem;
-}
-
-.cr-stat .cr-label {
-  font-size:.75rem; color:var(--muted); line-height:1.4;
-}
-
-.case-link {
-  display:inline-flex; align-items:center; gap:.4rem;
-  font-size:.85rem; font-weight:500; font-family:var(--serif);
-  color:var(--gold); text-decoration:none;
-  border-bottom:1px solid rgba(236,176,47,.3);
-  padding-bottom:2px; transition:opacity .2s;
-}
-.case-link:hover { opacity:.7; }
 
 /* ── how to work together ── */
 .work-grid {
@@ -422,12 +369,12 @@ section { margin-top:5rem; }
 <header class="nav">
   <a class="brand" href="/">deiadora<span>.</span></a>
   <nav class="navlinks">
+    <a href="/">home</a>
     <a href="/field-research">field research</a>
-    <a href="/ecosystem">ecosystem</a>
     <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
   </nav>
 </header>
-  
+
 <div class="page">
 
   <!-- ── HERO ── -->
@@ -444,7 +391,7 @@ section { margin-top:5rem; }
     <div class="what-grid">
       <div class="what-card" style="--wc-color:var(--c6)">
         <p class="wc-eyebrow">The research</p>
-        <h3>Quantum Currency — a framework for coherent systems</h3>
+        <h3>The Field Research series — a framework for coherent systems</h3>
         <p>A multiscalar, quantum-sequenced approach to how individuals, teams, and organisations actually cohere — with practical implications for operations, collaboration, governance, and exit. Built on 13 years of field research; formalised in four volumes.</p>
       </div>
       <div class="what-card" style="--wc-color:var(--c7)">
@@ -499,7 +446,6 @@ section { margin-top:5rem; }
     <p class="section-label">how the workshop works</p>
     <p class="how-intro">Ten steps, ten geometric anchors — each step represents a different geometry in our planetary ecosystem, each one an aspect of the same field. <strong>Steps 0–3 are open and free.</strong> They are the invitation. Steps 4–9 are where the implementation happens.</p>
 
-    <!-- row 1: steps 0–4 -->
     <div class="steps-row">
       <a class="step-chip" href="https://techtuition.ai/workshop/step-0" style="background:#0f6e5618; color:var(--c6)">
         <p class="sc-num">Step 0</p>
@@ -522,7 +468,6 @@ section { margin-top:5rem; }
         <p class="sc-name">Wave · First cube</p>
       </a>
     </div>
-    <!-- row 2: steps 5–9 -->
     <div class="steps-row">
       <a class="step-chip" style="background:#2d6a1f18; color:var(--c5)">
         <p class="sc-num">Step 5</p>
@@ -556,7 +501,7 @@ section { margin-top:5rem; }
   <section>
     <p class="section-label">the four books — four lenses on one framework</p>
     <div class="lens-grid">
-      <div class="lens-card" style="--lc:var(--c6)">
+      <div class="lens-card">
         <div style="height:2px; background:var(--c6); border-radius:2px; margin-bottom:1rem;"></div>
         <p class="lens-status" style="color:var(--c6); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">Publishing 2026</p>
         <h3>Quantum Currency</h3>
@@ -566,24 +511,24 @@ section { margin-top:5rem; }
         <div style="height:2px; background:var(--c7); border-radius:2px; margin-bottom:1rem;"></div>
         <p class="lens-status" style="color:var(--c7); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">In composition</p>
         <h3>Relational Currency</h3>
-        <p>The collaboration dimension — how the field between people and systems either generates or depletes relational energy. The geometry applied to every relationship the system depends on.</p>
+        <p>Field Research on Human Systems — the collaboration dimension. How the field between people and systems either generates or depletes relational energy. The geometry applied to every relationship the system depends on.</p>
       </div>
       <div class="lens-card">
         <div style="height:2px; background:var(--c3); border-radius:2px; margin-bottom:1rem;"></div>
         <p class="lens-status" style="color:var(--c3); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">In composition</p>
         <h3>Encoded Currency</h3>
-        <p>The historical and informational layer — how this geometry has been encoded across cultures and epochs, and what those encoding patterns reveal about the systems we are building now.</p>
+        <p>Field Research on Human Intelligence — the historical and informational layer. How this geometry has been encoded across cultures and epochs, and what those encoding patterns reveal about the systems we are building now.</p>
       </div>
       <div class="lens-card">
         <div style="height:2px; background:var(--c9); border-radius:2px; margin-bottom:1rem;"></div>
         <p class="lens-status" style="color:var(--c9); font-family:var(--serif); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.5rem;">In composition</p>
         <h3>Sovereign Currency</h3>
-        <p>The self-empowerment architecture — what it means to stand in one's own ground, design a system that generates its own energy, and hand it forward on one's own terms. The geometry applied to a life.</p>
+        <p>Field Research on Human Emergence — the self-empowerment architecture. What it means to stand in one's own ground, design a system that generates its own energy, and hand it forward on one's own terms.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── HOW TO WORK TOGETHER ── */--> 
+  <!-- ── HOW TO WORK TOGETHER ── -->
   <section>
     <p class="section-label">how to work together</p>
     <div class="work-grid">
@@ -599,7 +544,7 @@ section { margin-top:5rem; }
         <p>The next cohort for Steps 0–9 is by invitation only — yours, that is. For founders and their teams. Live, facilitated, with a custom playbook at the end.</p>
         <p class="wk-note">Limited places. Good soil only.</p>
       </div>
-       <div class="work-card">
+      <div class="work-card">
         <p class="wk-num">03</p>
         <h3>Continue the engagement</h3>
         <p>If Steps 0–9 resonated and you want to discuss what a direct engagement would look like — a speaking invitation, an embedded education proposal, or a coherence architecture retainer — we can continue the conversation.</p>
@@ -614,7 +559,7 @@ section { margin-top:5rem; }
     <p>The sequence is open. The workshop begins at Step 0. The entry is relationship. The yield, in good soil, is hundred-fold.</p>
     <div class="closing-links">
       <a class="btn btn-gold" href="https://techtuition.ai">begin at Step 0 →</a>
-      <a class="btn btn-ghost" href="https://deiadora.com">return home</a>
+      <a class="btn btn-ghost" href="/">return home</a>
     </div>
   </div>
 
@@ -626,7 +571,7 @@ section { margin-top:5rem; }
 </div>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear(); 
+document.getElementById('year').textContent = new Date().getFullYear();
 
 const toggle  = document.getElementById('themeToggle');
 const root    = document.documentElement;
@@ -641,6 +586,7 @@ function applyTheme(theme) {
   root.setAttribute('data-theme', theme);
   const isSystem = !localStorage.getItem(STORE);
   toggle.textContent = isSystem ? '🌗' : (theme === 'dark' ? '🌙' : '☀️');
+  toggle.setAttribute('aria-label', theme === 'dark' ? 'switch to light mode' : 'switch to dark mode');
 }
 
 applyTheme(resolveTheme());

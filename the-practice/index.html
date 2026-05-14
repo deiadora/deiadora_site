@@ -4,9 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>deiadora · the practice · coherence architecture</title>
-<meta name="description" content="Coherence architecture for organisations, AI systems, and the spaces between. What the practice is, how it works, and what it produces." />
+<meta name="description" content="Coherence architecture for organisations and AI systems. The relationship is the product. The audit, playbook, and agents are what become visible inside it." />
 <meta property="og:title" content="deiadora · the practice" />
-<meta property="og:description" content="Most organisations don't have an incoherence problem. They have a coherence debt. This practice exists to locate, measure, and resolve it." />
+<meta property="og:description" content="Coherence cannot be installed from a document. It is established through a relationship — and what emerges from that relationship is what holds under pressure." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://deiadora.com/practice" />
 <link rel="icon" href="/deiadora_favicon.png" type="image/png" />
@@ -46,6 +46,7 @@
 [data-theme="dark"] .intel-card   { background: #151515; }
 [data-theme="dark"] .what-card    { background: #151515; }
 [data-theme="dark"] .engage-card  { background: #151515; }
+[data-theme="dark"] .stewardship-block { background: #151515; }
 
 [data-theme="light"] {
   --paper:   #f4f2ec;
@@ -116,6 +117,11 @@ body {
   animation:fadeUp .5s ease both .2s;
 }
 .hero-sub strong { color:var(--ink); font-weight:500; }
+.hero-sub .hero-relational {
+  display:block; margin-top:1.1rem;
+  color:var(--ink); font-style:italic;
+  font-family:var(--display); font-size:1.05rem; line-height:1.7;
+}
 
 /* ── sections ── */
 section { margin-top:4.5rem; }
@@ -186,9 +192,15 @@ section { margin-top:4.5rem; }
 .intel-card p strong { color:#f4f2ec; font-weight:500; }
 .intel-card p em { color:#f4f2ec; font-style:italic; }
 
-/* ── engagement — four steps ── */
+/* ── engagement ── */
+.engage-preamble {
+  font-size:.97rem; color:var(--muted); line-height:1.85;
+  font-weight:300; max-width:640px; margin-bottom:1.8rem;
+}
+.engage-preamble strong { color:var(--ink); font-weight:500; }
+
 .engage-grid {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
 }
 @media(max-width:700px){ .engage-grid { grid-template-columns:1fr 1fr; } }
 @media(max-width:420px){ .engage-grid { grid-template-columns:1fr; } }
@@ -222,6 +234,34 @@ section { margin-top:4.5rem; }
 .engage-card p {
   font-size:.85rem; color:var(--muted); line-height:1.65; flex:1;
 }
+
+/* ── stewardship block — the container ── */
+.stewardship-block {
+  margin-top:1rem; padding:2rem 2.4rem;
+  background:var(--card);
+  border:1px solid var(--teal);
+  border-radius:var(--r);
+  position:relative; overflow:hidden;
+}
+.stewardship-block::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:linear-gradient(90deg, var(--teal), var(--teal-lt));
+}
+.stewardship-block .sb-head {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--teal); margin-bottom:.9rem;
+}
+.stewardship-block .sb-title {
+  font-family:var(--display); font-size:1.25rem; font-weight:400;
+  font-style:italic; color:var(--ink);
+  margin-bottom:.75rem; line-height:1.3;
+}
+.stewardship-block p {
+  font-size:.92rem; color:var(--muted); line-height:1.78;
+  max-width:640px;
+}
+.stewardship-block p strong { color:var(--ink); font-weight:500; }
 
 /* ── closing pull quote ── */
 .closing-pull {
@@ -297,7 +337,7 @@ section { margin-top:4.5rem; }
       They have a <strong>coherence debt</strong> — accumulated over years of strategy
       that outpaced structure, values that were stated but never enacted,
       and systems built to perform alignment rather than produce it.
-      This practice exists to locate, measure, and resolve that debt.
+      <em class="hero-relational">Coherence cannot be installed from a document. It is established through a relationship — and what emerges from that relationship is what holds under pressure.</em>
     </p>
   </section>
 
@@ -345,9 +385,11 @@ section { margin-top:4.5rem; }
         specific coherence field.
       </p>
       <p>
-        What clients receive is a <strong>10-branch playbook</strong>: a structured,
+        What emerges from the engagement is a <strong>10-dimension playbook</strong>: a structured,
         non-sequential set of interventions that can be delegated across functions,
         completed in any order, and implemented at the pace the organisation can sustain.
+        The playbook is what becomes visible. It is not the work. The work is the ongoing
+        relationship that produced it — and that continues to hold it.
       </p>
       <p>
         The 264 quantum keys are the engine. The 880 relational protocols govern how
@@ -361,7 +403,14 @@ section { margin-top:4.5rem; }
 
   <!-- ── HOW ENGAGEMENT WORKS ── -->
   <section>
-    <p class="section-label">how engagement works</p>
+    <p class="section-label">the engagement</p>
+
+    <p class="engage-preamble">
+      The engagement is a relationship, not a project. The coherence audit, playbook, and agents
+      are not sequential deliverables — they are what becomes visible as the relationship deepens.
+      <strong>Ongoing stewardship is not the final step. It is the condition under which everything else occurs.</strong>
+    </p>
+
     <div class="engage-grid">
 
       <div class="engage-card">
@@ -382,19 +431,32 @@ section { margin-top:4.5rem; }
         <p>Custom AI agents built on the coherence architecture. They do not expose the model. They operate through it — producing outputs that demonstrate coherence without describing it.</p>
       </div>
 
-      <div class="engage-card">
-        <p class="ec-num">04</p>
-        <h3>Ongoing stewardship</h3>
-        <p>Coherence is not a project state. It is a field condition. Ongoing engagement ensures the system continues to generate rather than deplete the energy it needs to sustain itself.</p>
-      </div>
-
     </div>
+
+    <div class="stewardship-block">
+      <p class="sb-head">the container</p>
+      <p class="sb-title">Ongoing stewardship</p>
+      <p>
+        Coherence is not a project state. It is a field condition. This is not what happens
+        after the engagement — <strong>it is what the engagement is.</strong> The audit, playbook,
+        and agents emerge within it. The relationship continues for as long as the system
+        requires a coherent field to organise against — and what it builds in that time
+        is the capacity to sustain itself.
+      </p>
+    </div>
+
   </section>
 
   <!-- ── CLOSING PULL ── -->
   <div class="closing-pull">
-    <p>The question is not whether your organisation has coherence gaps.</p>
-    <p class="pull-sub">The question is whether you can afford to leave them unresolved. Every engagement begins with a conversation. Peer-to-peer. No application process.</p>
+    <p>The relationship is the architecture.</p>
+    <p class="pull-sub">
+      The playbook, the agents, the audit — these are what become visible inside it.
+      Every engagement begins with a conversation. Peer-to-peer. No application process.
+      If you want to arrive with the architecture already in hand, the workshop at
+      <a href="https://techtuition.ai" style="color:var(--gold);text-decoration:none;">techtuition.ai</a>
+      is the natural on-ramp — the place where the work becomes yours before we work together.
+    </p>
     <a class="btn primary" href="mailto:herself@deiadora.com?subject=coherence architecture enquiry · deiadora.com">email deiadora →</a>
   </div>
 

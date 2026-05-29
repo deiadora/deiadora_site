@@ -3,7 +3,7 @@
 The field of the ecosystem. The ground state before anything is built.
 
 deiadora.com is the home of the deiadora ecosystem —
-nine dimensions, one field. The ground condition of The Currency Workshop.
+nine dimensions, one field. The ground condition of The Currency Playbook workshop.
 
 ## part of the deiadora ecosystem
  

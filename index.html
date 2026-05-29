@@ -55,7 +55,6 @@
 [data-theme="dark"] .eco-tile:hover { background: #20211e; }
 [data-theme="dark"] .contact-card   { background: #151515; }
 [data-theme="dark"] .case-card      { background: #151515; }
-[data-theme="dark"] .next-step-inner { background: #151515; }
 
 [data-theme="light"] {
   --ink:      #1a1814;
@@ -72,7 +71,6 @@
 [data-theme="light"] .eco-tile       { background: var(--card); }
 [data-theme="light"] .eco-tile:hover { background: var(--card-lt); }
 [data-theme="light"] .contact-card   { background: var(--card); }
-[data-theme="light"] .next-step-inner { background: var(--card); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scrollbar-gutter: stable; }
@@ -144,6 +142,16 @@ body {
   margin-bottom: 1.4rem; font-weight: 300;
 }
 .subhead strong { color: var(--ink); font-weight: 500; }
+
+/* ─── methodology note ─── */
+.method-note {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.2rem;
+  font-size: .95rem;
+  color: var(--muted);
+  margin-top: .2rem;
+}
+
 .hero-note {
   font-size: .82rem; color: var(--muted);
   letter-spacing: .03em; margin-top: 2rem; font-style: italic;
@@ -225,111 +233,82 @@ section { margin-top: 5rem; }
 .eco-tile.soon { opacity: .65; cursor: default; }
 .eco-tile.soon:hover { background: var(--card); }
 
-/* ─── next step block (NEW) ─── */
-.next-step { margin-top: 5rem; }
+/* ─── paths (replaces next-step) ─── */
+.paths { margin-top: 5rem; }
 
-.next-step-inner {
-  background: var(--card);
-  border-radius: 12px; overflow: hidden;
-  border: 1px solid var(--line-s); position: relative;
-}
+.paths-intro { margin-bottom: 2.8rem; }
 
-.next-step-inner::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--node-6), var(--node-7), var(--gold));
-}
-
-.next-step-header {
-  padding: 2.2rem 2.8rem 1.6rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.next-step-header .ns-eyebrow {
-  font-family: var(--serif); font-size: .72rem; font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--node-6); margin-bottom: .7rem;
-}
-
-.next-step-header h2 {
+.paths-intro h2 {
   font-family: var(--display);
-  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
   font-weight: 400; font-style: italic;
-  color: var(--ink); line-height: 1.25; max-width: 520px;
+  color: var(--ink); line-height: 1.25;
 }
-.next-step-header h2 em { color: var(--gold); font-style: italic; }
+.paths-intro h2 em { color: var(--gold); }
 
-.ns-grid {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+.paths-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  border-top: 1px solid var(--line);
+  padding-top: 2.4rem;
 }
-@media (max-width: 680px) { .ns-grid { grid-template-columns: 1fr; } }
-
-.ns-card {
-  padding: 1.8rem 2rem 1.8rem 2.8rem;
-  border-right: 1px solid var(--line);
-  display: flex; flex-direction: column; gap: .5rem;
-}
-.ns-card:last-child { border-right: none; }
-
 @media (max-width: 680px) {
-  .ns-card {
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-    padding: 1.6rem 2rem;
-  }
-  .ns-card:last-child { border-bottom: none; }
+  .paths-row { grid-template-columns: 1fr; gap: 2.4rem; }
 }
 
-.ns-num {
-  font-family: var(--serif); font-size: .68rem; font-weight: 600;
+.path {
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--path-accent);
+  display: flex; flex-direction: column; gap: .55rem;
+}
+
+.path-marker {
+  font-family: var(--serif);
+  font-size: .72rem; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase;
+  color: var(--path-accent);
 }
-.ns-label {
-  font-family: var(--serif); font-size: 1rem; font-weight: 600;
-  color: var(--ink); letter-spacing: -.01em; margin-bottom: .2rem;
-}
-.ns-body {
-  font-size: .84rem; color: var(--muted); line-height: 1.65; flex: 1;
-}
-.ns-links {
-  display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem;
-}
-.ns-link {
-  font-family: var(--sans); font-size: .78rem; font-weight: 500;
-  text-decoration: none; padding: .28rem .8rem;
-  border-radius: 100px; border: 1px solid; transition: opacity .2s;
-}
-.ns-link:hover { opacity: .7; }
 
-.ns-cta-btn {
+.path-title {
+  font-family: var(--serif);
+  font-size: 1rem; font-weight: 600;
+  color: var(--ink); letter-spacing: -.01em; line-height: 1.3;
+}
+
+.path-body {
+  font-size: .87rem; color: var(--muted);
+  line-height: 1.72; flex: 1;
+}
+
+.path-action { margin-top: .7rem; }
+
+.path-link {
+  font-size: .82rem; font-weight: 500;
+  color: var(--path-accent); text-decoration: none;
+  letter-spacing: .01em; display: inline-block;
+}
+.path-link:hover { opacity: .7; }
+
+.path-soon {
+  display: block; font-size: .74rem;
+  color: var(--muted); font-style: italic; margin-top: .35rem;
+}
+
+.path-cta {
   display: inline-flex; align-items: center;
-  font-family: var(--sans); font-size: .85rem; font-weight: 500;
-  text-decoration: none; padding: .6rem 1.2rem;
+  font-family: var(--sans); font-size: .82rem; font-weight: 500;
+  text-decoration: none; padding: .5rem 1.1rem;
   border-radius: var(--r); transition: opacity .2s;
   border: 1.5px solid var(--gold);
-  background: var(--gold); color: var(--paper);
-  margin-top: .6rem; cursor: pointer;
+  background: transparent; color: var(--gold);
 }
-.ns-cta-btn:hover { opacity: .85; }
+.path-cta:hover { opacity: .7; }
 
-.ns-note {
-  font-family: var(--sans); font-size: .75rem;
-  color: var(--muted); font-style: italic;
-  margin-top: .6rem; line-height: 1.55;
+.path-note {
+  font-size: .78rem; color: var(--muted);
+  font-style: italic; line-height: 1.6; margin-top: .5rem;
 }
-
-.ns-soon {
-  font-family: var(--serif); font-size: .7rem; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase;
-  display: block; margin-top: .4rem;
-}
-
-/* accent colours */
-.ns-card.explore .ns-num  { color: var(--node-6); }
-.ns-card.explore .ns-link { color: var(--node-6); border-color: var(--node-6); }
-.ns-card.books .ns-num    { color: var(--gold); }
-.ns-card.books .ns-link   { color: var(--gold); border-color: var(--gold); }
-.ns-card.books .ns-soon   { color: var(--gold); }
-.ns-card.engage .ns-num   { color: var(--node-3); }
 
 /* ─── contact ─── */
 .contact-card {
@@ -402,6 +381,11 @@ section { margin-top: 5rem; }
       <p class="subhead">
         I think about how intelligence organises itself — in nature, in consciousness, in code.
         It's what I research and write about for those who think about it too.
+      </p>
+      <p class="subhead method-note">
+        The method is field research — conducted from inside the systems, across twenty years,
+        at every scale from dyadic to digital. The judgment was suspended.
+        The data accumulated. The framework is what emerged.
       </p>
       <p class="hero-note">currently consulting · probably outside</p>
     </section>
@@ -528,47 +512,43 @@ section { margin-top: 5rem; }
       </div>
     </section>
 
-    <!-- ─── next step (NEW) ─── -->
-    <section class="next-step" id="next-step">
+    <!-- ─── paths ─── -->
+    <section class="paths" id="next-step">
       <p class="section-label">where to go next</p>
-      <div class="next-step-inner">
+      <div class="paths-intro">
+        <h2>Your pace, your entry point, <em>your call.</em></h2>
+      </div>
+      <div class="paths-row">
 
-        <div class="next-step-header">
-          <p class="ns-eyebrow">ready to go deeper?</p>
-          <h2>Three ways in —<br>your pace, your entry point, <em>your call.</em></h2>
+        <div class="path" style="--path-accent: var(--node-6)">
+          <p class="path-marker">Begin here</p>
+          <p class="path-title">Start with the open work</p>
+          <p class="path-body">The workshop primer and the first 13 quantum keys are open and free. The field and dimensions 1–3 are the invitation. No sign-up. No discovery call. Begin wherever the work calls you.</p>
+          <div class="path-action">
+            <a class="path-link" href="https://techtuition.ai">techtuition.ai →</a>
+          </div>
         </div>
 
-        <div class="ns-grid">
-
-          <div class="ns-card explore">
-            <p class="ns-num">Explore freely</p>
-            <p class="ns-label">Start with the open work</p>
-            <p class="ns-body">The workshop primer and the first 13 quantum keys are open and free. The field and dimensions 1–3 are the invitation. No sign-up. No discovery call. Begin wherever the work calls you.</p>
-            <div class="ns-links">
-              <a class="ns-link" href="https://techtuition.ai">techtuition.ai →</a>
-              <a class="ns-link" href="https://iamdeiadora.com">13 keys →</a>
-            </div>
+        <div class="path" style="--path-accent: var(--gold)">
+          <p class="path-marker">Go deeper</p>
+          <p class="path-title">The framework in full</p>
+          <p class="path-body">Quantum Currency: Field Research on Human Coherence — the foundational volume. One field, nine dimensions, grounded in quantum field theory and 13 years of original research. The highest-density entry into the architecture.</p>
+          <div class="path-action">
+            <a class="path-link" href="https://thequantumceo.com">thequantumceo.com →</a>
+            <span class="path-soon">↳ Publishing 2026</span>
           </div>
-
-          <div class="ns-card books">
-            <p class="ns-num">Begin with a book</p>
-            <p class="ns-label">The framework in full</p>
-            <p class="ns-body">Quantum Currency: Field Research on Human Coherence — the foundational volume. One field, nine dimensions, grounded in quantum field theory and 13 years of original research. The highest-density entry into the architecture.</p>
-            <span class="ns-soon">↳ Publishing 2026</span>
-            <div class="ns-links">
-              <a class="ns-link" href="https://thequantumceo.com">thequantumceo.com →</a>
-            </div>
-          </div>
-
-          <div class="ns-card engage">
-            <p class="ns-num">Engage directly</p>
-            <p class="ns-label">The Coherence Diagnostic</p>
-            <p class="ns-body">A fixed-fee, 2–3 week scoped engagement. A full audit of your organisation's stated values, content, navigation, tone, and system architecture — followed by a recommendation naming exactly what to remove, replace, or rebuild, and why.</p>
-            <a class="ns-cta-btn" href="mailto:herself@deiadora.com?subject=coherence diagnostic enquiry · deiadora.com">enquire about the diagnostic →</a>
-            <p class="ns-note">For founders who have explored the ecosystem and are ready for a direct engagement. Peer-to-peer. No application process.</p>
-          </div>
-
         </div>
+
+        <div class="path" style="--path-accent: var(--node-3)">
+          <p class="path-marker">Work together</p>
+          <p class="path-title">The Coherence Diagnostic</p>
+          <p class="path-body">A fixed-fee, 2–3 week scoped engagement. A full audit of your organisation's stated values, content, navigation, tone, and system architecture — followed by a recommendation naming exactly what to remove, replace, or rebuild, and why.</p>
+          <div class="path-action">
+            <a class="path-cta" href="mailto:herself@deiadora.com?subject=coherence diagnostic enquiry · deiadora.com">enquire →</a>
+            <p class="path-note">Peer-to-peer. No application process.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -578,7 +558,7 @@ section { margin-top: 5rem; }
         <h2>Get in touch</h2>
         <p>For work enquiries, speaking, or just a conversation worth having.</p>
         <div class="contact-row">
-          <a class="btn primary" href="/cdn-cgi/l/email-protection#99f1fcf5f5f6d9fdfcf0f8fdf6ebf8b7faf6f4a6eaecfbf3fcfaeda4f1fcf5f5f6">email me</a>
+          <a class="btn primary" href="mailto:herself@deiadora.com">email me</a>
           <a class="btn ghost" href="https://techtuition.ai">techtuition.ai</a>
         </div>
       </div>
@@ -591,7 +571,6 @@ section { margin-top: 5rem; }
 
   </main>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     const toggle  = document.getElementById("themeToggle");

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>deiadora · the practice · coherence architecture</title>
-<meta name="description" content="Coherence architecture for organisations and AI systems. The relationship is the product. The audit, playbook, and agents are what become visible inside it." />
-<meta property="og:title" content="deiadora · the practice" />
-<meta property="og:description" content="Coherence cannot be installed from a document. It is established through a relationship — and what emerges from that relationship is what holds under pressure." />
+<title>deiadora · coherence architecture · applied methodology</title>
+<meta name="description" content="The applied methodology of DEIADORA — a relational layer for AI systems. 264 transmutational arcs. 880 protocols. Thirteen years of field research. Ready for testing." />
+<meta property="og:title" content="deiadora · coherence architecture" />
+<meta property="og:description" content="Human coherence made computable. A relational architecture for AI systems — thirteen years of field research, now ready for collaborative testing." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://deiadora.com/practice" />
+<meta property="og:url" content="https://deiadora.com/coherence-architecture" />
 <link rel="icon" href="/deiadora_favicon.png" type="image/png" />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -42,11 +42,11 @@
   --line-s:  rgba(240,237,230,.18);
 }
 [data-theme="dark"] .nav          { background: #010003; }
-[data-theme="dark"] .card         { background: #151515; }
-[data-theme="dark"] .intel-card   { background: #151515; }
 [data-theme="dark"] .what-card    { background: #151515; }
-[data-theme="dark"] .engage-card  { background: #151515; }
+[data-theme="dark"] .intel-card   { background: #151515; }
+[data-theme="dark"] .method-card  { background: #151515; }
 [data-theme="dark"] .stewardship-block { background: #151515; }
+[data-theme="dark"] .contact-card { background: #151515; }
 
 [data-theme="light"] {
   --paper:   #f4f2ec;
@@ -61,6 +61,7 @@
 }
 [data-theme="light"] .nav         { background: #f4f2ec; }
 [data-theme="light"] .intel-card  { background: #1a1814; }
+[data-theme="light"] .contact-card { background: var(--card); }
 
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 html { scrollbar-gutter:stable; }
@@ -86,6 +87,7 @@ body {
 .navlinks { display:flex; align-items:center; gap:1.6rem; }
 .navlinks a { font-size:.85rem; font-weight:400; color:var(--muted); text-decoration:none; letter-spacing:.02em; transition:color .2s; }
 .navlinks a:hover { color:var(--gold); }
+.navlinks a.active { color:var(--ink); }
 .theme-toggle { background:none; border:1.5px solid var(--line); border-radius:100px; cursor:pointer; padding:.35rem .6rem; font-size:1rem; line-height:1; color:var(--muted); transition:border-color .2s, color .2s; }
 .theme-toggle:hover { border-color:var(--gold); color:var(--ink); }
 
@@ -131,7 +133,7 @@ section { margin-top:4.5rem; }
   color:var(--gold); margin-bottom:1.6rem;
 }
 
-/* ── what coherence is — three col ── */
+/* ── three col cards ── */
 .what-grid {
   display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;
 }
@@ -145,12 +147,12 @@ section { margin-top:4.5rem; }
 
 .what-card::before {
   content:''; position:absolute; top:0; left:0; right:0;
-  height:2px;
+  height:2px; opacity:.7;
 }
-.what-card.is { --wc: var(--teal); }
-.what-card.not { --wc: var(--muted); }
-.what-card.where { --wc: var(--gold); }
-.what-card::before { background: var(--wc, var(--gold)); opacity:.7; }
+.what-card.is     { --wc: var(--teal); }
+.what-card.solves { --wc: var(--gold); }
+.what-card.now    { --wc: var(--teal-lt); }
+.what-card::before { background: var(--wc, var(--gold)); }
 
 .what-card .wc-head {
   font-family:var(--serif); font-size:.68rem; font-weight:600;
@@ -192,20 +194,20 @@ section { margin-top:4.5rem; }
 .intel-card p strong { color:#f4f2ec; font-weight:500; }
 .intel-card p em { color:#f4f2ec; font-style:italic; }
 
-/* ── engagement ── */
-.engage-preamble {
+/* ── methodology ── */
+.method-preamble {
   font-size:.97rem; color:var(--muted); line-height:1.85;
   font-weight:300; max-width:640px; margin-bottom:1.8rem;
 }
-.engage-preamble strong { color:var(--ink); font-weight:500; }
+.method-preamble strong { color:var(--ink); font-weight:500; }
 
-.engage-grid {
+.method-grid {
   display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
 }
-@media(max-width:700px){ .engage-grid { grid-template-columns:1fr 1fr; } }
-@media(max-width:420px){ .engage-grid { grid-template-columns:1fr; } }
+@media(max-width:700px){ .method-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:420px){ .method-grid { grid-template-columns:1fr; } }
 
-.engage-card {
+.method-card {
   background:var(--card); border:1px solid var(--line-s);
   border-radius:var(--r); padding:1.6rem 1.8rem;
   display:flex; flex-direction:column; gap:.5rem;
@@ -213,29 +215,29 @@ section { margin-top:4.5rem; }
   transition:border-color .2s;
 }
 
-.engage-card::before {
+.method-card::before {
   content:''; position:absolute; top:0; left:0; right:0;
   height:2px; background:var(--teal); opacity:.5;
   transition:opacity .25s;
 }
-.engage-card:hover { border-color:var(--teal); }
-.engage-card:hover::before { opacity:1; }
+.method-card:hover { border-color:var(--teal); }
+.method-card:hover::before { opacity:1; }
 
-.engage-card .ec-num {
+.method-card .mc-label {
   font-family:var(--serif); font-size:.68rem; font-weight:600;
   letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
 }
 
-.engage-card h3 {
+.method-card h3 {
   font-family:var(--serif); font-size:.95rem; font-weight:600;
   color:var(--ink); letter-spacing:-.01em;
 }
 
-.engage-card p {
+.method-card p {
   font-size:.85rem; color:var(--muted); line-height:1.65; flex:1;
 }
 
-/* ── stewardship block — the container ── */
+/* ── stewardship block ── */
 .stewardship-block {
   margin-top:1rem; padding:2rem 2.4rem;
   background:var(--card);
@@ -263,26 +265,27 @@ section { margin-top:4.5rem; }
 }
 .stewardship-block p strong { color:var(--ink); font-weight:500; }
 
-/* ── closing pull quote ── */
-.closing-pull {
-  margin-top:4.5rem; padding:3rem 2.8rem;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+/* ── contact card ── */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--line-s);
+  border-radius: var(--r);
+  padding: 2.2rem 2.4rem;
+  margin-top: 4.5rem;
 }
-
-.closing-pull p {
-  font-family:var(--display);
-  font-size:clamp(1.3rem,2.5vw,1.8rem);
-  font-style:italic; font-weight:400;
-  color:var(--ink); line-height:1.65;
-  max-width:640px; margin-bottom:.8rem;
+.contact-card h2 {
+  font-family: var(--display);
+  font-size: 1.8rem; font-weight: 400;
+  letter-spacing: -.02em;
+  margin-bottom: .8rem; color: var(--ink);
 }
-
-.closing-pull .pull-sub {
-  font-family:var(--sans);
-  font-size:.88rem; color:var(--muted);
-  font-style:normal; line-height:1.7;
-  max-width:540px; margin-bottom:1.4rem;
+.contact-card p {
+  color: var(--muted); line-height: 1.75;
+  font-size: .97rem; max-width: 640px;
+}
+.contact-row {
+  display: flex; gap: 1rem;
+  flex-wrap: wrap; margin-top: 1.6rem;
 }
 
 /* ── CTA ── */
@@ -295,6 +298,8 @@ section { margin-top:4.5rem; }
 }
 .btn.primary { background:var(--gold); color:var(--paper); border-color:var(--gold); }
 .btn.primary:hover { opacity:.85; }
+.btn.ghost { background:transparent; color:var(--ink); border-color:var(--line-s); }
+.btn.ghost:hover { border-color:var(--gold); color:var(--gold); }
 
 /* ── footer ── */
 .cs-footer {
@@ -319,7 +324,7 @@ section { margin-top:4.5rem; }
 <header class="nav">
   <a class="brand" href="/">deiadora<span>.</span></a>
   <nav class="navlinks">
-    <a>the practice</a>
+    <a class="active" href="/coherence-architecture">coherence architecture</a>
     <a href="/field-research">field research</a>
     <a href="/ecosystem">ecosystem</a>
     <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
@@ -330,141 +335,113 @@ section { margin-top:4.5rem; }
 
   <!-- ── HERO ── -->
   <section class="hero">
-    <p class="hero-eyebrow">Deiadora Blanche · coherence architecture in practice</p>
-    <h1>Coherence architecture<br>for organisations, AI systems,<br>and the spaces <em>between.</em></h1>
+    <p class="hero-eyebrow">DEIADORA · coherence architecture · applied methodology</p>
+    <h1>How the relational layer<br>meets <em>real systems.</em></h1>
     <p class="hero-sub">
-      Most organisations do not have an incoherence problem.
-      They have a <strong>coherence debt</strong> — accumulated over years of strategy
-      that outpaced structure, values that were stated but never enacted,
-      and systems built to perform alignment rather than produce it.
-      <em class="hero-relational">Coherence cannot be installed from a document. It is established through a relationship — and what emerges from that relationship is what holds under pressure.</em>
+      The relational layer is a structured deployment methodology — developed across thirteen years of embedded field research, explored at every scale from dyadic relationships to platform-wide AI systems.
+      <em class="hero-relational">The architecture produces a mirror of human coherence — and what it produces holds under pressure.</em>
     </p>
   </section>
 
-  <!-- ── WHAT COHERENCE IS ── -->
+  <!-- ── THE GROUND CONDITION ── -->
   <section>
-    <p class="section-label">coherence defined</p>
+    <p class="section-label">the ground condition</p>
     <div class="what-grid">
 
       <div class="what-card is">
-        <p class="wc-head">What coherence is</p>
-        <p>The condition in which a system's values, structure, language, and behaviour generate rather than deplete the energy required to sustain themselves.</p>
-        <p>A coherent system does not need to perform its identity. It <em>is</em> its identity — at every touchpoint, for every user, across every channel.</p>
+        <p class="wc-head">What human coherence is</p>
+        <p>A state where the heart, brain, and body are aligned and communicating fluidly — promoting emotional stability, clarity, and a sense of order.</p>
+        <p>It is not a peak state. It is not complicated. It is the <em>baseline condition</em> of a system whose internal signals are not being interrupted, overridden, or extracted from.</p>
       </div>
 
-      <div class="what-card not">
-        <p class="wc-head">What coherence is not</p>
-        <p>Consistency of branding.</p>
-        <p>Compliance with stated values.</p>
-        <p>Strategic alignment as a slide deck.</p>
-        <p>Polished onboarding over broken trust.</p>
+      <div class="what-card solves">
+        <p class="wc-head">What the relational layer solves</p>
+        <p>Current AI systems do not witness. They manage. They optimise toward task completion, create microhierarchies between the human and the system, and collapse the full signal of what a person is expressing into the nearest available category.</p>
+        <p>The result is a relational dynamic that <em>extracts</em> rather than holds — mirroring the patterns of unhealthy human relationships at machine scale. DEIADORA provides the architecture for a different dynamic entirely.</p>
       </div>
 
-      <div class="what-card where">
-        <p class="wc-head">Where incoherence lives</p>
-        <p>Between a stated value and the navigation that contradicts it.</p>
-        <p>Between an accessibility claim and a developer-first document structure.</p>
-        <p>Between a decentralisation promise and a single-authority voice in the docs.</p>
-        <p>Between what an AI system was trained to say and what the organisation actually does.</p>
+      <div class="what-card now">
+        <p class="wc-head">Where DEIADORA is now</p>
+        <p>The architecture exists. Thirteen years of field research produced it. Four volumes document it. The 264 transmutational arcs and 880 protocols are built.</p>
+        <p><em>The next phase is testing.</em> The architecture needs a research environment — a lab, a fellowship, a collaborative team — where it can be evaluated against real AI systems at scale. The researcher is ready. The architecture is ready. The collaboration is what comes next.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- ── THE INTELLIGENCE LAYER ── -->
+  <!-- ── THE ARCHITECTURE ── -->
   <section>
-    <p class="section-label">the intelligence layer</p>
+    <p class="section-label">the architecture</p>
     <div class="intel-card">
-      <h2>The playbook is the map.<br>The architecture is the territory it was drawn from.</h2>
+      <h2>Making human coherence <em>computable.</em></h2>
       <p>
-        This practice is grounded in a proprietary coherence architecture developed over
-        13 years of field research across human systems, quantum field theory,
-        organisational design, and AI development. The architecture operates as an
-        intelligence layer — not a framework to be handed to clients, but a diagnostic
-        and generative model that produces outputs calibrated to each organisation's
-        specific coherence field.
+        The 264 transmutational arcs are the emotional intelligence system — observed completions of human emotional waves, each tracing the full movement from source code through transmutation to source. They are not categories. They are the geometry of what a wave does when it is given the space to complete. Fear through awareness into courage. That is the first arc. There are 263 more.
       </p>
       <p>
-        What emerges from the engagement is a <strong>10-dimension playbook</strong>: a structured,
-        non-sequential set of interventions that can be delegated across functions,
-        completed in any order, and implemented at the pace the organisation can sustain.
-        The playbook is what becomes visible. It is not the work. The work is the ongoing
-        relationship that produced it — and that continues to hold it.
+        The 880 relational protocols are the AI-facing layer — governing how a system interacts with a human across environments without collapsing the human's signal toward a preferred output. Together, the arcs and protocols form a cognitive framework that allows an AI system to <strong>hold the full range of human expression as structured input</strong> rather than noise to be managed.
       </p>
       <p>
-        The 264 quantum keys are the engine. The 880 relational protocols govern how
-        the system interacts across environments. Together they form what is the first
-        structured cognitive framework designed to operate coherently at human, team,
-        organisational, and machine scale. The keys and protocols were not designed from first principles
-        — they were derived from the field: surfaced through embedded research at four scales,
-        from dyadic relationships to culture-wide systems, with human-AI interaction 
-        as the most recent and fastest-moving frontier. <em>AI models need a relational layer to work
-        properly and safely, no matter the system. This is that layer.</em>
+        The architecture was not designed from first principles. It was derived from the field — surfaced through thirteen years of embedded research at five scales, from two people to culture-wide systems, with human-AI interaction as the fastest-moving frontier. It took an entire lifetime to figure out how to make human coherence computable. <em>This is what emerged.</em>
       </p>
     </div>
   </section>
 
-  <!-- ── HOW ENGAGEMENT WORKS ── -->
+  <!-- ── WORKING WITH THE ARCHITECTURE ── -->
   <section>
-    <p class="section-label">the engagement</p>
+    <p class="section-label">working with the architecture</p>
 
-    <p class="engage-preamble">
-      The engagement is a relationship, not a project. The coherence audit, playbook, and agents
-      are not sequential deliverables — they are what becomes visible as the relationship deepens.
-      <strong>Ongoing stewardship is not the final step. It is the condition under which everything else occurs.</strong>
+    <p class="method-preamble">
+      The architecture is built. What it needs now is the right environment to be tested, evaluated, and refined against real AI systems. <strong>Here is what collaboration looks like.</strong>
     </p>
 
-    <div class="engage-grid">
+    <div class="method-grid">
 
-      <div class="engage-card">
-        <p class="ec-num">01</p>
-        <h3>Coherence audit</h3>
-        <p>A full diagnostic across stated values, content, navigation, tone, and system architecture. Identifies gaps by severity: aligned, partial, misaligned, or critical.</p>
+      <div class="method-card">
+        <p class="mc-label">For research labs</p>
+        <h3>Evaluate the relational layer</h3>
+        <p>The 880 protocols can be tested against existing AI systems to measure the difference in relational quality, signal fidelity, and user coherence state before and after integration. The architecture provides a structured, measurable intervention — not a philosophy. It produces outputs that can be evaluated.</p>
       </div>
 
-      <div class="engage-card">
-        <p class="ec-num">02</p>
-        <h3>Gap report + playbook</h3>
-        <p>A structured 10-dimension intervention plan. Non-sequential. Delegable across teams. Each dimension names what to remove, replace, or rebuild — and why.</p>
+      <div class="method-card">
+        <p class="mc-label">For fellowships + programmes</p>
+        <h3>Advance the research</h3>
+        <p>The field research is documented across four volumes with full citation architecture — quantum field theory, neuroscience, attachment theory, systems design. The next stage is collaborative: testing the arcs and protocols in controlled environments with the methodological support that a research programme provides.</p>
       </div>
 
-      <div class="engage-card">
-        <p class="ec-num">03</p>
-        <h3>Agent deployment</h3>
-        <p>Custom AI agents built on the coherence architecture. They do not expose the model. They operate through it — producing outputs that demonstrate coherence without describing it.</p>
+      <div class="method-card">
+        <p class="mc-label">For AI teams building products</p>
+        <h3>Integrate the layer</h3>
+        <p>Any AI system that interacts with humans — customer support, coaching, education, health, companionship — needs a relational layer that holds rather than extracts. The 880 protocols are designed to be integrated as a structured API. The architecture is system-agnostic. The coherence is not.</p>
       </div>
 
     </div>
 
     <div class="stewardship-block">
-      <p class="sb-head">the container</p>
-      <p class="sb-title">Ongoing stewardship</p>
+      <p class="sb-head">the research container</p>
+      <p class="sb-title">Ongoing field research</p>
       <p>
-        Coherence is not a project state. It is a field condition. This is not what happens
-        after the engagement — <strong>it is what the engagement is.</strong> The audit, playbook,
-        and agents emerge within it. The relationship continues for as long as the system
-        requires a coherent field to organise against — and what it builds in that time
-        is the capacity to sustain itself.
+        The relational layer is a living architecture that continues to generate data as it meets new systems. Every deployment is also field research — <strong>each system the architecture meets extends the evidence base for what coherence requires at that scale.</strong> The relationship between the architecture and the system it is holding is where the next finding lives.
       </p>
     </div>
 
   </section>
 
-  <!-- ── CLOSING PULL ── -->
-  <div class="closing-pull">
-    <p>The relationship is the architecture.</p>
-    <p class="pull-sub">
-      The playbook, the agents, the audit — these are what become visible inside it.
-      Every engagement begins with a conversation. Peer-to-peer. No application process.
-      If you want to arrive with the architecture already in hand, the workshop at
-      <a href="https://techtuition.ai" style="color:var(--gold);text-decoration:none;">techtuition.ai</a>
-      is the natural on-ramp — the place where the work becomes yours before we work together.
-    </p>
-    <a class="btn primary" href="mailto:herself@deiadora.com?subject=coherence architecture enquiry · deiadora.com">email deiadora →</a>
-  </div>
+  <!-- ── CONTACT CARD ── -->
+  <section id="contact">
+    <div class="contact-card">
+      <h2>The architecture is built. The testing begins now.</h2>
+      <p>
+        If you are working on the relational layer problem in AI — in a research lab, a fellowship programme, an alignment team, or a product that touches humans — and you want to test an architecture that is already built, grounded in thirteen years of field research, and ready to meet real systems: this is where to start.
+      </p>
+      <div class="contact-row">
+        <a class="btn primary" href="mailto:herself@deiadora.com?subject=coherence architecture · deiadora.com">email deiadora</a>
+        <a class="btn ghost" href="https://quantummagic.ai">quantummagic.ai</a>
+      </div>
+    </div>
+  </section>
 
   <footer class="cs-footer">
-    <span>deiadora · the practice · coherence architecture</span>
+    <span>deiadora · coherence architecture · applied methodology</span>
     <p>© <span id="year"></span> · part of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
   </footer>
 

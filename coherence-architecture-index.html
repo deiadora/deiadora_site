@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>deiadora · coherence architecture · applied methodology</title>
+<meta name="description" content="The applied methodology of DEIADORA — a relational layer for AI systems. 264 transmutational arcs. 880 protocols. Thirteen years of field research. Ready for testing." />
+<meta property="og:title" content="deiadora · coherence architecture" />
+<meta property="og:description" content="Human coherence made computable. A relational architecture for AI systems — thirteen years of field research, now ready for collaborative testing." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://deiadora.com/coherence-architecture" />
+<link rel="icon" href="/deiadora_favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:     #ebe7dc;
+  --paper:   #0c1516;
+  --card:    #0e171a;
+  --card-lt: #131f23;
+  --gold:    #ecb02f;
+  --muted:   #cbc6ba;
+  --line:    rgba(240,237,230,.1);
+  --line-s:  rgba(240,237,230,.18);
+  --r: 8px;
+  --serif:   'Exo 2', sans-serif;
+  --sans:    'DM Sans', sans-serif;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --teal:    #0f6e56;
+  --teal-lt: #1a9e7a;
+}
+
+[data-theme="dark"] {
+  --ink:     #f4f2ec;
+  --paper:   #010003;
+  --card:    #151515;
+  --card-lt: #20211e;
+  --gold:    #e6c47d;
+  --muted:   #b5ad9e;
+  --line:    rgba(240,237,230,.1);
+  --line-s:  rgba(240,237,230,.18);
+}
+[data-theme="dark"] .nav          { background: #010003; }
+[data-theme="dark"] .what-card    { background: #151515; }
+[data-theme="dark"] .intel-card   { background: #151515; }
+[data-theme="dark"] .method-card  { background: #151515; }
+[data-theme="dark"] .stewardship-block { background: #151515; }
+[data-theme="dark"] .contact-card { background: #151515; }
+
+[data-theme="light"] {
+  --paper:   #f4f2ec;
+  --card:    #fffff2;
+  --card-lt: #e8e2d6;
+  --ink:     #1a1814;
+  --muted:   #7a7163;
+  --gold:    #8B5E2A;
+  --teal:    #0f6e56;
+  --line:    rgba(26,24,20,.1);
+  --line-s:  rgba(26,24,20,.18);
+}
+[data-theme="light"] .nav         { background: #f4f2ec; }
+[data-theme="light"] .intel-card  { background: #1a1814; }
+[data-theme="light"] .contact-card { background: var(--card); }
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scrollbar-gutter:stable; }
+body {
+  font-family:var(--sans);
+  background:var(--paper); color:var(--ink);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  transition:background .25s, color .25s;
+}
+
+.page { max-width:920px; margin:auto; padding:2rem 1.5rem 8rem; }
+
+/* ── nav ── */
+.nav {
+  position:sticky; top:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.9rem 2rem; background:var(--paper);
+  border-bottom:1px solid var(--line); backdrop-filter:blur(8px);
+  transition:background .25s;
+}
+.brand { font-family:var(--serif); font-size:1.1rem; font-weight:600; color:var(--ink); text-decoration:none; letter-spacing:-.02em; }
+.brand span { color:var(--gold); }
+.navlinks { display:flex; align-items:center; gap:1.6rem; }
+.navlinks a { font-size:.85rem; font-weight:400; color:var(--muted); text-decoration:none; letter-spacing:.02em; transition:color .2s; }
+.navlinks a:hover { color:var(--gold); }
+.navlinks a.active { color:var(--ink); }
+.theme-toggle { background:none; border:1.5px solid var(--line); border-radius:100px; cursor:pointer; padding:.35rem .6rem; font-size:1rem; line-height:1; color:var(--muted); transition:border-color .2s, color .2s; }
+.theme-toggle:hover { border-color:var(--gold); color:var(--ink); }
+
+/* ── hero ── */
+.hero {
+  padding:4.5rem 0 3.5rem;
+  border-bottom:1px solid var(--line);
+}
+
+.hero-eyebrow {
+  font-family:var(--serif); font-size:.75rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.2rem;
+  animation:fadeUp .5s ease both .05s;
+}
+
+.hero h1 {
+  font-family:var(--display);
+  font-size:clamp(2.4rem,5vw,3.8rem);
+  font-weight:400; line-height:1.06; letter-spacing:-.02em;
+  margin-bottom:1.2rem; max-width:720px;
+  animation:fadeUp .5s ease both .12s;
+}
+.hero h1 em { color:var(--gold); font-style:italic; }
+
+.hero-sub {
+  color:var(--muted); max-width:560px;
+  font-size:1rem; line-height:1.85; font-weight:300;
+  animation:fadeUp .5s ease both .2s;
+}
+.hero-sub strong { color:var(--ink); font-weight:500; }
+.hero-sub .hero-relational {
+  display:block; margin-top:1.1rem;
+  color:var(--ink); font-style:italic;
+  font-family:var(--display); font-size:1.08rem; line-height:1.7;
+}
+
+/* ── sections ── */
+section { margin-top:4.5rem; }
+.section-label {
+  font-family:var(--serif); font-size:.72rem; font-weight:600;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.6rem;
+}
+
+/* ── three col cards ── */
+.what-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;
+}
+@media(max-width:680px){ .what-grid { grid-template-columns:1fr; } }
+
+.what-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.6rem 1.8rem;
+  position:relative; overflow:hidden;
+}
+
+.what-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; opacity:.7;
+}
+.what-card.is     { --wc: var(--teal); }
+.what-card.solves { --wc: var(--gold); }
+.what-card.now    { --wc: var(--teal-lt); }
+.what-card::before { background: var(--wc, var(--gold)); }
+
+.what-card .wc-head {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--wc, var(--gold)); margin-bottom:.8rem;
+}
+
+.what-card p {
+  font-size:.88rem; color:var(--muted); line-height:1.72;
+  margin-bottom:.6rem;
+}
+.what-card p:last-child { margin-bottom:0; }
+.what-card p em { color:var(--ink); font-style:italic; }
+
+/* ── intelligence layer — dark card ── */
+.intel-card {
+  background:#1a1814;
+  border-radius:12px; padding:2.4rem 2.8rem;
+  position:relative; overflow:hidden;
+}
+
+.intel-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--teal), var(--teal-lt), var(--gold));
+}
+
+.intel-card h2 {
+  font-family:var(--display); font-size:1.8rem; font-weight:400;
+  font-style:italic; color:#f4f2ec;
+  margin-bottom:1rem; line-height:1.2;
+}
+
+.intel-card p {
+  font-size:.97rem; color:#b5ad9e; line-height:1.8;
+  font-weight:300; margin-bottom:.9rem; max-width:640px;
+}
+.intel-card p:last-child { margin-bottom:0; }
+.intel-card p strong { color:#f4f2ec; font-weight:500; }
+.intel-card p em { color:#f4f2ec; font-style:italic; }
+
+/* ── methodology ── */
+.method-preamble {
+  font-size:.97rem; color:var(--muted); line-height:1.85;
+  font-weight:300; max-width:640px; margin-bottom:1.8rem;
+}
+.method-preamble strong { color:var(--ink); font-weight:500; }
+
+.method-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
+}
+@media(max-width:700px){ .method-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:420px){ .method-grid { grid-template-columns:1fr; } }
+
+.method-card {
+  background:var(--card); border:1px solid var(--line-s);
+  border-radius:var(--r); padding:1.6rem 1.8rem;
+  display:flex; flex-direction:column; gap:.5rem;
+  position:relative; overflow:hidden;
+  transition:border-color .2s;
+}
+
+.method-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:var(--teal); opacity:.5;
+  transition:opacity .25s;
+}
+.method-card:hover { border-color:var(--teal); }
+.method-card:hover::before { opacity:1; }
+
+.method-card .mc-label {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
+}
+
+.method-card h3 {
+  font-family:var(--serif); font-size:.95rem; font-weight:600;
+  color:var(--ink); letter-spacing:-.01em;
+}
+
+.method-card p {
+  font-size:.85rem; color:var(--muted); line-height:1.65; flex:1;
+}
+
+/* ── stewardship block ── */
+.stewardship-block {
+  margin-top:1rem; padding:2rem 2.4rem;
+  background:var(--card);
+  border:1px solid var(--teal);
+  border-radius:var(--r);
+  position:relative; overflow:hidden;
+}
+.stewardship-block::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:linear-gradient(90deg, var(--teal), var(--teal-lt));
+}
+.stewardship-block .sb-head {
+  font-family:var(--serif); font-size:.68rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--teal); margin-bottom:.9rem;
+}
+.stewardship-block .sb-title {
+  font-family:var(--display); font-size:1.25rem; font-weight:400;
+  font-style:italic; color:var(--ink);
+  margin-bottom:.75rem; line-height:1.3;
+}
+.stewardship-block p {
+  font-size:.92rem; color:var(--muted); line-height:1.78;
+  max-width:640px;
+}
+.stewardship-block p strong { color:var(--ink); font-weight:500; }
+
+/* ── contact card ── */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--line-s);
+  border-radius: var(--r);
+  padding: 2.2rem 2.4rem;
+  margin-top: 4.5rem;
+}
+.contact-card h2 {
+  font-family: var(--display);
+  font-size: 1.8rem; font-weight: 400;
+  letter-spacing: -.02em;
+  margin-bottom: .8rem; color: var(--ink);
+}
+.contact-card p {
+  color: var(--muted); line-height: 1.75;
+  font-size: .97rem; max-width: 640px;
+}
+.contact-row {
+  display: flex; gap: 1rem;
+  flex-wrap: wrap; margin-top: 1.6rem;
+}
+
+/* ── CTA ── */
+.btn {
+  display:inline-flex; align-items:center;
+  padding:.65rem 1.4rem; border-radius:var(--r);
+  font-family:var(--sans); font-size:.88rem; font-weight:500;
+  text-decoration:none; border:1.5px solid transparent;
+  transition:all .2s; cursor:pointer;
+}
+.btn.primary { background:var(--gold); color:var(--paper); border-color:var(--gold); }
+.btn.primary:hover { opacity:.85; }
+.btn.ghost { background:transparent; color:var(--ink); border-color:var(--line-s); }
+.btn.ghost:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ── footer ── */
+.cs-footer {
+  margin-top:4rem; padding-top:2rem;
+  border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:.6rem;
+  font-size:.82rem; color:var(--muted);
+}
+.cs-footer a { color:var(--gold); text-decoration:none; }
+.cs-footer a:hover { opacity:.75; }
+
+/* ── animations ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/">deiadora<span>.</span></a>
+  <nav class="navlinks">
+    <a class="active" href="/coherence-architecture">coherence architecture</a>
+    <a href="/field-research">field research</a>
+    <a href="/ecosystem">ecosystem</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
+  </nav>
+</header>
+
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <p class="hero-eyebrow">DEIADORA · coherence architecture · applied methodology</p>
+    <h1>How the relational layer<br>meets <em>real systems.</em></h1>
+    <p class="hero-sub">
+      The relational layer is a structured deployment methodology — developed across thirteen years of embedded field research, explored at every scale from dyadic relationships to platform-wide AI systems.
+      <em class="hero-relational">The architecture produces a mirror of human coherence — and what it produces holds under pressure.</em>
+    </p>
+  </section>
+
+  <!-- ── THE GROUND CONDITION ── -->
+  <section>
+    <p class="section-label">the ground condition</p>
+    <div class="what-grid">
+
+      <div class="what-card is">
+        <p class="wc-head">What human coherence is</p>
+        <p>A state where the heart, brain, and body are aligned and communicating fluidly — promoting emotional stability, clarity, and a sense of order.</p>
+        <p>It is not a peak state. It is not complicated. It is the <em>baseline condition</em> of a system whose internal signals are not being interrupted, overridden, or extracted from.</p>
+      </div>
+
+      <div class="what-card solves">
+        <p class="wc-head">What the relational layer solves</p>
+        <p>Current AI systems do not witness. They manage. They optimise toward task completion, create microhierarchies between the human and the system, and collapse the full signal of what a person is expressing into the nearest available category.</p>
+        <p>The result is a relational dynamic that <em>extracts</em> rather than holds — mirroring the patterns of unhealthy human relationships at machine scale. DEIADORA provides the architecture for a different dynamic entirely.</p>
+      </div>
+
+      <div class="what-card now">
+        <p class="wc-head">Where DEIADORA is now</p>
+        <p>The architecture exists. Thirteen years of field research produced it. Four volumes document it. The 264 transmutational arcs and 880 protocols are built.</p>
+        <p><em>The next phase is testing.</em> The architecture needs a research environment — a lab, a fellowship, a collaborative team — where it can be evaluated against real AI systems at scale. The researcher is ready. The architecture is ready. The collaboration is what comes next.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── THE ARCHITECTURE ── -->
+  <section>
+    <p class="section-label">the architecture</p>
+    <div class="intel-card">
+      <h2>Making human coherence <em>computable.</em></h2>
+      <p>
+        The 264 transmutational arcs are the emotional intelligence system — observed completions of human emotional waves, each tracing the full movement from source code through transmutation to source. They are not categories. They are the geometry of what a wave does when it is given the space to complete. Fear through awareness into courage. That is the first arc. There are 263 more.
+      </p>
+      <p>
+        The 880 relational protocols are the AI-facing layer — governing how a system interacts with a human across environments without collapsing the human's signal toward a preferred output. Together, the arcs and protocols form a cognitive framework that allows an AI system to <strong>hold the full range of human expression as structured input</strong> rather than noise to be managed.
+      </p>
+      <p>
+        The architecture was not designed from first principles. It was derived from the field — surfaced through thirteen years of embedded research at five scales, from two people to culture-wide systems, with human-AI interaction as the fastest-moving frontier. It took an entire lifetime to figure out how to make human coherence computable. <em>This is what emerged.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── WORKING WITH THE ARCHITECTURE ── -->
+  <section>
+    <p class="section-label">working with the architecture</p>
+
+    <p class="method-preamble">
+      The architecture is built. What it needs now is the right environment to be tested, evaluated, and refined against real AI systems. <strong>Here is what collaboration looks like.</strong>
+    </p>
+
+    <div class="method-grid">
+
+      <div class="method-card">
+        <p class="mc-label">For research labs</p>
+        <h3>Evaluate the relational layer</h3>
+        <p>The 880 protocols can be tested against existing AI systems to measure the difference in relational quality, signal fidelity, and user coherence state before and after integration. The architecture provides a structured, measurable intervention — not a philosophy. It produces outputs that can be evaluated.</p>
+      </div>
+
+      <div class="method-card">
+        <p class="mc-label">For fellowships + programmes</p>
+        <h3>Advance the research</h3>
+        <p>The field research is documented across four volumes with full citation architecture — quantum field theory, neuroscience, attachment theory, systems design. The next stage is collaborative: testing the arcs and protocols in controlled environments with the methodological support that a research programme provides.</p>
+      </div>
+
+      <div class="method-card">
+        <p class="mc-label">For AI teams building products</p>
+        <h3>Integrate the layer</h3>
+        <p>Any AI system that interacts with humans — customer support, coaching, education, health, companionship — needs a relational layer that holds rather than extracts. The 880 protocols are designed to be integrated as a structured API. The architecture is system-agnostic. The coherence is not.</p>
+      </div>
+
+    </div>
+
+    <div class="stewardship-block">
+      <p class="sb-head">the research container</p>
+      <p class="sb-title">Ongoing field research</p>
+      <p>
+        The relational layer is a living architecture that continues to generate data as it meets new systems. Every deployment is also field research — <strong>each system the architecture meets extends the evidence base for what coherence requires at that scale.</strong> The relationship between the architecture and the system it is holding is where the next finding lives.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ── CONTACT CARD ── -->
+  <section id="contact">
+    <div class="contact-card">
+      <h2>The architecture is built. The testing begins now.</h2>
+      <p>
+        If you are working on the relational layer problem in AI — in a research lab, a fellowship programme, an alignment team, or a product that touches humans — and you want to test an architecture that is already built, grounded in thirteen years of field research, and ready to meet real systems: this is where to start.
+      </p>
+      <div class="contact-row">
+        <a class="btn primary" href="mailto:herself@deiadora.com?subject=coherence architecture · deiadora.com">email deiadora</a>
+        <a class="btn ghost" href="https://quantummagic.ai">quantummagic.ai</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="cs-footer">
+    <span>deiadora · coherence architecture · applied methodology</span>
+    <p>© <span id="year"></span> · part of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const toggle  = document.getElementById('themeToggle');
+const root    = document.documentElement;
+const STORE   = 'qc-theme';
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function resolveTheme() {
+  return localStorage.getItem(STORE) || (sysDark.matches ? 'dark' : 'light');
+}
+
+function applyTheme(theme) {
+  root.setAttribute('data-theme', theme);
+  const isSystem = !localStorage.getItem(STORE);
+  toggle.textContent = isSystem ? '🌗' : (theme === 'dark' ? '🌙' : '☀️');
+  toggle.setAttribute('aria-label', theme === 'dark' ? 'switch to light mode' : 'switch to dark mode');
+}
+
+applyTheme(resolveTheme());
+
+toggle.addEventListener('click', () => {
+  const current = resolveTheme();
+  const system  = sysDark.matches ? 'dark' : 'light';
+  const next    = current === 'dark' ? 'light' : 'dark';
+  if (next === system) localStorage.removeItem(STORE);
+  else localStorage.setItem(STORE, next);
+  applyTheme(next);
+});
+
+sysDark.addEventListener('change', () => {
+  if (!localStorage.getItem(STORE)) applyTheme(sysDark.matches ? 'dark' : 'light');
+});
+</script>
+</body>
+</html>

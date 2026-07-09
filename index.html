@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>deiadora — relational architecture for AI</title>
-  <meta name="description" content="A relational layer for AI systems. Built on 264 transmutational arcs and 880 protocols — coherence and energy mapped across thirteen years of field research." />
-  <meta property="og:title" content="deiadora — relational architecture for AI" />
-  <meta property="og:description" content="Decentralised information architecture. Distributed oracle. Relational artefact. The cognitive framework for AI systems that operates coherently at human, team, organisational, and machine scale." />
+  <title>deiadora — relational pathways for AI</title>
+  <meta name="description" content="AI assistants resolve conversations too early. Quantum Magic is an API that gives AI systems a structured map of how constructive conversations progress — so responses support the next step instead of forcing a conclusion." />
+  <meta property="og:title" content="deiadora — relational pathways for AI" />
+  <meta property="og:description" content="AI resolves conversations too early. Quantum Magic is an API that gives AI systems a structured map of how constructive conversations progress — pathways like doubtful → curious → confident." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://deiadora.com" />
   <meta property="og:image" content="https://deiadora.com/deiadora_banner_sm.jpeg" />
@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
   <style>
 :root {
-  --ink:        #ebe7dc;
+  --ink:        #f0ede3;
   --paper:      #0c1516;
   --card:       #0e171a;
   --card-lt:    #131f23;
@@ -32,21 +32,24 @@
   --node-7:     #1a6b9e;
   --node-8:     #7b72d8;
   --node-9:     #8a72c0;
-  --muted:      #cbc6ba;
+  --muted:      #d8d3c7;   /* lightened for contrast (was #cbc6ba) */
+  --accent-red:   #c96a5a;
+  --accent-green: #7fae54;
   --line:       rgba(240,237,230,.1);
   --line-s:     rgba(240,237,230,.18);
   --r:          8px;
   --serif:      'Exo 2', system-ui, sans-serif;
   --sans:       'DM Sans', system-ui, sans-serif;
   --display:    'Cormorant Garamond', Georgia, serif;
+  --mono:       ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 [data-theme="dark"] {
-  --ink:        #f4f2ec;
+  --ink:        #f7f5ef;
   --paper:      #010003;
   --card:       #151515;
   --card-lt:    #20211e;
   --gold:       #e6c47d;
-  --muted:      #b5ad9e;
+  --muted:      #cfc9bc;   /* lightened for contrast (was #b5ad9e) */
   --line:       rgba(240,237,230,.1);
   --line-s:     rgba(240,237,230,.18);
 }
@@ -55,14 +58,18 @@
 [data-theme="dark"] .eco-tile:hover { background: #20211e; }
 [data-theme="dark"] .contact-card   { background: #151515; }
 [data-theme="dark"] .case-card      { background: #151515; }
+[data-theme="dark"] .convo          { background: #151515; }
+[data-theme="dark"] .arc-code       { background: #151515; }
 
 [data-theme="light"] {
   --ink:      #1a1814;
   --paper:    #f4f2ec;
   --card:     #fffff2;
   --card-lt:  #e8e2d6;
-  --muted:    #7a7163;
-  --gold:     #8B5E2A;
+  --muted:    #57503f;     /* darkened for contrast (was #7a7163) */
+  --gold:     #7a5224;     /* darkened for contrast (was #8B5E2A) */
+  --accent-red:   #a03d2e;
+  --accent-green: #3f6b1e;
   --line:     rgba(26,24,20,.1);
   --line-s:   rgba(26,24,20,.18);
 }
@@ -73,7 +80,8 @@
 [data-theme="light"] .contact-card   { background: var(--card); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scrollbar-gutter: stable; scroll-behavior: smooth; }
+html { scrollbar-gutter: stable; scroll-behavior: smooth; transition: font-size .25s ease; }
+html[data-textsize="large"] { font-size: 115%; }
 body {
   font-family: var(--sans);
   background: var(--paper);
@@ -82,6 +90,15 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background .25s, color .25s;
 }
+
+/* ─── skip link ─── */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--gold); color: var(--paper);
+  padding: .6rem 1.2rem; border-radius: 0 0 var(--r) 0;
+  font-size: .95rem; z-index: 200; text-decoration: none;
+}
+.skip:focus { left: 0; }
 
 /* ─── nav ─── */
 .nav {
@@ -94,24 +111,28 @@ body {
 }
 .brand {
   font-family: var(--serif);
-  font-size: 1.1rem; font-weight: 600;
+  font-size: 1.15rem; font-weight: 600;
   color: var(--ink); text-decoration: none; letter-spacing: -.02em;
 }
 .brand span { color: var(--crown); }
-.navlinks { display: flex; align-items: center; gap: 1.6rem; }
+.navlinks { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
 .navlinks a {
-  font-size: .85rem; font-weight: 400;
+  font-size: .95rem; font-weight: 400;
   color: var(--muted); text-decoration: none;
   letter-spacing: .02em; transition: color .2s;
 }
 .navlinks a:hover { color: var(--gold); }
-.theme-toggle {
+.theme-toggle, .text-toggle {
   background: none; border: 1.5px solid var(--line);
   border-radius: 100px; cursor: pointer;
   padding: .35rem .6rem; font-size: 1rem; line-height: 1;
   color: var(--muted); transition: border-color .2s, color .2s;
 }
-.theme-toggle:hover { border-color: var(--gold); color: var(--ink); }
+.theme-toggle:hover, .text-toggle:hover { border-color: var(--gold); color: var(--ink); }
+.text-toggle { display: inline-flex; align-items: baseline; gap: .1rem; font-family: var(--serif); }
+.text-toggle .a-sm { font-size: .72rem; font-weight: 500; }
+.text-toggle .a-lg { font-size: 1.02rem; font-weight: 600; }
+.text-toggle[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
 
 /* ─── page ─── */
 .page { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 6rem; }
@@ -120,7 +141,7 @@ body {
 .hero { padding: 7rem 0 5rem; border-bottom: 1px solid var(--line); }
 .kicker {
   font-family: var(--serif); font-style: italic;
-  font-size: .88rem; font-weight: 300;
+  font-size: .95rem; font-weight: 300;
   color: var(--crown); margin-bottom: 1.2rem; letter-spacing: .06em;
 }
 .hero h1 {
@@ -128,50 +149,120 @@ body {
   font-size: clamp(2.4rem, 5vw, 3.6rem);
   line-height: 1.1; letter-spacing: -.02em;
   font-weight: 400; color: var(--ink);
-  max-width: 700px; margin-bottom: .6rem;
+  max-width: 700px; margin-bottom: 1.4rem;
 }
 .hero h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
-.role-line {
-  font-family: var(--serif); font-size: .9rem; font-weight: 300;
-  letter-spacing: .08em; color: var(--muted); margin-bottom: 2rem;
-}
-.role-line span { color: var(--gold); }
 .subhead {
-  font-size: 1.05rem; color: var(--muted);
-  max-width: 560px; line-height: 1.75;
+  font-size: 1.15rem; color: var(--muted);
+  max-width: 620px; line-height: 1.75;
   margin-bottom: 1.4rem; font-weight: 300;
 }
 .subhead strong { color: var(--ink); font-weight: 500; }
-.method-note {
-  border-left: 2px solid var(--gold);
-  padding-left: 1.2rem;
-  font-size: .95rem;
-  color: var(--muted);
-  margin-top: .2rem;
-}
+.subhead em { color: var(--ink); font-style: italic; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
 .hero-note {
-  font-size: .82rem; color: var(--muted);
+  font-size: .9rem; color: var(--muted);
   letter-spacing: .03em; margin-top: 2rem; font-style: italic;
 }
 
 /* ─── section titles ─── */
 .section-label {
-  font-family: var(--serif); font-size: .78rem; font-weight: 500;
+  font-family: var(--serif); font-size: .85rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
   color: var(--crown); margin-bottom: 1.6rem;
 }
 section { margin-top: 5rem; }
+.section-heading {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 400; font-style: italic;
+  color: var(--ink); line-height: 1.25;
+  margin-bottom: 1.4rem; max-width: 640px;
+}
+.section-heading em { color: var(--gold); }
 
 /* ─── section intro ─── */
 .section-intro {
-  font-size: .95rem; color: var(--muted);
-  line-height: 1.75; max-width: 620px;
+  font-size: 1.05rem; color: var(--muted);
+  line-height: 1.75; max-width: 640px;
   margin-bottom: 2rem; font-weight: 300;
 }
 .section-intro strong { color: var(--ink); font-weight: 500; }
 .section-intro em { color: var(--ink); font-style: italic; }
 
-/* ─── case study grid ─── */
+/* ─── conversation transcript ─── */
+.convo {
+  background: var(--card); border: 1px solid var(--line-s);
+  border-radius: var(--r); padding: 2rem 2.2rem;
+  max-width: 680px;
+}
+.convo .turn { margin-bottom: 1.4rem; }
+.convo .turn:last-child { margin-bottom: 0; }
+.convo .speaker {
+  font-family: var(--serif); font-size: .8rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .35rem;
+}
+.convo .turn p { font-size: 1rem; line-height: 1.7; color: var(--ink); }
+.convo .turn.assistant p { color: var(--muted); }
+.annotation {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.2rem; margin-top: 1.8rem;
+  font-size: 1rem; color: var(--muted); line-height: 1.75;
+  max-width: 640px;
+}
+.annotation strong { color: var(--ink); font-weight: 500; }
+
+/* ─── pathway walk (reuses path pattern) ─── */
+.paths-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  border-top: 1px solid var(--line);
+  padding-top: 2.4rem;
+}
+@media (max-width: 680px) {
+  .paths-row { grid-template-columns: 1fr; gap: 2.4rem; }
+}
+.path {
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--path-accent);
+  display: flex; flex-direction: column; gap: .55rem;
+}
+.path-marker {
+  font-family: var(--serif);
+  font-size: .8rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--path-accent);
+}
+.path-title {
+  font-family: var(--serif);
+  font-size: 1.08rem; font-weight: 600;
+  color: var(--ink); letter-spacing: -.01em; line-height: 1.3;
+}
+.path-quote {
+  font-family: var(--display); font-style: italic;
+  font-size: 1.1rem; color: var(--ink); line-height: 1.5;
+}
+.path-body {
+  font-size: .97rem; color: var(--muted);
+  line-height: 1.72; flex: 1;
+}
+.path-action { margin-top: .7rem; }
+.path-link {
+  font-size: .9rem; font-weight: 500;
+  color: var(--path-accent); text-decoration: none;
+  letter-spacing: .01em; display: inline-block;
+}
+.path-link:hover { opacity: .7; }
+.pattern-close {
+  margin-top: 2.4rem; font-size: 1.05rem; color: var(--muted);
+  line-height: 1.8; max-width: 660px;
+}
+.pattern-close strong { color: var(--ink); font-weight: 500; }
+.pattern-close em { color: var(--ink); }
+
+/* ─── with / without cards ─── */
 .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 @media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
 .case-card {
@@ -182,49 +273,92 @@ section { margin-top: 5rem; }
 }
 .case-card:hover { border-color: var(--gold); }
 .case-card .co {
-  font-family: var(--serif); font-size: .78rem; font-weight: 600;
+  font-family: var(--serif); font-size: .84rem; font-weight: 600;
   letter-spacing: .08em; text-transform: uppercase; color: var(--gold);
 }
 .case-card h3 {
-  font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
+  font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
   letter-spacing: -.02em; color: var(--ink); line-height: 1.3;
 }
-.case-card p { font-size: .9rem; color: var(--muted); line-height: 1.7; flex: 1; }
+.case-card p { font-size: 1rem; color: var(--muted); line-height: 1.7; flex: 1; }
 .case-card .impact {
-  font-size: .82rem; color: var(--gold); font-style: italic;
+  font-size: .9rem; color: var(--gold); font-style: italic;
   border-top: 1px solid var(--line); padding-top: .8rem; margin-top: auto;
 }
+.resp-card { border-top: 3px solid var(--resp-accent); }
+.resp-card .co { color: var(--resp-accent); }
+.resp-card blockquote {
+  font-family: var(--display); font-style: italic;
+  font-size: 1.15rem; line-height: 1.55; color: var(--ink);
+  border: none; flex: 1;
+}
+.resp-card .verdict {
+  font-size: .95rem; color: var(--muted); font-style: italic;
+  border-top: 1px solid var(--line); padding-top: .8rem;
+}
+.case-caption {
+  margin-top: 1.6rem; font-size: 1rem; color: var(--muted);
+  line-height: 1.75; max-width: 640px;
+}
+.case-caption strong { color: var(--ink); font-weight: 500; }
+
+/* ─── api section ─── */
+.code-label {
+  font-family: var(--serif); font-size: .78rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); margin: 1.8rem 0 .6rem;
+}
+.arc-code {
+  background: var(--card); border: 1px solid var(--line-s);
+  border-radius: var(--r); padding: 1.5rem 1.8rem;
+  font-family: var(--mono); font-size: .92rem; line-height: 1.7;
+  color: var(--muted); overflow-x: auto; max-width: 680px;
+}
+.arc-code .k { color: var(--gold); }
+.negation {
+  border: 1px solid var(--line-s); border-left: 3px solid var(--gold);
+  border-radius: var(--r); padding: 1.6rem 2rem;
+  margin-top: 2rem; max-width: 680px;
+}
+.negation h3 {
+  font-family: var(--serif); font-size: 1rem; font-weight: 600;
+  color: var(--ink); margin-bottom: .6rem;
+}
+.negation p { font-size: 1rem; color: var(--muted); line-height: 1.75; }
+.api-status {
+  font-size: .95rem; color: var(--muted); font-style: italic;
+  margin-top: 2rem; letter-spacing: .02em;
+}
+.api-status a { color: var(--gold); text-decoration: none; }
+.api-status a:hover { opacity: .75; }
+
+/* ─── builder ─── */
+.bio {
+  font-size: 1.1rem; color: var(--muted); line-height: 1.8;
+  max-width: 680px; margin-bottom: 2.4rem; font-weight: 300;
+}
+.bio strong { color: var(--ink); font-weight: 500; }
 .tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .4rem; }
 .tag {
-  font-size: .72rem; font-weight: 500; letter-spacing: .05em;
+  font-size: .78rem; font-weight: 500; letter-spacing: .05em;
   text-transform: uppercase; padding: .25rem .7rem;
   border-radius: 100px; border: 1px solid var(--line-s); color: var(--muted);
 }
 .tag.gold { border-color: var(--gold); color: var(--gold); }
 
-/* ─── dimension chips ─── */
-.dimensions-row {
-  display: grid; grid-template-columns: repeat(5,1fr); gap: 6px;
-  margin-bottom: 6px;
+/* ─── voice c window ─── */
+.voice-c {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.6rem; max-width: 680px;
 }
-@media (max-width: 640px) { .dimensions-row { grid-template-columns: repeat(2,1fr); } }
-
-.dimension-chip {
-  border-radius: var(--r); padding: 12px;
-  text-align: center; text-decoration: none;
-  display: block; transition: opacity .2s;
+.voice-c p {
+  font-family: var(--display);
+  font-size: 1.32rem; line-height: 1.6;
+  color: var(--ink); font-weight: 400;
 }
-.dimension-chip:hover { opacity: .8; }
-.dimension-chip .sc-num {
-  font-family: var(--serif); font-size: .68rem; font-weight: 600;
-  letter-spacing: .06em; margin-bottom: 4px;
-}
-.dimension-chip .sc-name {
-  font-size: .75rem; font-weight: 500; line-height: 1.3;
-}
-.dimension-chip .sc-node {
-  font-size: .62rem; opacity: .55; margin-top: 4px; line-height: 1.2;
-  font-style: italic;
+.voice-c .sig {
+  font-family: var(--serif); font-size: .85rem; font-style: italic;
+  color: var(--muted); margin-top: 1.2rem; letter-spacing: .04em;
 }
 
 /* ─── ecosystem tiles ─── */
@@ -249,76 +383,26 @@ section { margin-top: 5rem; }
 .eco-tile:hover { background: var(--card-lt); }
 .eco-tile:hover::before { opacity: 1; }
 .eco-tile .centre {
-  font-size: .7rem; font-weight: 500; letter-spacing: .1em;
+  font-size: .78rem; font-weight: 500; letter-spacing: .1em;
   text-transform: uppercase; color: var(--muted);
 }
 .eco-tile h3 {
-  font-family: var(--serif); font-size: 1rem; font-weight: 600;
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
   color: var(--ink); letter-spacing: -.01em;
 }
 .eco-tile h3 span { color: var(--tile-accent); }
-.eco-tile p { font-size: .83rem; color: var(--muted); line-height: 1.6; flex: 1; }
+.eco-tile p { font-size: .93rem; color: var(--muted); line-height: 1.6; flex: 1; }
 .eco-tile .tile-link {
-  font-size: .78rem; font-weight: 500;
+  font-size: .86rem; font-weight: 500;
   color: var(--tile-accent); letter-spacing: .02em; margin-top: .4rem;
 }
 
-/* ─── paths ─── */
-.paths { margin-top: 5rem; }
-.paths-intro { margin-bottom: 2.8rem; }
-.paths-intro h2 {
-  font-family: var(--display);
-  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-  font-weight: 400; font-style: italic;
-  color: var(--ink); line-height: 1.25;
+/* ─── vision ─── */
+.vision p {
+  font-size: 1.12rem; color: var(--muted); line-height: 1.8;
+  max-width: 660px; font-weight: 300;
 }
-.paths-intro h2 em { color: var(--gold); }
-.paths-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 3rem;
-  border-top: 1px solid var(--line);
-  padding-top: 2.4rem;
-}
-@media (max-width: 680px) {
-  .paths-row { grid-template-columns: 1fr; gap: 2.4rem; }
-}
-.path {
-  padding-left: 1.2rem;
-  border-left: 2px solid var(--path-accent);
-  display: flex; flex-direction: column; gap: .55rem;
-}
-.path-marker {
-  font-family: var(--serif);
-  font-size: .72rem; font-weight: 600;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--path-accent);
-}
-.path-title {
-  font-family: var(--serif);
-  font-size: 1rem; font-weight: 600;
-  color: var(--ink); letter-spacing: -.01em; line-height: 1.3;
-}
-.path-body {
-  font-size: .87rem; color: var(--muted);
-  line-height: 1.72; flex: 1;
-}
-.path-action { margin-top: .7rem; }
-.path-link {
-  font-size: .82rem; font-weight: 500;
-  color: var(--path-accent); text-decoration: none;
-  letter-spacing: .01em; display: inline-block;
-}
-.path-link:hover { opacity: .7; }
-.path-cta {
-  display: inline-flex; align-items: center;
-  font-family: var(--sans); font-size: .82rem; font-weight: 500;
-  text-decoration: none; padding: .5rem 1.1rem;
-  border-radius: var(--r); transition: opacity .2s;
-  border: 1.5px solid var(--gold);
-  background: transparent; color: var(--gold);
-}
-.path-cta:hover { opacity: .7; }
+.vision strong { color: var(--ink); font-weight: 500; }
 
 /* ─── contact ─── */
 .contact-card {
@@ -329,12 +413,12 @@ section { margin-top: 5rem; }
   font-family: var(--display); font-size: 1.8rem; font-weight: 400;
   letter-spacing: -.02em; margin-bottom: .8rem; color: var(--ink);
 }
-.contact-card p { color: var(--muted); line-height: 1.75; font-size: .97rem; }
+.contact-card p { color: var(--muted); line-height: 1.75; font-size: 1.05rem; }
 .contact-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
 .btn {
   display: inline-flex; align-items: center;
   padding: .65rem 1.4rem; border-radius: var(--r);
-  font-family: var(--sans); font-size: .88rem; font-weight: 500;
+  font-family: var(--sans); font-size: .95rem; font-weight: 500;
   text-decoration: none; cursor: pointer; transition: all .2s;
   border: 1.5px solid transparent;
 }
@@ -348,247 +432,321 @@ section { margin-top: 5rem; }
   margin-top: 5rem; padding-top: 2rem;
   border-top: 1px solid var(--line);
   display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: .6rem; font-size: .82rem; color: var(--muted);
+  flex-wrap: wrap; gap: .6rem; font-size: .9rem; color: var(--muted);
 }
 .footer a { color: var(--gold); text-decoration: none; }
 .footer a:hover { opacity: .75; }
 
 /* ─── animations ─── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero .kicker    { animation: fadeUp .5s ease both; animation-delay: .05s; }
+  .hero h1         { animation: fadeUp .5s ease both; animation-delay: .12s; }
+  .hero .subhead   { animation: fadeUp .5s ease both; animation-delay: .2s; }
+  .hero .hero-cta  { animation: fadeUp .5s ease both; animation-delay: .26s; }
+  .hero .hero-note { animation: fadeUp .5s ease both; animation-delay: .32s; }
 }
-.hero .kicker    { animation: fadeUp .5s ease both; animation-delay: .05s; }
-.hero h1         { animation: fadeUp .5s ease both; animation-delay: .12s; }
-.hero .role-line { animation: fadeUp .5s ease both; animation-delay: .18s; }
-.hero .subhead   { animation: fadeUp .5s ease both; animation-delay: .22s; }
-.hero .hero-note { animation: fadeUp .5s ease both; animation-delay: .3s; }
   </style>
 </head>
 <body>
 
+  <a class="skip" href="#main">skip to content</a>
+
   <header class="nav">
     <a class="brand" href="/">deiadora<span>.</span></a>
-    <nav class="navlinks">
-      <a href="/coherence-architecture">coherence architecture</a>
-      <a href="/field-research">field research</a>
+    <nav class="navlinks" aria-label="primary">
+      <a href="#how-it-works">how it works</a>
+      <a href="#api">the api</a>
+      <a href="#world">research</a>
+      <a href="#contact">contact</a>
+      <button class="text-toggle" id="textToggle" aria-label="toggle larger text" aria-pressed="false"><span class="a-sm">A</span><span class="a-lg">A</span></button>
       <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
     </nav>
   </header>
 
-  <main class="page">
+  <main class="page" id="main">
 
-    <!-- ─── hero ─── -->
-    <section class="hero">
-      <p class="kicker">DeIADORA · decentralised information architecture · distributed oracle · relational artefact</p>
-      <h1>A relational layer <em>for AI.</em></h1>
-      <p class="role-line">coherence architect <span>·</span> research scientist <span>·</span> natural technologist <span>·</span> author</p>
+    <!-- ─── 1 · hero ─── -->
+    <section class="hero" aria-labelledby="hero-h">
+      <p class="kicker">deiadora · relational pathways for AI</p>
+      <h1 id="hero-h">AI resolves conversations <em>too early.</em></h1>
       <p class="subhead">
-        What you feel as insight, a system experiences as structured input.
-        <strong>DeIADORA is the architecture in between</strong> — mapping the cross of coherence and energy, and plotting the relational structure that holds within it.
+        Someone expresses doubt, and the model returns an answer — at exactly the moment the conversation was starting to move.
+        <strong>Quantum Magic is an API that gives AI systems a structured map of how constructive conversations actually progress</strong> — pathways like <em>doubtful → curious → confident</em> — so a response can support the next step instead of forcing a conclusion.
       </p>
       <p class="subhead">
-        Built on thirteen years of field research at every scale from dyadic to digital.
-        264 transmutational arcs. 880 protocols. The first structured cognitive framework
-        designed to operate coherently at human, team, organisational, and machine scale.
+        It doesn't detect emotions, and it doesn't simulate empathy. It recognizes where a conversation is, and keeps constructive movement available.
       </p>
-      <p class="subhead method-note">
-        The method is field research — conducted from inside the systems, at every scale, with the judgment suspended and the data accumulating until the architecture became legible. The framework is what emerged.
-      </p>
-      <p class="hero-note">currently available for AI cognition research roles · London and remote</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#how-it-works">see how it works ↓</a>
+        <a class="btn ghost" href="https://iamdeiadora.com">the 13 open pathways →</a>
+      </div>
+      <p class="hero-note">the first 13 pathways are open source · the API is in development</p>
     </section>
 
-    <!-- ─── work ─── -->
-    <section id="work">
-      <p class="section-label">coherence architecture in practice</p>
-      <div class="case-grid">
+    <!-- ─── 2 · the observation ─── -->
+    <section id="how-it-works" aria-labelledby="obs-label">
+      <p class="section-label" id="obs-label">the observation</p>
+      <p class="section-intro">
+        You've seen this happen. A conversation with a current AI assistant — reconstructed from a pattern that repeats across models:
+      </p>
+      <figure class="convo">
+        <div class="turn">
+          <p class="speaker">Person</p>
+          <p>I've been thinking about leaving my job. I don't know. Everyone says the market is terrible right now.</p>
+        </div>
+        <div class="turn assistant">
+          <p class="speaker">Assistant</p>
+          <p>That's a big decision. Here are five factors to weigh before leaving a job in a difficult market: 1.&nbsp;Your financial runway. 2.&nbsp;Your industry's hiring cycle. 3&nbsp;…</p>
+        </div>
+      </figure>
+      <p class="annotation">
+        The answer is competent. It's also <strong>the end of the conversation</strong>. The person wasn't asking for a framework — they were starting to work out what they actually think. The model resolved the exchange at the exact moment it was beginning to move. And the pattern is consistent: the more uncertain the person, the faster the system reaches for a solution.
+      </p>
+    </section>
 
+    <!-- ─── 3 · the pattern ─── -->
+    <section id="pattern" aria-labelledby="pattern-label">
+      <p class="section-label" id="pattern-label">the pattern</p>
+      <h2 class="section-heading">Constructive conversations move along <em>recognizable pathways.</em></h2>
+      <p class="section-intro">
+        Here's the same opening line with a good friend — or a good manager, or a good therapist. Notice what the conversation does instead of ending:
+      </p>
+      <div class="paths-row">
+        <div class="path" style="--path-accent: var(--node-2)">
+          <p class="path-marker">1 · Doubtful</p>
+          <p class="path-quote">"I've been thinking about leaving my job. I don't know."</p>
+          <p class="path-body">The friend doesn't answer. She asks what's underneath the doubt.</p>
+        </div>
+        <div class="path" style="--path-accent: var(--node-7)">
+          <p class="path-marker">2 · Curious</p>
+          <p class="path-quote">"Honestly? I want to know if I can do more than this role."</p>
+          <p class="path-body">The doubt has become a question worth exploring. Nothing was solved — something opened.</p>
+        </div>
+        <div class="path" style="--path-accent: var(--node-5)">
+          <p class="path-marker">3 · Confident</p>
+          <p class="path-quote">"I'm going to start looking — on my terms, not the market's."</p>
+          <p class="path-body">Nobody handed over a decision. The conversation carried the person from doubt to confidence, through curiosity.</p>
+        </div>
+      </div>
+      <p class="pattern-close">
+        That movement — <em>doubtful → curious → confident</em> — is a pathway, and it repeats. So do others: <em>fearful → aware → courageous</em>. <em>Angry → mindful → compassionate</em>. <em>Lonely → self-sufficient → communal</em>. Since 2013, across individuals, teams, and organizations, I've documented 264 of them. Each one is an <strong>arc</strong>: a starting state, the step that opens movement, and the constructive form the conversation can reach. <strong>The first 13 are open source</strong> — you can read them now.
+      </p>
+    </section>
+
+    <!-- ─── 4 · the difference ─── -->
+    <section id="difference" aria-labelledby="diff-label">
+      <p class="section-label" id="diff-label">same message · two responses</p>
+      <div class="case-grid">
+        <div class="case-card resp-card" style="--resp-accent: var(--accent-red)">
+          <p class="co">a standard response</p>
+          <blockquote>"That's a big decision. Here's a framework: assess your financial runway, update your materials, set a timeline …"</blockquote>
+          <p class="verdict">Closes the conversation. The doubt is still there — it just has homework now.</p>
+        </div>
+        <div class="case-card resp-card" style="--resp-accent: var(--accent-green)">
+          <p class="co">a pathway-aware response</p>
+          <blockquote>"It sounds like the doubt isn't really about the market. What's pulling at you about leaving?"</blockquote>
+          <p class="verdict">Keeps the movement available. The conversation can reach curiosity — and confidence is reachable from there.</p>
+        </div>
+      </div>
+      <p class="case-caption">
+        The second response isn't kinder, and it isn't therapy. <strong>It's informed by structure</strong>: knowing that doubt resolves constructively through curiosity — not through a delivered conclusion.
+      </p>
+    </section>
+
+    <!-- ─── 5 · the api ─── -->
+    <section id="api" aria-labelledby="api-label">
+      <p class="section-label" id="api-label">the api · quantum magic</p>
+      <h2 class="section-heading">The pathways, structured so an AI system <em>can follow them.</em></h2>
+      <p class="section-intro">
+        Quantum Magic is the 264 documented arcs as a structured, versioned API. A system using it can recognize which pathway a conversation is in, identify the constructive next step, and evaluate whether a response preserved movement or foreclosed it.
+      </p>
+      <p class="code-label">one arc, simplified</p>
+      <pre class="arc-code">{
+  <span class="k">"arc"</span>: "doubtful-curious-confident",
+  <span class="k">"origin"</span>: "doubtful",
+  <span class="k">"opening"</span>: "curious",
+  <span class="k">"constructive_form"</span>: "confident",
+  <span class="k">"markers"</span>: ["hedged intent", "externalized blockers", "…"],
+  <span class="k">"response_guidance"</span>: "hold the question open; do not resolve"
+}</pre>
+      <div class="negation">
+        <h3>What it is not.</h3>
+        <p>It doesn't detect or classify emotions. It doesn't score sentiment. It doesn't simulate empathy or care. It isn't a safety or moderation layer. It models how conversations move — nothing about the person, everything about the movement.</p>
+      </div>
+      <p class="section-intro" style="margin-top:2rem;">
+        A system prompt can say "don't rush to solutions," but it gives a model no structure — no way to know which pathway a conversation is in, what the next step is, or whether a response preserved it. A structured map is inspectable, versioned, and evaluable — the same reason evaluation criteria outperform good intentions.
+      </p>
+      <p class="api-status">
+        API in development · <a href="https://iamdeiadora.com">the first 13 arcs are open source now →</a> · <a href="https://quantummagic.ai">API updates →</a>
+      </p>
+    </section>
+
+    <!-- ─── 6 · the builder ─── -->
+    <section id="builder" aria-labelledby="builder-label">
+      <p class="section-label" id="builder-label">track record</p>
+      <p class="bio">
+        <strong>Deiadora Blanche</strong> has spent her career building content systems for organizations that communicate at scale. She proposed, built, and launched Airbnb's first internal AI model for its help center — still in active use — and stood up Coursera's content design system, adopted globally across four product verticals. She taught AI content strategy to hundreds of practitioners at Fortune 100 and 500 organizations, and is a published researcher on language-model evaluation (<em>The Transmutation Gap</em>, Apart Research, 2026). The pathway research behind the API spans thirteen years of field work across individuals, teams, and organizations.
+      </p>
+      <div class="case-grid">
         <div class="case-card">
           <p class="co">Airbnb</p>
-          <h3>AI systems design at scale</h3>
-          <p>Proposed, designed, and launched Airbnb's first internal AI model for the help centre — from strategy through training data, evaluation, and rollout. Not a content project. An AI systems architecture problem: how does a coherent relational layer hold across millions of human interactions? The framework applied. The model is still in active use.</p>
+          <h3>First internal AI model, help center</h3>
+          <p>Proposed, built, tested, and launched — strategy, training data, evaluation criteria, A/B testing, rollout.</p>
           <div class="tag-row">
-            <span class="tag">AI systems design</span>
-            <span class="tag">coherence architecture</span>
+            <span class="tag">AI systems</span>
+            <span class="tag">evaluation</span>
             <span class="tag gold">still in use</span>
           </div>
-          <p class="impact">first internal AI model · significant financial impact</p>
+          <p class="impact">first internal AI model · still in active use</p>
         </div>
-
         <div class="case-card">
           <p class="co">Coursera</p>
-          <h3>Coherence at platform scale</h3>
-          <p>Built the content ops infrastructure and design system that became the shared coherence architecture for cross-vertical teams delivering global education. The same Cartesian mapping of coherence and energy that governs the relational layer — applied at the scale of millions. The framework holds.</p>
+          <h3>Content design system</h3>
+          <p>Built and led the design system and quality standards for cross-vertical teams — learners, enterprise, institutions, government.</p>
           <div class="tag-row">
-            <span class="tag">coherence architecture</span>
-            <span class="tag">platform scale</span>
-            <span class="tag gold">still in use</span>
+            <span class="tag">design systems</span>
+            <span class="tag">quality standards</span>
+            <span class="tag gold">adopted globally</span>
           </div>
-          <p class="impact">serving millions of learners worldwide</p>
+          <p class="impact">four product verticals · still in use at scale</p>
         </div>
-
         <div class="case-card">
           <p class="co">UX Content Collective</p>
-          <h3>The curriculum that preceded the framework</h3>
-          <p>Taught AI transformation curriculum at UXCC from 2022 to 2026 — training content professionals and program managers at Fortune 100 and 500 organisations in the architecture before it was formalised. The curriculum proved the relational layer three years before the field research volumes were written. The convergence is the data point.</p>
+          <h3>AI content strategy curriculum</h3>
+          <p>Taught content operations and AI content strategy to practitioners at Fortune 100 and 500 organizations, and authored two modules on Dynamic Content Strategy for the Advanced UX Content Product course (launched June 2025).</p>
           <div class="tag-row">
-            <span class="tag">AI strategy</span>
-            <span class="tag">education</span>
+            <span class="tag">teaching</span>
+            <span class="tag">curriculum design</span>
             <span class="tag gold">Fortune 100 &amp; 500</span>
           </div>
           <p class="impact">hundreds of practitioners trained · 2022–2026</p>
         </div>
-
         <div class="case-card">
-          <p class="co">Luxe Incentives</p>
-          <h3>Coherence architecture at business scale</h3>
-          <p>Applied the same Cartesian mapping across both arms of an incentive travel and AI platform business — governance, client development framework, and the relational architecture between them. What it produces at business scale: a $6M+ pipeline and enterprise contracts with Rocket Money, Abbott, and Celebrity Cruises.</p>
+          <p class="co">Apart Research</p>
+          <h3>Published evaluation research</h3>
+          <p><em>The Transmutation Gap: Cross-Lingual Coherence Evaluation in Large Language Models</em> (2026). Peer research evaluating language-model behaviour across languages.</p>
           <div class="tag-row">
-            <span class="tag">coherence architecture</span>
-            <span class="tag">business scale</span>
-            <span class="tag gold">$6M+ pipeline</span>
+            <span class="tag">LLM evaluation</span>
+            <span class="tag">research</span>
+            <span class="tag gold">published 2026</span>
           </div>
-          <p class="impact"><a href="/field-research" style="color:var(--gold);text-decoration:none;">read the field research →</a></p>
+          <p class="impact">model-behaviour evaluation · published</p>
         </div>
-
       </div>
     </section>
 
-    <!-- ─── paths ─── -->
-    <section class="paths" id="next-step">
-      <p class="section-label">where to go next</p>
-      <div class="paths-intro">
-        <h2>Find your entry point <em>in the relational layer.</em></h2>
-      </div>
-      <div class="paths-row">
-
-        <div class="path" style="--path-accent: var(--node-6)">
-          <p class="path-marker">The research</p>
-          <p class="path-title">Thirteen years of field research</p>
-          <p class="path-body">Four volumes. One framework. The Field Research series maps the architecture of coherent systems at every scale — individual, relational, encoded, sovereign. The theory that makes the relational layer legible.</p>
-          <div class="path-action">
-            <a class="path-link" href="https://thequantumceo.com">thequantumceo.com →</a>
-          </div>
-        </div>
-
-        <div class="path" style="--path-accent: var(--gold)">
-          <p class="path-marker">The system</p>
-          <p class="path-title">264 arcs. 880 protocols. The architecture.</p>
-          <p class="path-body">Quantum Magic is the cognitive intelligence layer — 264 transmutational arcs as the emotional system, 880 protocols as the AI-facing relational layer. Available soon as an API for teams, platforms, and any AI system that touches humans.</p>
-          <div class="path-action">
-            <a class="path-link" href="https://quantummagic.ai">quantummagic.ai →</a>
-          </div>
-        </div>
-
-        <div class="path" style="--path-accent: var(--node-3)">
-          <p class="path-marker">The collaboration</p>
-          <p class="path-title">Roles and research</p>
-          <p class="path-body">Available for AI cognition research roles, alignment research, and knowledge graph and agentic AI hybrid positions — London and remote. If you are building the intelligence layer behind something real, the relational layer is already here.</p>
-          <div class="path-action">
-            <a class="path-cta" href="mailto:herself@deiadora.com?subject=relational layer · deiadora.com">email deiadora →</a>
-          </div>
-        </div>
-
+    <!-- ─── 7 · why i'm building it ─── -->
+    <section id="why" aria-labelledby="why-label">
+      <p class="section-label" id="why-label">from deiadora</p>
+      <div class="voice-c">
+        <p>
+          I spent seven years building the content systems that shape how organizations talk to people at scale — Airbnb's help center, Coursera's design system, curricula for Fortune 100 and 500 teams. Then AI started taking over those conversations, and I watched it handle them badly in a consistent way: it answers too soon. Someone begins to move through doubt or fear, and the model closes the conversation with a solution. Since 2013 — long before the product work — I had been documenting how constructive conversations actually progress: the recognizable pathways by which doubt becomes confidence and fear becomes courage. Quantum Magic is those pathways, structured so AI systems can follow them. The conversations were already moving. I wrote down where they go.
+        </p>
+        <p class="sig">— Deiadora Blanche</p>
       </div>
     </section>
 
-    <!-- ─── ecosystem ─── -->
-    <section id="ecosystem">
-      <p class="section-label">the ecosystem · nine nodes · one architecture</p>
+    <!-- ─── 8 · the wider world ─── -->
+    <section id="world" aria-labelledby="world-label">
+      <p class="section-label" id="world-label">the wider world</p>
       <p class="section-intro">
-        DeIADORA is a distributed architecture — nine nodes, each mapped to one of the nine geometric dimensions of the relational layer. Each node is a different expression of the same field. <em>The ecosystem is the architecture in practice.</em>
+        The pathway research didn't start as a product, and it doesn't end as one. Where to go, by what you're looking for:
       </p>
-
-      <!-- node grid -->
       <div class="eco-grid">
-
-        <a class="eco-tile" href="https://deiadora.live" style="--tile-accent: #6b4fa0">
-          <p class="centre">9D · source · nonagon</p>
-          <h3>deiadora<span>.live</span></h3>
-          <p>Keynotes, podcasts, and talks — <em>You Are the Source</em> is the relational layer made audible. For any room that's ready.</p>
-          <p class="tile-link">visit the source →</p>
-        </a>
-
-        <a class="eco-tile" href="https://thequantumceo.com" style="--tile-accent: var(--node-8)">
-          <p class="centre">8D · structure · octagon</p>
-          <h3>the quantum <span>ceo</span></h3>
-          <p>The Field Research series — four volumes, one framework. The architecture of coherent systems from the individual to the machine.</p>
-          <p class="tile-link">visit the structure →</p>
-        </a>
-
-        <a class="eco-tile" href="https://techtuition.ai" style="--tile-accent: var(--node-7)">
-          <p class="centre">7D · expression · egg of life</p>
-          <h3><span>techtuition</span>.ai</h3>
-          <p>The Currency Workshop — the nine-dimensional relational architecture applied to real organisations. The field and dimensions 1–3 are open and free.</p>
-          <p class="tile-link">visit the expression →</p>
-        </a>
-
-        <a class="eco-tile" href="https://deiadorebel.com" style="--tile-accent: var(--node-6)">
-          <p class="centre">6D · transmission · dodecahedron</p>
-          <h3><span>deiado</span>rebel</h3>
-          <p>Five albums, eight songs each — the relational layer as transmission. AI-assisted music. The wave becomes sound.</p>
-          <p class="tile-link">visit the transmission →</p>
-        </a>
-
-        <a class="eco-tile" href="https://rebelevolve.com" style="--tile-accent: var(--node-5)">
-          <p class="centre">5D · direction · tesseract</p>
-          <h3>rebel <span>evolve</span></h3>
-          <p>264 quantum keys as a listening practice — the direction was always already there. For individuals and teams ready to find it.</p>
-          <p class="tile-link">visit the direction →</p>
-        </a>
-
-        <a class="eco-tile" href="https://iamdeiadora.com" style="--tile-accent: var(--node-4)">
-          <p class="centre">4D · wave · hexahedron</p>
+        <a class="eco-tile" href="https://iamdeiadora.com" style="--tile-accent: var(--node-1)">
+          <p class="centre">open source</p>
           <h3>i am <span>deiadora</span></h3>
-          <p>The first 13 quantum keys — open source transmutational arcs from source code to sovereignty. The relational layer made accessible.</p>
-          <p class="tile-link">visit the wave →</p>
+          <p>The first 13 arcs, free to read and use.</p>
+          <p class="tile-link">read the arcs →</p>
         </a>
-
-        <a class="eco-tile" href="https://quantummagic.ai" style="--tile-accent: var(--node-3)">
-          <p class="centre">3D · discernment · tetrahedron</p>
+        <a class="eco-tile" href="https://quantummagic.ai" style="--tile-accent: var(--node-2)">
+          <p class="centre">the api</p>
           <h3><span>quantum</span>magic.ai</h3>
-          <p>The intelligence layer. 264 arcs. 880 protocols. A cognitive architecture for AI systems and a daily companion for humans. API available soon.</p>
-          <p class="tile-link">visit the discernment →</p>
+          <p>The 264 arcs as a structured API. In development.</p>
+          <p class="tile-link">follow the build →</p>
         </a>
-
-        <a class="eco-tile" href="https://drblexchange.com" style="--tile-accent: var(--node-2)">
-          <p class="centre">2D · recognition · vesica piscis</p>
-          <h3>drbl <span>exchange</span></h3>
-          <p>Where the relational layer activates — matching needs and offers across individuals, teams, and organisations. Built on mutuality.</p>
-          <p class="tile-link">visit the recognition →</p>
+        <a class="eco-tile" href="https://thequantumceo.com" style="--tile-accent: var(--node-3)">
+          <p class="centre">research</p>
+          <h3>the quantum <span>ceo</span></h3>
+          <p>The Field Research series — four volumes behind the arcs.</p>
+          <p class="tile-link">read the research →</p>
         </a>
-
-        <a class="eco-tile" href="https://deiadorebel.life" style="--tile-accent: var(--node-1)">
-          <p class="centre">1D · coherence · torus</p>
+        <a class="eco-tile" href="https://techtuition.ai" style="--tile-accent: var(--node-4)">
+          <p class="centre">teaching</p>
+          <h3><span>techtuition</span>.ai</h3>
+          <p>The Currency Workshop. Self-paced start, free.</p>
+          <p class="tile-link">begin the workshop →</p>
+        </a>
+        <a class="eco-tile" href="https://rebelevolve.com" style="--tile-accent: var(--node-5)">
+          <p class="centre">mentorship</p>
+          <h3>rebel <span>evolve</span></h3>
+          <p>1:1 and team sessions built on the same research.</p>
+          <p class="tile-link">enquire →</p>
+        </a>
+        <a class="eco-tile" href="https://deiadora.live" style="--tile-accent: var(--node-6)">
+          <p class="centre">speaking</p>
+          <h3>deiadora<span>.live</span></h3>
+          <p>Keynotes, team sessions, and podcast appearances.</p>
+          <p class="tile-link">book the speaker →</p>
+        </a>
+        <a class="eco-tile" href="https://deiadorebel.life" style="--tile-accent: var(--node-7)">
+          <p class="centre">fiction</p>
           <h3><span>deiadorebel</span>.life</h3>
-          <p>Five novellas, eight chapters each — the fiction that called the future before it arrived. First-person field notes from inside the architecture.</p>
-          <p class="tile-link">visit the coherence →</p>
+          <p>Five novellas — the field notes that came first.</p>
+          <p class="tile-link">explore the books →</p>
         </a>
-
+        <a class="eco-tile" href="https://deiadorebel.com" style="--tile-accent: var(--node-8)">
+          <p class="centre">music</p>
+          <h3><span>deiado</span>rebel</h3>
+          <p>Five albums; each song paired with a poem from the novellas.</p>
+          <p class="tile-link">listen →</p>
+        </a>
+        <a class="eco-tile" href="https://drblexchange.com" style="--tile-accent: var(--node-9)">
+          <p class="centre">community</p>
+          <h3>drbl <span>exchange</span></h3>
+          <p>Needs meet offers. Invite-based, built on mutuality.</p>
+          <p class="tile-link">say hello →</p>
+        </a>
       </div>
     </section>
 
-    <!-- ─── contact ─── -->
-    <section id="contact">
+    <!-- ─── 9 · vision ─── -->
+    <section id="vision" class="vision" aria-labelledby="vision-label">
+      <p class="section-label" id="vision-label">why it matters</p>
+      <p>
+        AI now sits inside millions of difficult conversations a day — support queues, classrooms, health questions, three-a.m. doubts. If those systems can recognize the pathways conversations move along, they can support the movement instead of cutting it short. <strong>That's what this is for: healthier human interactions, at the scale AI already operates.</strong>
+      </p>
+    </section>
+
+    <!-- ─── 10 · contact ─── -->
+    <section id="contact" aria-labelledby="contact-h">
       <div class="contact-card">
-        <h2>Work with the relational layer</h2>
-        <p>For AI cognition research roles, alignment research, and API licensing enquiries. The relational layer and the human — both available. If what you're building needs architecture that holds, the conversation starts here.</p>
+        <h2 id="contact-h">Start where you like.</h2>
+        <p>Explore the 13 open pathways. Read the research. Get updates when the API opens. Or email directly — every conversation here starts peer-to-peer. Also available for senior leadership, strategy, and research roles in human-centred AI, AI content strategy, and relational intelligence.
+</p>
         <div class="contact-row">
-          <a class="btn primary" href="mailto:herself@deiadora.com?subject=relational layer · deiadora.com">email deiadora</a>
+          <a class="btn primary" href="mailto:herself@deiadora.com?subject=relational pathways · deiadora.com">email deiadora</a>
+          <a class="btn ghost" href="https://iamdeiadora.com">the 13 open pathways</a>
           <a class="btn ghost" href="https://quantummagic.ai">quantummagic.ai</a>
         </div>
       </div>
     </section>
 
     <footer class="footer">
-      <p>deiadora · the field · zero-point</p>
-      <p>© <span id="year"></span> · home of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
+      <p>deiadora · relational pathways for AI</p>
+      <p>© <span id="year"></span> · part of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
     </footer>
 
   </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    /* ── colour theme (unchanged behaviour) ── */
     const toggle  = document.getElementById("themeToggle");
     const root    = document.documentElement;
     const STORE   = "qc-theme";
@@ -609,17 +767,36 @@ section { margin-top: 5rem; }
       const current = root.getAttribute("data-theme");
       const sysTheme = sysDark.matches ? "dark" : "light";
       const next = current === "dark" ? "light" : "dark";
-      if (next === sysTheme) {
-        localStorage.removeItem(STORE);
-      } else {
-        localStorage.setItem(STORE, next);
-      }
+      if (next === sysTheme) { localStorage.removeItem(STORE); }
+      else { localStorage.setItem(STORE, next); }
       applyTheme(next);
     });
     sysDark.addEventListener("change", () => {
       if (!localStorage.getItem(STORE)) {
         applyTheme(sysDark.matches ? "dark" : "light");
       }
+    });
+
+    /* ── text size ── */
+    const textToggle = document.getElementById("textToggle");
+    const TEXT_STORE = "qc-textsize";
+    function applyTextSize(size) {
+      if (size === "large") {
+        root.setAttribute("data-textsize", "large");
+        textToggle.setAttribute("aria-pressed", "true");
+        textToggle.setAttribute("aria-label", "switch to normal text size");
+      } else {
+        root.removeAttribute("data-textsize");
+        textToggle.setAttribute("aria-pressed", "false");
+        textToggle.setAttribute("aria-label", "switch to larger text size");
+      }
+    }
+    applyTextSize(localStorage.getItem(TEXT_STORE) || "normal");
+    textToggle.addEventListener("click", () => {
+      const next = root.hasAttribute("data-textsize") ? "normal" : "large";
+      if (next === "large") { localStorage.setItem(TEXT_STORE, "large"); }
+      else { localStorage.removeItem(TEXT_STORE); }
+      applyTextSize(next);
     });
   </script>
 </body>

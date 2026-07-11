@@ -1,19 +1,29 @@
-# deiadora.com · the field · zero point
+[deiadora-com-README.md](https://github.com/user-attachments/files/29910542/deiadora-com-README.md)
+# deiadora.com
 
-The field of the ecosystem. The ground state before anything is built.
+> Front door of the deiadora ecosystem — relational pathways for AI: the observation, the arcs, the API, the builder.
 
-deiadora.com is the home of the deiadora ecosystem —
-nine dimensions, one field. The ground condition of The Currency Playbook workshop.
+## What this is
 
-## part of the deiadora ecosystem
- 
-→ [deiadora.com](https://deiadora.com) · the field · zero point
-→ [deiadorebel.life](https://deiadorebel.life) · dimension 1 · coherence · torus
-→ [drblexchange.com](https://drblexchange.com) · dimension 2 ·recognition · vesica piscis
-→ [quantummagic.ai](https://quantummagic.ai) · dimension 3 · discernment · tetrahedron
-→ [iamdeiadora.com](https://iamdeiadora.com) · dimension 4 · wave · the cube
-→ [rebelevolve.com](https://rebelevolve.com) · dimension 5 · direction · second cube
-→ [deiadorebel.com](https://deiadorebel.com) · dimension 6 · transmission · dodecahedron
-→ [techtuition.ai](https://techtuition.ai) · dimension 7 · expression · egg of life
-→ [thequantumceo.com](https://thequantumceo.com) · dimension 8 · structure · octagon
-→ [deiadora.live](https://deiadora.live) · dimension 9 · source · nonagon
+The ecosystem's front door. Opens with the founding observation (AI resolves conversations too early), walks one arc, shows the with/without example, introduces the API and the builder, and maps the wider world — research, teaching, mentorship, speaking, fiction, music, community.
+
+## Stack
+
+Single-file static site — one `index.html`, no build step, no frameworks, no dependencies beyond Google Fonts.
+
+Shared deiadora ecosystem design system:
+- CSS custom properties; Cormorant Garamond / Exo 2 / DM Sans
+- Three themes (default, dark, light) with system-preference tracking, persisted via `localStorage`
+- A/A text-size toggle (115% scaling), persisted via `localStorage`
+- WCAG AA contrast verified for all text/background pairs in all three themes
+- Skip link, semantic sections, `prefers-reduced-motion` support
+
+## Deploy
+
+Cloudflare Pages. No build command; root directory as output. Replace placeholder links (mail subjects, audio files, or invite URLs) noted in HTML comments where present.
+
+## Ecosystem
+
+Part of the deiadora ecosystem — ten sites, one design system, one author. Front door: [deiadora.com](https://deiadora.com).
+
+© Deiadora Blanche. All rights reserved.

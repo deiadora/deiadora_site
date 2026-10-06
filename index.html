@@ -1,420 +1,1896 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>deiadora — content systems for people, organizations, and AI</title>
-  <meta name="description" content="Deiadora Blanche is a content strategist and systems thinker making complex information and the systems behind it more coherent." />
-  <meta property="og:title" content="deiadora — content systems for people, organizations, and AI" />
-  <meta property="og:description" content="Content systems, independent AI research, and selected work by Deiadora Blanche." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://deiadora.com" />
-  <meta property="og:image" content="https://deiadora.com/deiadora_banner_sm.jpeg" />
-  <link rel="icon" href="/deiadora_favicon.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
-  <style>
-:root {
-  --ink:        #f0ede3;
-  --paper:      #0c1516;
-  --card:       #0e171a;
-  --card-lt:    #131f23;
-  --gold:       #ecb02f;
-  --crown:      var(--gold);
-  --muted:      #d8d3c7;
-  --line:       rgba(240,237,230,.1);
-  --line-s:     rgba(240,237,230,.18);
-  --r:          8px;
-  --serif:      'Exo 2', system-ui, sans-serif;
-  --sans:       'DM Sans', system-ui, sans-serif;
-  --display:    'Cormorant Garamond', Georgia, serif;
-  --mono:       ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>DEIADORA — Regenerative Systems Architecture</title>
+<meta name="description" content="DEIADORA — Regenerative Systems Architecture. Designing multi-scalar ecosystems that return the human being to their own centre." />
+<meta name="robots" content="index, follow, noai, noimageai" />
+<meta name="tdm-reservation" content="1" />
+<meta name="color-scheme" content="dark light" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@300;400;500&family=Rye&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================================
+   DEIADORA — Somatic Geometry Design Tokens
+   Unified scale driven by --base-font-size × --font-scale.
+   =========================================================================== */
+:root{
+  --base-font-size: 16px;
+  --font-scale: 1;
+
+  /* Dark Theme */
+  --bg:         #07080b;
+  --bg-2:       #0d0d12;
+  --fg:         #efe7d8;
+  --fg-dim:     rgba(239,231,216,0.72);
+  --fg-faint:   rgba(239,231,216,0.42);
+  --fg-ghost:   rgba(239,231,216,0.18);
+  --rule:       rgba(239,231,216,0.12);
+  --rule-soft:  rgba(239,231,216,0.06);
+  --accent:     #c9a227;
+  --panel-bg:   rgba(10,10,14,0.95);
+  --chip-bg:    rgba(239,231,216,0.04);
+  --chip-bg-hi: rgba(239,231,216,0.09);
+  --card-bg:    rgba(239,231,216,0.024);
+  --focus:      #ffd86b;
+  --state:      #8c93a8;
+
+  --mono:    "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --sans:    "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --display: "Rye", Georgia, serif;
 }
-[data-theme="dark"] {
-  --ink:        #f7f5ef;
-  --paper:      #010003;
-  --card:       #151515;
-  --card-lt:    #20211e;
-  --gold:       #e6c47d;
-  --muted:      #cfc9bc;
-  --line:       rgba(240,237,230,.1);
-  --line-s:     rgba(240,237,230,.18);
+:root[data-theme="light"]{
+  /* Light Theme */
+  --bg:         #f7f5f0;
+  --bg-2:       #efece4;
+  --fg:         #1d1b18;
+  --fg-dim:     rgba(29,27,24,0.78);
+  --fg-faint:   rgba(29,27,24,0.50);
+  --fg-ghost:   rgba(29,27,24,0.16);
+  --rule:       rgba(29,27,24,0.14);
+  --rule-soft:  rgba(29,27,24,0.07);
+  --accent:     #9a6b14;
+  --panel-bg:   rgba(247,245,240,0.97);
+  --chip-bg:    rgba(29,27,24,0.038);
+  --chip-bg-hi: rgba(29,27,24,0.08);
+  --card-bg:    rgba(29,27,24,0.022);
+  --focus:      #7a4a00;
+  --state:      #5a6070;
 }
-[data-theme="dark"] .nav          { background: #010003; }
-[data-theme="dark"] .contact-card { background: #151515; }
-[data-theme="dark"] .case-card    { background: #151515; }
-[data-theme="light"] {
-  --ink:      #1a1814;
-  --paper:    #f4f2ec;
-  --card:     #fffff2;
-  --card-lt:  #e8e2d6;
-  --muted:    #57503f;
-  --gold:     #7a5224;
-  --line:     rgba(26,24,20,.1);
-  --line-s:   rgba(26,24,20,.18);
+
+*{ box-sizing:border-box; }
+html{ font-size: calc(var(--base-font-size) * var(--font-scale)); }
+html,body{ height:100%; }
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--sans); overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .5s ease, color .5s ease;
 }
-[data-theme="light"] .nav          { background: #f4f2ec; }
-[data-theme="light"] .brand        { color: #1a1814; }
-[data-theme="light"] .contact-card { background: var(--card); }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scrollbar-gutter: stable; scroll-behavior: smooth; transition: font-size .25s ease; }
-html[data-textsize="large"] { font-size: 115%; }
-body {
-  font-family: var(--sans);
-  background: var(--paper);
-  color: var(--ink);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  transition: background .25s, color .25s;
+canvas#gl{ position:fixed; inset:0; width:100%; height:100%; display:block; z-index:0; }
+
+/* Accessibility & Focus States */
+:focus{ outline:none; }
+:focus-visible{
+  outline:2px solid var(--focus);
+  outline-offset:3px;
+  border-radius:2px;
 }
-/* ─── skip link ─── */
-.skip {
-  position: absolute; left: -9999px; top: 0;
-  background: var(--gold); color: var(--paper);
-  padding: .6rem 1.2rem; border-radius: 0 0 var(--r) 0;
-  font-size: .95rem; z-index: 200; text-decoration: none;
+.sr-only{
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0;
 }
-.skip:focus { left: 0; }
-/* ─── nav ─── */
-.nav {
-  position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: .9rem 2rem;
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(8px);
-  gap: 1rem; flex-wrap: wrap;
+#skip{
+  position:fixed; top:-100px; left:12px; z-index:60;
+  background:var(--panel-bg); color:var(--fg); border:1px solid var(--rule);
+  font-family:var(--mono); font-size:0.7rem; letter-spacing:0.12em;
+  padding:0.7rem 1rem; text-decoration:none; border-radius:3px;
+  transition:top .2s ease;
 }
-.brand {
-  font-family: var(--serif);
-  font-size: 1.15rem; font-weight: 600;
-  color: var(--ink); text-decoration: none; letter-spacing: -.02em;
+#skip:focus{ top:12px; }
+
+/* Background Watermark */
+#bigtype{
+  position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:0.1em;
+  transition:padding-right .72s cubic-bezier(.22,.9,.2,1);
 }
-.brand span { color: var(--crown); }
-.navlinks { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
-.navlinks a {
-  font-size: .95rem; font-weight: 400;
-  color: var(--muted); text-decoration: none;
-  letter-spacing: .02em; transition: color .2s;
+body.panel-open #bigtype{ padding-right:min(480px, 92vw); }
+@media (max-width:920px){ body.panel-open #bigtype{ padding-right:0; opacity:.25; } }
+#bt-index{
+  font-family:var(--mono); font-weight:300;
+  font-size:clamp(6rem, 23vw, 20rem); line-height:0.82;
+  letter-spacing:-0.05em; color:var(--fg);
+  opacity:0.045; transition:opacity .8s ease;
 }
-.navlinks a:hover { color: var(--gold); }
-.theme-toggle, .text-toggle {
-  background: none; border: 1.5px solid var(--line);
-  border-radius: 100px; cursor: pointer;
-  padding: .35rem .6rem; font-size: 1rem; line-height: 1;
-  color: var(--muted); transition: border-color .2s, color .2s;
+:root[data-theme="light"] #bt-index{ opacity:0.06; }
+#bt-word{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(0.75rem, 2.8vw, 1.9rem); line-height:1;
+  letter-spacing:0.25em; text-indent:0.25em;
+  color:var(--fg); opacity:0.09;
+  transition:opacity .8s ease, letter-spacing 1s ease;
+  white-space:nowrap; max-width:100%;
 }
-.theme-toggle:hover, .text-toggle:hover { border-color: var(--gold); color: var(--ink); }
-.text-toggle { display: inline-flex; align-items: baseline; gap: .1rem; font-family: var(--serif); }
-.text-toggle .a-sm { font-size: .72rem; font-weight: 500; }
-.text-toggle .a-lg { font-size: 1.02rem; font-weight: 600; }
-.text-toggle[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
-/* ─── page ─── */
-.page { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 6rem; }
-/* ─── hero ─── */
-.hero { padding: 7rem 0 5rem; border-bottom: 1px solid var(--line); }
-.kicker {
-  font-family: var(--serif); font-style: italic;
-  font-size: .95rem; font-weight: 300;
-  color: var(--crown); margin-bottom: 1.2rem; letter-spacing: .06em;
+:root[data-theme="light"] #bt-word{ opacity:0.12; }
+body.morphing #bt-index{ opacity:0.015; }
+body.morphing #bt-word{ opacity:0.03; letter-spacing:0.45em; }
+
+/* Brand Lockup */
+#brand{
+  position:fixed; top:0; left:0; z-index:5;
+  padding:1.4rem 1.6rem; pointer-events:none; max-width:min(60vw, 30rem);
 }
-.hero h1 {
-  font-family: var(--display);
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  line-height: 1.1; letter-spacing: -.02em;
-  font-weight: 400; color: var(--ink);
-  max-width: 700px; margin-bottom: 1.4rem;
+#brand .mark{
+  font-family:var(--display); font-size:1.45rem; line-height:1;
+  letter-spacing:0.02em; color:var(--fg);
 }
-.hero h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
-.subhead {
-  font-size: 1.15rem; color: var(--muted);
-  max-width: 660px; line-height: 1.75;
-  margin-bottom: 1.4rem; font-weight: 300;
+#brand .tagline{
+  font-family:var(--sans); font-size:0.68rem; font-weight:400;
+  color:var(--fg-dim); margin-top:0.45rem; line-height:1.4;
 }
-.subhead strong { color: var(--ink); font-weight: 500; }
-.subhead em { color: var(--ink); font-style: italic; }
-.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
-.hero-note {
-  font-size: .9rem; color: var(--muted);
-  letter-spacing: .03em; margin-top: 2rem; font-style: italic;
+#brand .imprint{
+  font-family:var(--mono); font-size:0.56rem; letter-spacing:0.14em;
+  color:var(--fg-faint); margin-top:0.35rem; text-transform:uppercase;
 }
-/* ─── section titles ─── */
-.section-label {
-  font-family: var(--serif); font-size: .85rem; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--crown); margin-bottom: 1.6rem;
+
+/* Header Controls & Readout */
+#utility{
+  position:fixed; top:0; right:0; z-index:9;
+  padding:1.2rem 1.5rem; display:flex; flex-direction:column;
+  align-items:flex-end; gap:0.65rem;
+  transition:transform .72s cubic-bezier(.22,.9,.2,1);
 }
-section { margin-top: 5rem; }
-.section-heading {
-  font-family: var(--display);
-  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-  font-weight: 400; font-style: italic;
-  color: var(--ink); line-height: 1.25;
-  margin-bottom: 1.4rem; max-width: 640px;
+@media (min-width:921px){
+  body.panel-open #utility{ transform:translateX(calc(-1 * min(480px, 92vw))); }
 }
-.section-heading em { color: var(--gold); }
-/* ─── section intro ─── */
-.section-intro {
-  font-size: 1.05rem; color: var(--muted);
-  line-height: 1.75; max-width: 660px;
-  margin-bottom: 1.1rem; font-weight: 300;
+.nav-cluster{ display:flex; gap:0.65rem; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+.ctlrow{ display:flex; gap:0.35rem; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+
+/* Differentiated Action Triggers */
+.btn-toplink{
+  appearance:none; cursor:pointer; text-decoration:none;
+  background:var(--chip-bg-hi);
+  border:1px solid var(--rule);
+  color:var(--fg);
+  font-family:var(--sans);
+  font-size:0.75rem;
+  font-weight:600;
+  letter-spacing:0.02em;
+  padding:0.46rem 0.85rem;
+  border-radius:4px;
+  display:inline-flex;
+  align-items:center;
+  gap:0.45rem;
+  transition:background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  line-height:1.1;
+  white-space:nowrap;
+  box-shadow:0 1px 4px rgba(0,0,0,0.18);
 }
-.section-intro:last-of-type { margin-bottom: 0; }
-.section-intro strong { color: var(--ink); font-weight: 500; }
-.section-intro em { color: var(--ink); font-style: italic; }
-.section-intro a { color: var(--gold); text-decoration: none; }
-.section-intro a:hover { opacity: .75; }
-.inline-link {
-  display: inline-block; margin-top: 1.4rem;
-  font-size: .95rem; font-weight: 500;
-  color: var(--gold); text-decoration: none; letter-spacing: .01em;
+.btn-toplink:hover{
+  background:var(--state);
+  color:var(--bg);
+  border-color:var(--state);
 }
-.inline-link:hover { opacity: .75; }
-/* ─── publications ─── */
-.pubs { list-style: none; max-width: 660px; margin-top: 2rem; }
-.pubs li {
-  border-left: 2px solid var(--line-s);
-  padding-left: 1.4rem; margin-bottom: 1.4rem;
+.btn-toplink[aria-expanded="true"]{
+  background:var(--state);
+  color:var(--bg);
+  border-color:var(--state);
 }
-.pubs li:last-child { margin-bottom: 0; }
-.pubs a {
-  font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
-  letter-spacing: -.01em; line-height: 1.45;
-  color: var(--gold); text-decoration: none;
+.btn-toplink .icon-glyph{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  opacity:0.7;
 }
-.pubs a:hover { opacity: .75; }
-/* ─── cards (retained for portfolio case studies) ─── */
-.case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-@media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
-.case-card {
-  background: var(--card); border: 1px solid var(--line-s);
-  border-radius: var(--r); padding: 2rem 2.2rem;
-  display: flex; flex-direction: column; gap: 1rem;
-  transition: border-color .2s;
+
+/* Standard Utility Micro-Controls */
+.ctl{
+  appearance:none; cursor:pointer;
+  background:var(--chip-bg); border:1px solid var(--rule-soft); color:var(--fg-dim);
+  font-family:var(--sans); font-size:0.68rem; font-weight:500;
+  padding:0.42rem 0.65rem; border-radius:3px;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+  line-height:1.1; white-space:nowrap;
 }
-.case-card:hover { border-color: var(--gold); }
-.case-card .co {
-  font-family: var(--serif); font-size: .84rem; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--gold);
+.ctl:hover{ background:var(--chip-bg-hi); color:var(--fg); border-color:var(--rule); }
+.ctl[aria-pressed="true"]{ color:var(--state); border-color:currentColor; }
+.ctl .kbd{
+  font-family:var(--mono); font-size:0.6rem; opacity:.55; margin-left:0.4em;
 }
-.case-card h3 {
-  font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
-  letter-spacing: -.02em; color: var(--ink); line-height: 1.3;
+.ctlgroup{ display:flex; border:1px solid var(--rule-soft); border-radius:3px; overflow:hidden; }
+.ctlgroup .ctl{ border:0; border-radius:0; border-right:1px solid var(--rule-soft); font-family:var(--mono); }
+.ctlgroup .ctl:last-child{ border-right:0; }
+
+#readout{
+  text-align:right; font-family:var(--mono); font-size:0.56rem;
+  letter-spacing:0.14em; color:var(--fg-faint); text-transform:uppercase;
+  line-height:1.9; pointer-events:none;
 }
-.case-card p { font-size: 1rem; color: var(--muted); line-height: 1.7; flex: 1; }
-.case-card .impact {
-  font-size: .9rem; color: var(--gold); font-style: italic;
-  border-top: 1px solid var(--line); padding-top: .8rem; margin-top: auto;
+#readout b{ color:var(--fg-dim); font-weight:500; }
+@media (max-width:920px){ #readout{ display:none; } #utility{ padding:0.8rem 0.9rem; } }
+@media (max-width:700px){
+  #brand{ padding:0.85rem 1rem; max-width:44vw; }
+  #brand .mark{ font-size:1.15rem; }
+  #brand .tagline, #brand .imprint{ display:none; }
+  #utility{ padding:0.7rem 0.75rem; gap:0.4rem; }
+  .btn-toplink{ font-size:0.68rem; padding:0.38rem 0.6rem; }
+  .ctl{ font-size:0.62rem; padding:0.35rem 0.5rem; }
+  .ctl .kbd{ display:none; }
 }
-/* ─── bio ─── */
-.bio {
-  font-size: 1.1rem; color: var(--muted); line-height: 1.8;
-  max-width: 680px; margin-bottom: 1.2rem; font-weight: 300;
+
+/* Bottom Selector Rail */
+#selector{
+  position:fixed; left:0; right:0; bottom:0; z-index:6;
+  display:flex; align-items:flex-end; justify-content:center;
+  gap:clamp(2px,1.05vw,14px); padding:0 1.1rem 1.15rem;
+  flex-wrap:nowrap;
 }
-.bio strong { color: var(--ink); font-weight: 500; }
-.bio em { color: var(--ink); }
-.bio a { color: var(--gold); text-decoration: none; }
-.bio a:hover { opacity: .75; }
-/* ─── contact ─── */
-.contact-card {
-  background: var(--card); border: 1px solid var(--line-s);
-  border-radius: var(--r); padding: 2.2rem 2.4rem;
+.sel{
+  appearance:none; background:transparent; border:0; cursor:pointer;
+  color:var(--fg-faint); font-family:var(--mono); font-size:0.62rem;
+  letter-spacing:0.08em; padding:0.6rem 0.36rem 0.5rem; position:relative;
+  display:flex; flex-direction:column; align-items:center; gap:0.55rem;
+  transition:color .3s ease; min-width:0;
 }
-.contact-card h2 {
-  font-family: var(--display); font-size: 1.8rem; font-weight: 400;
-  letter-spacing: -.02em; margin-bottom: .8rem; color: var(--ink);
+.sel .tick{
+  width:1px; height:0.85rem; background:currentColor; opacity:.4;
+  transition:height .4s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
 }
-.contact-card p { color: var(--muted); line-height: 1.75; font-size: 1.05rem; font-weight: 300; }
-.contact-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
-.btn {
-  display: inline-flex; align-items: center;
-  padding: .65rem 1.4rem; border-radius: var(--r);
-  font-family: var(--sans); font-size: .95rem; font-weight: 500;
-  text-decoration: none; cursor: pointer; transition: all .2s;
-  border: 1.5px solid transparent;
+.sel .num{ font-variant-numeric:tabular-nums; }
+.sel .word{
+  font-family:var(--sans); font-size:0.55rem; font-weight:500;
+  letter-spacing:0.04em; opacity:0;
+  transform:translateY(-3px); transition:opacity .3s ease, transform .3s ease;
+  white-space:nowrap; position:absolute; bottom:-0.15rem;
 }
-.btn.primary { background: var(--gold); color: var(--paper); border-color: var(--gold); }
-.btn.primary:hover { opacity: .85; }
-.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line-s); }
-.btn.ghost:hover { border-color: var(--gold); color: var(--gold); }
-/* ─── footer ─── */
-.footer {
-  margin-top: 5rem; padding-top: 2rem;
-  border-top: 1px solid var(--line);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: .6rem; font-size: .9rem; color: var(--muted);
+.sel:hover{ color:var(--fg-dim); }
+.sel:hover .tick{ height:1.35rem; opacity:.85; }
+.sel[aria-selected="true"]{ color:var(--state); }
+.sel[aria-selected="true"] .tick{ height:2rem; opacity:1; }
+@media (min-width:780px){
+  .sel{ padding-bottom:1.35rem; }
+  .sel[aria-selected="true"] .word{ opacity:.9; transform:translateY(0); }
 }
-.footer a { color: var(--gold); text-decoration: none; }
-.footer a:hover { opacity: .75; }
-/* ─── animations ─── */
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .hero .kicker    { animation: fadeUp .5s ease both; animation-delay: .05s; }
-  .hero h1         { animation: fadeUp .5s ease both; animation-delay: .12s; }
-  .hero .subhead   { animation: fadeUp .5s ease both; animation-delay: .2s; }
-  .hero .hero-cta  { animation: fadeUp .5s ease both; animation-delay: .26s; }
-  .hero .hero-note { animation: fadeUp .5s ease both; animation-delay: .32s; }
+
+/* Slide-over Drawer */
+#panel{
+  position:fixed; top:0; right:0; bottom:0; z-index:12;
+  width:min(480px, 92vw);
+  background:var(--panel-bg);
+  backdrop-filter:blur(24px) saturate(120%);
+  -webkit-backdrop-filter:blur(24px) saturate(120%);
+  border-left:1px solid var(--rule);
+  transform:translateX(101%);
+  transition:transform .72s cubic-bezier(.22,.9,.2,1);
+  display:flex; flex-direction:column;
 }
-  </style>
+#panel.open{ transform:translateX(0); }
+#panel::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:var(--state); opacity:.75;
+}
+#ptab{
+  position:absolute; left:-2rem; top:50%; transform:translateY(-50%) rotate(180deg);
+  writing-mode:vertical-rl; background:var(--panel-bg);
+  border:1px solid var(--rule); border-right:0; border-radius:3px 0 0 3px;
+  color:var(--fg-dim); font-family:var(--sans); font-size:0.62rem; font-weight:500;
+  letter-spacing:0.18em; text-transform:uppercase; padding:1.1rem 0.46rem; cursor:pointer;
+  transition:color .25s ease;
+}
+#ptab:hover{ color:var(--fg); }
+
+#pbody{ overflow-y:auto; padding:2.4rem 2rem 3.4rem; flex:1; scrollbar-width:thin; }
+#pbody::-webkit-scrollbar{ width:4px; }
+#pbody::-webkit-scrollbar-thumb{ background:var(--fg-ghost); border-radius:4px; }
+
+/* Drawer Typography & Hierarchy */
+.p-head{ display:flex; align-items:baseline; gap:0.75rem; margin-bottom:1.1rem; }
+.p-idx{
+  font-family:var(--mono); font-size:2.2rem; font-weight:300; line-height:1;
+  color:var(--state); font-variant-numeric:tabular-nums;
+}
+.p-word{
+  font-family:var(--sans); font-size:1.35rem; font-weight:600; letter-spacing:-0.01em;
+  color:var(--fg); margin:0;
+}
+
+/* Metadata Pills */
+.p-meta-group{
+  display:flex; flex-wrap:wrap; gap:0.45rem; margin-top:0.85rem;
+}
+.p-meta-pill{
+  display:inline-flex; align-items:center; gap:0.35rem;
+  font-family:var(--mono); font-size:0.58rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--fg-dim); background:var(--chip-bg); border:1px solid var(--rule-soft);
+  padding:0.35rem 0.55rem; border-radius:3px;
+}
+.p-meta-pill b{ color:var(--state); font-weight:500; }
+
+/* Sections */
+.p-sec{ border-top:1px solid var(--rule); padding:1.3rem 0 0.3rem; }
+.p-sec h3{
+  margin:0 0 0.75rem; font-family:var(--sans); font-weight:600;
+  font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--state);
+}
+
+/* Unified Container Grammar */
+.card{
+  background:var(--card-bg);
+  border:1px solid var(--rule-soft);
+  border-radius:4px;
+  padding:1rem 1.1rem;
+  margin-bottom:0.9rem;
+}
+.card.highlight{
+  border-left:2px solid var(--state);
+}
+.card .card-label{
+  display:block; font-family:var(--sans); font-size:0.68rem; font-weight:600;
+  letter-spacing:0.06em; text-transform:uppercase; color:var(--state); margin-bottom:0.35rem;
+}
+.card .card-text{
+  margin:0; font-size:0.88rem; line-height:1.6; color:var(--fg-dim);
+}
+.card .card-text.italic{
+  font-style:italic; color:var(--fg);
+}
+
+/* Action Buttons */
+.offers{ display:flex; flex-direction:column; gap:0.55rem; margin-top:0.6rem; }
+.offer{
+  display:flex; align-items:center; justify-content:space-between; gap:0.8rem;
+  font-family:var(--sans); font-size:0.75rem; font-weight:500;
+  text-decoration:none; cursor:pointer;
+  border:1px solid currentColor; border-radius:3px; padding:0.75rem 0.9rem;
+  color:var(--state); background:transparent; text-align:left;
+  transition:background .25s ease, color .25s ease;
+  appearance:none; width:100%;
+}
+.offer.secondary{ color:var(--fg-dim); border-color:var(--rule); }
+.offer:hover{ background:var(--state); color:var(--bg); border-color:var(--state); }
+.offer.secondary:hover{ background:var(--fg-dim); color:var(--bg); }
+.offer .arrow{ opacity:.7; font-family:var(--mono); }
+
+/* Footer */
+.p-foot{
+  margin-top:2.2rem; border-top:1px solid var(--rule); padding-top:1.2rem;
+  font-family:var(--sans); font-size:0.72rem; line-height:1.75; color:var(--fg-faint);
+}
+.p-foot strong{ color:var(--fg-dim); font-weight:500; }
+.p-foot-expand{
+  margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid var(--rule-soft);
+  display:flex; flex-direction:column; gap:0.5rem;
+}
+.p-socials{ display:flex; gap:0.55rem; align-items:center; }
+.social-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  color:var(--fg-dim); border:1px solid var(--rule-soft); border-radius:3px;
+  width:1.75rem; height:1.75rem; text-decoration:none;
+  transition:color .2s ease, border-color .2s ease, background .2s ease;
+}
+.social-link:hover{
+  color:var(--state); border-color:var(--state); background:var(--chip-bg-hi);
+}
+.social-link svg{ width:0.85rem; height:0.85rem; fill:currentColor; }
+
+.p-legal-row{
+  margin-top:0.85rem; padding-top:0.75rem; border-top:1px solid var(--rule-soft);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;
+  font-size:0.65rem;
+}
+.btn-legal-link{
+  appearance:none; background:transparent; border:0; padding:0; cursor:pointer;
+  color:var(--fg-faint); font-family:var(--sans); font-size:0.65rem; text-decoration:underline;
+  text-underline-offset:2px; transition:color .2s ease;
+}
+.btn-legal-link:hover{ color:var(--state); }
+
+/* Modals */
+.scrim{
+  position:fixed; inset:0; z-index:30; background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center; padding:1.5rem;
+  opacity:0; pointer-events:none; transition:opacity .35s ease;
+}
+:root[data-theme="light"] .scrim{ background:rgba(60,55,45,0.45); }
+.scrim.open{ opacity:1; pointer-events:auto; }
+.dlg{
+  background:var(--bg-2); border:1px solid var(--rule); border-radius:5px;
+  width:min(660px, 100%); max-height:86vh; overflow-y:auto;
+  padding:2.2rem 2.2rem 2rem; position:relative;
+  transform:translateY(10px) scale(.985); transition:transform .35s cubic-bezier(.22,.9,.2,1);
+}
+.dlg.dlg-wide{ width:min(780px, 100%); }
+.scrim.open .dlg{ transform:none; }
+.dlg h2{
+  margin:0 0 0.35rem; font-family:var(--sans); font-weight:600;
+  font-size:1.35rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--fg);
+}
+.dlg .dlg-sub{
+  font-family:var(--sans); font-size:0.75rem; color:var(--fg-faint); margin-bottom:1.4rem;
+}
+.dlg h3{
+  margin:1.4rem 0 0.5rem; font-family:var(--sans); font-weight:600;
+  font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--state);
+}
+.dlg p{ margin:0 0 0.95rem; font-size:0.92rem; line-height:1.7; color:var(--fg-dim); }
+.dlg p.lede{ font-size:1.02rem; color:var(--fg); line-height:1.65; font-weight:400; }
+.dlg ul{ margin:0 0 1.1rem; padding-left:1.3rem; color:var(--fg-dim); font-size:0.88rem; line-height:1.65; }
+.dlg li{ margin-bottom:0.45rem; }
+.dlg .close{
+  position:absolute; top:0.85rem; right:0.9rem; background:transparent;
+  border:1px solid var(--rule-soft); border-radius:3px; color:var(--fg-faint);
+  font-family:var(--sans); font-size:0.68rem; font-weight:500;
+  padding:0.4rem 0.6rem; cursor:pointer;
+}
+.dlg .close:hover{ color:var(--fg); border-color:var(--rule); }
+
+#hint{
+  position:fixed; left:1.6rem; bottom:1.15rem; z-index:5;
+  font-family:var(--mono); font-size:0.54rem; letter-spacing:0.14em;
+  color:var(--fg-ghost); text-transform:uppercase; line-height:2;
+  pointer-events:none;
+}
+#hint .k{ color:var(--fg-faint); }
+@media (max-width:1180px){ #hint{ display:none; } }
+
+#veil{
+  position:fixed; inset:0; z-index:40; background:var(--bg);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.2rem;
+  transition:opacity 1s ease; font-family:var(--mono);
+  font-size:0.6rem; letter-spacing:0.26em; color:var(--fg-faint); text-transform:uppercase;
+}
+#veil.gone{ opacity:0; pointer-events:none; }
+#veil .ring{
+  width:2rem; height:2rem; border:1px solid var(--rule);
+  border-top-color:var(--accent); border-radius:50%;
+  animation:spin 1.6s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){
+  #veil .ring{ animation:none; }
+  #panel, #bigtype, .scrim, .dlg{ transition-duration:.01ms !important; }
+}
+</style>
 </head>
 <body>
-  <a class="skip" href="#main">skip to content</a>
 
-  <header class="nav">
-    <a class="brand" href="/">deiadora<span>.</span></a>
-    <nav class="navlinks" aria-label="primary">
-      <a href="#client">client work</a>
-      <a href="#research">research</a>
-      <a href="#about">about</a>
-      <a href="#contact">contact</a>
-      <button class="text-toggle" id="textToggle" aria-label="toggle larger text" aria-pressed="false"><span class="a-sm">A</span><span class="a-lg">A</span></button>
-      <button class="theme-toggle" id="themeToggle" aria-label="toggle colour mode">🌗</button>
-    </nav>
-  </header>
+<a id="skip" href="#selector">Skip to state controls</a>
+<div id="a11y-announcer" class="sr-only" role="status" aria-live="assertive" aria-atomic="true"></div>
 
-  <main class="page" id="main">
+<canvas id="gl" aria-hidden="true"></canvas>
 
-    <!-- ─── hero ─── -->
-    <section class="hero" aria-labelledby="hero-h">
-      <p class="kicker">deiadora blanche · content strategy &amp; systems</p>
-      <h1 id="hero-h">Content systems for people, organizations, <em>and AI.</em></h1>
-      <p class="subhead">
-        I'm Deiadora Blanche, a content strategist and systems thinker. I help organizations make complex information clearer and the systems behind it more coherent, especially when AI is involved.
-      </p>
-      <div class="hero-cta">
-        <a class="btn primary" href="https://www.deiadora.org/">View my portfolio →</a>
-        <a class="btn ghost" href="https://techtuition.ai/">Work with me at techtuition →</a>
+<div id="bigtype" aria-hidden="true">
+  <div id="bt-index">00</div>
+  <div id="bt-word">// THE FIELD</div>
+</div>
+
+<header id="brand">
+  <div class="mark">DEIADORA</div>
+  <div class="tagline">Regenerative Systems Architecture</div>
+  <div class="imprint">Sovereign Practice · Emergence Arc 0–9</div>
+</header>
+
+<div id="utility">
+  <div class="nav-cluster">
+    <a href="/portfolio" class="btn-toplink" id="link-portfolio">
+      <span>Portfolio</span>
+      <span class="icon-glyph" aria-hidden="true">↗</span>
+    </a>
+
+    <button class="btn-toplink" id="btn-about" type="button" aria-haspopup="dialog" aria-controls="about" aria-expanded="false">
+      <span>About</span>
+      <span class="icon-glyph" aria-hidden="true">↗</span>
+    </button>
+
+    <div class="ctlrow">
+      <button class="ctl" id="btn-theme" type="button" aria-pressed="false">
+        <span id="theme-label">Dark</span><span class="kbd" aria-hidden="true">T</span>
+      </button>
+      <button class="ctl" id="btn-motion" type="button" aria-pressed="false">
+        <span id="motion-label">Motion on</span><span class="kbd" aria-hidden="true">P</span>
+      </button>
+      <button class="ctl" id="btn-audio" type="button" aria-pressed="false">
+        <span id="audio-label">Audio off</span><span class="kbd" aria-hidden="true">M</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="ctlrow">
+    <div class="ctlgroup" role="group" aria-label="Display text size">
+      <button class="ctl" id="btn-fdown" type="button" aria-label="Decrease text size">A&minus;</button>
+      <button class="ctl" id="btn-freset" type="button" aria-label="Reset text size to 100 percent"><span id="font-label">100%</span></button>
+      <button class="ctl" id="btn-fup" type="button" aria-label="Increase text size">A+</button>
+    </div>
+  </div>
+
+  <div id="readout" aria-hidden="true">
+    <div>State <b id="ro-state">00</b></div>
+    <div>Spectrum <b id="ro-color">Alabaster Pearl</b></div>
+    <div>Drone <b id="ro-audio">off</b></div>
+    <div>Motion <b id="ro-motion">live</b></div>
+  </div>
+</div>
+
+<nav id="selector" role="tablist" aria-label="Emergence arc states 0 through 9"></nav>
+
+<aside id="panel" role="tabpanel" aria-labelledby="tab-0" tabindex="-1">
+  <button id="ptab" type="button" aria-controls="panel" aria-expanded="false">Dossier</button>
+  <div id="pbody"></div>
+</aside>
+
+<div id="hint" aria-hidden="true">
+  <div><span class="k">0–9</span> select state &nbsp;·&nbsp; <span class="k">←→</span> step</div>
+  <div><span class="k">click</span> advance &nbsp;·&nbsp; <span class="k">drag</span> orbit</div>
+  <div><span class="k">T</span> theme &nbsp;·&nbsp; <span class="k">P</span>/<span class="k">space</span> motion &nbsp;·&nbsp; <span class="k">+ −</span> text size</div>
+  <div><span class="k">A</span> dossier &nbsp;·&nbsp; <span class="k">M</span> audio &nbsp;·&nbsp; <span class="k">?</span> about</div>
+</div>
+
+<!-- About Modal -->
+<div class="scrim" id="about-scrim">
+  <div class="dlg" id="about" role="dialog" aria-modal="true" aria-labelledby="about-title" tabindex="-1">
+    <button class="close" type="button" data-close="about">Close &nbsp;Esc</button>
+    <h2 id="about-title">About</h2>
+    <div class="dlg-sub">Deiadora Blanche · Regenerative Systems Architecture</div>
+
+    <p class="lede">Every system leaves a physical impression. Long before you cognitively decide whether you trust an organization, a platform, or an interface, your autonomic nervous system already registers whether the interaction is regenerative or quietly extractive.</p>
+
+    <p>My practice is grounded in tracking that exact threshold. Beginning in 2013, following a major life transition, I spent years conducting cross-scale ethnographic field observation into human agency, relational dynamics, and systemic coherence under pressure. To preserve the raw empirical nuance without diluting it, I poured those observations into narrative fiction and qualitative compendiums &mdash; an archive I subsequently translated into systems architecture and enterprise design.</p>
+
+    <p>When I brought that research into tech in late 2019, applying it to systems design and enterprise content operations was natural. I entered the industry with an acute sensitivity to interface mechanics: the tone of microcopy, the friction of user funnels, and the autonomic impact of digital tools. Software often designs quiet micro-hierarchies where the machine commands, the human complies, and attention is commodified.</p>
+
+    <p><strong>Regenerative Systems Architecture</strong> is the alternative. It is the discipline of engineering multi-scalar systems—digital interfaces, operating models, and team protocols—that safeguard cognitive agency, honor the nervous system, and return human beings to their own center. Today, I advise founders, engineering leaders, and ethical teams building sovereign systems engineered for mutual trust, structural clarity, and lasting viability.</p>
+
+    <div class="offers" style="margin-top:1.4rem">
+      <button class="offer" type="button" id="about-dispatch">Initiate connection with Deiadora <span class="arrow" aria-hidden="true">&#8594;</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Direct Channel Modal -->
+<div class="scrim" id="dispatch-scrim">
+  <div class="dlg" id="dispatch" role="dialog" aria-modal="true" aria-labelledby="dispatch-title" tabindex="-1">
+    <button class="close" type="button" data-close="dispatch">Close &nbsp;Esc</button>
+    <h2 id="dispatch-title">Direct Channel</h2>
+    <div class="dlg-sub" id="dispatch-context">Regenerative Systems Architecture</div>
+
+    <p class="lede">Direct channel for systems advisory, executive audits, and peer collaboration. Messages route directly to Deiadora Blanche.</p>
+    <p>Share what system you are architecting, where it is losing coherence, and your operating timeline.</p>
+
+    <div class="offers">
+      <a class="offer" id="dispatch-connection" href="#">Initiate connection with Deiadora <span class="arrow" aria-hidden="true">&#8594;</span></a>
+      <a class="offer secondary" id="dispatch-collab" href="#">Inquire about collaboration or advisory <span class="arrow" aria-hidden="true">&#8594;</span></a>
+    </div>
+
+    <p style="margin-top:1.4rem; font-size:0.8rem; color:var(--fg-faint);">Proprietary research archive access is granted on request to verified researchers, technical founders, and ethical peers.</p>
+  </div>
+</div>
+
+<!-- Sovereign Terms & Privacy Modal -->
+<div class="scrim" id="legal-scrim">
+  <div class="dlg dlg-wide" id="legal" role="dialog" aria-modal="true" aria-labelledby="legal-title" tabindex="-1">
+    <button class="close" type="button" data-close="legal">Close &nbsp;Esc</button>
+    <h2 id="legal-title">Legal Architecture &amp; Sovereign Terms</h2>
+    <div class="dlg-sub">Deiadora Blanche // DEIADORA &mdash; Regenerative Systems Architecture &middot; California, United States</div>
+
+    <p class="lede">This platform operates under a sovereign custodial model: our work product is legally protected against unauthorized extraction, and our digital infrastructure maintains default-zero telemetry on all visitors.</p>
+
+    <h3>Part 1: Terms of Use &amp; Intellectual Property Custody</h3>
+    <p>All content, architectural frameworks, mathematical representations, ethnographic models, case study narratives, audio compositions, and code published on <code>deiadora.com</code> and associated subdomains are the proprietary intellectual property and custodial work product of Deiadora Blanche.</p>
+    <ul>
+      <li><strong>Prohibition on Automated Scraping &amp; AI Training:</strong> No portion of this site may be scraped, crawled, ingested, vectorized, tokenized, or used as training data for machine learning models or generative AI without an explicit written commercial license. Technical anti-mining protocols (<code>noai</code>, <code>noimageai</code>, <code>tdm-reservation</code>) are strictly asserted.</li>
+      <li><strong>Limited Permitted Use:</strong> Visitors are granted a revocable, non-exclusive license to view materials solely for personal evaluation, peer engagement, or hiring/contract assessment. Republishing, derivative framework repackaging, or unauthorized commercial endorsement is prohibited.</li>
+      <li><strong>Non-Extractive Boundaries:</strong> Reviewing materials does not establish a fiduciary or binding advisory relationship. Advisory engagements are governed strictly by separate written agreements.</li>
+    </ul>
+
+    <h3>Part 2: Privacy Policy (Default-Zero Telemetry)</h3>
+    <p>In accordance with State 00 (The Field) and the principle of <em>Unconditioned Ground</em>, DEIADORA operates on a <strong>default-zero telemetry architecture</strong>:</p>
+    <ul>
+      <li><strong>Zero Third-Party Trackers:</strong> We deploy no Google Analytics, Meta Pixels, session replays, or third-party telemetry scripts.</li>
+      <li><strong>Zero Marketing Cookies:</strong> We set no cross-site advertising cookies or browser fingerprinting beacons.</li>
+      <li><strong>Local Preferences Only:</strong> Small, non-identifying accessibility preferences (contrast theme, font scale, motion toggle) stay entirely within your local browser storage and are never transmitted externally.</li>
+      <li><strong>Voluntary Communications:</strong> Personal details transmitted directly via email are used solely for professional dialogue and retained under secure access controls. You retain full rights to access, portability, or erasure under GDPR and CCPA.</li>
+    </ul>
+
+    <h3>Part 3: Governing Law &amp; Inquiries</h3>
+    <p>These terms are governed by the laws of the State of California, United States. Direct all legal notices and rights inquiries to <code>herself@deiadora.com</code>.</p>
+  </div>
+</div>
+
+<div id="veil"><div class="ring" aria-hidden="true"></div><div>Initialising field</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+"use strict";
+
+const CONTACT_OBF = ["herself", "deiadora.com"].join("@");
+
+const Perlin = (function(){
+  const p = new Uint8Array(512);
+  const perm = [151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,
+  8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,
+  177,33,88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,
+  158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,
+  161,1,216,80,73,209,76,132,187,208,89,18,169,200,196,135,130,116,188,159,86,164,100,109,
+  198,173,186,3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,
+  47,16,58,17,182,189,28,42,223,183,170,213,119,248,152,2,44,154,163,70,221,153,101,155,167,
+  43,172,9,129,22,39,253,19,98,108,110,79,113,224,232,178,185,112,104,218,246,97,228,251,34,
+  242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214,31,181,199,
+  106,157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,
+  141,128,195,78,66,215,61,156,180];
+  for(let i=0;i<256;i++){ p[i]=perm[i]; p[i+256]=perm[i]; }
+  const fade = t => t*t*t*(t*(t*6-15)+10);
+  const lp = (a,b,t) => a+t*(b-a);
+  function grad(h,x,y,z){
+    h &= 15;
+    const u = h<8 ? x : y;
+    const v = h<4 ? y : (h===12||h===14 ? x : z);
+    return ((h&1)===0?u:-u) + ((h&2)===0?v:-v);
+  }
+  return {
+    n3(x,y,z){
+      const X=Math.floor(x)&255, Y=Math.floor(y)&255, Z=Math.floor(z)&255;
+      x-=Math.floor(x); y-=Math.floor(y); z-=Math.floor(z);
+      const u=fade(x), v=fade(y), w=fade(z);
+      const A=p[X]+Y, AA=p[A]+Z, AB=p[A+1]+Z;
+      const B=p[X+1]+Y, BA=p[B]+Z, BB=p[B+1]+Z;
+      return lp(
+        lp(lp(grad(p[AA],x,y,z),      grad(p[BA],x-1,y,z),      u),
+           lp(grad(p[AB],x,y-1,z),    grad(p[BB],x-1,y-1,z),    u), v),
+        lp(lp(grad(p[AA+1],x,y,z-1),  grad(p[BA+1],x-1,y,z-1),  u),
+           lp(grad(p[AB+1],x,y-1,z-1),grad(p[BB+1],x-1,y-1,z-1),u), v), w);
+    }
+  };
+})();
+
+function flow(x,y,z,t,out){
+  const s=0.045;
+  out.x = Perlin.n3(x*s,      y*s,      z*s + t*0.05);
+  out.y = Perlin.n3(x*s+31.7, y*s-11.3, z*s + t*0.05);
+  out.z = Perlin.n3(x*s-57.1, y*s+77.9, z*s + t*0.05) * 0.45;
+  return out;
+}
+
+const SPECTRUM_NAMES = [
+  "Alabaster Pearl",
+  "Radiant Amber",
+  "Sage / Seafoam",
+  "Electric Cerulean",
+  "Emerald Jade",
+  "Iris / Indigo",
+  "Resonant Amethyst",
+  "Coral Rose",
+  "Crystalline Lapis",
+  "Aurora Gold"
+];
+
+const ACCENT_DARK  = [
+  0xd9d5cb,
+  0xe8a938,
+  0x6bb89e,
+  0x4caee6,
+  0x3eb885,
+  0x7c7ee0,
+  0xaa70e0,
+  0xe87a74,
+  0x5294e2,
+  0xf0cf65
+];
+
+const ACCENT_LIGHT = [
+  0x424652,
+  0xa66d0c,
+  0x287058,
+  0x146d9e,
+  0x1f7850,
+  0x4044a6,
+  0x6b309e,
+  0xb83d37,
+  0x1c5ea8,
+  0x997510
+];
+
+const STATES = [
+{
+  key:"THE FIELD",
+  pulse:0.55, amp:0.030, spin:0.035, base:57.0, ratios:[1,2,3],
+  anchor:"Quantum field / Zero-point",
+  physio:"The unconscious as field",
+  regenPrinciple:"Unconditioned Ground",
+  sovereignty:"The system never demands immediate behavioral yield or forced declarations of intent. Zero default telemetry; zero unconsented cognitive capture.",
+  interconnection:"Creates an unhurried, spacious relational horizon where authentic engagement can emerge without coercion or defensive posturing.",
+  designStandard:"Systems must allow the human nervous system to settle into baseline regulation before any interaction loop begins.",
+  quantum:"Quantum field theory — fields are more fundamental than particles. The primary reality is not objects moving through space but the field from which objects temporarily emerge."
+},
+{
+  key:"COHERENCE",
+  pulse:0.85, amp:0.028, spin:0.055, base:61.7, ratios:[1,2,3,4],
+  anchor:"Torus",
+  physio:"Cardiac plexus",
+  regenPrinciple:"The Non-Depleting Loop",
+  sovereignty:"Human energy invested into a workflow is returned as lasting personal capability rather than absorbed into platform lock-in.",
+  interconnection:"Sustains high operational velocity within teams and ecosystems without burning out the individuals circulating the energy.",
+  designStandard:"A regenerative system recirculates attention; what the participant puts in must generate equal or greater vitality in return.",
+  quantum:"A coherent system under pressure compresses; it does not fragment."
+},
+{
+  key:"RECOGNITION",
+  pulse:1.10, amp:0.026, spin:0.048, base:65.4, ratios:[1,1.5,2,3],
+  anchor:"Vesica piscis",
+  physio:"Enteric nervous system",
+  regenPrinciple:"Dyadic Integrity",
+  sovereignty:"Both parties in an interaction retain complete, distinct boundary custody. No enmeshment; no erasure of the individual.",
+  interconnection:"The shared intersection (the lens) generates mutual insight and relational trust that neither could manufacture alone.",
+  designStandard:"True connection requires intact boundaries; if one system must diminish itself to connect, the interface has failed.",
+  quantum:"Once two systems have genuinely interacted, measurement of one instantly affects the state of the other, regardless of the distance between them."
+},
+{
+  key:"DISCERNMENT",
+  pulse:1.40, amp:0.024, spin:0.062, base:69.3, ratios:[1,1.3333,2,2.6667],
+  anchor:"Tetrahedron / Merkaba",
+  physio:"Insula cortex",
+  regenPrinciple:"Structural Economy",
+  sovereignty:"Provides clear, unambiguous posture under pressure. The interface filters out high-noise cognitive bombardment so core integrity remains intact.",
+  interconnection:"Clear boundaries make collaborative decisions dependable and predictable, removing hidden traps or manipulative ambiguity.",
+  designStandard:"Clarity is kindness; systems must present honest, load-bearing choices without manipulative defaults or disguised trade-offs.",
+  quantum:"The act of observation changes the system being observed, and discernment is not passive assessment but a physical act with physical consequences in the field."
+},
+{
+  key:"WAVE",
+  pulse:1.75, amp:0.055, spin:0.040, base:73.4, ratios:[1,1.5,1.7321,3,4.5],
+  anchor:"Hexahedron",
+  physio:"Celiac plexus",
+  regenPrinciple:"Distributed Load",
+  sovereignty:"No single node, human contributor, or subsystem is forced to carry catastrophic weight alone.",
+  interconnection:"Load and emotional momentum are distributed laterally across resilient, peer-to-peer relationships, allowing signal to travel without fracturing the network.",
+  designStandard:"Ecosystems must be engineered so that pressure propagates across a community without crushing any single person.",
+  quantum:"Wave-particle duality — emotion is energy in motion, requiring space and observation to complete its arc before collapsing into particle-like meaning."
+},
+{
+  key:"DIRECTION",
+  pulse:2.10, amp:0.022, spin:0.075, base:77.8, ratios:[1,1.25,1.5,2,2.5],
+  anchor:"Tesseract",
+  physio:"Default mode network",
+  regenPrinciple:"Multi-Scalar Orientation",
+  sovereignty:"Resists short-term reactive panic and vanity metrics, preserving the practitioner's long-term sovereign compass.",
+  interconnection:"Aligns immediate tactical actions with systemic health, generational impact, and collective viability.",
+  designStandard:"Replaces coercive retention loops with tools that orient the user within complexity, empowering deliberate agency over compulsive clicking.",
+  quantum:"Spontaneous symmetry breaking — direction emerges from coherence the way a pencil balanced on its point falls: not pushed, but released."
+},
+{
+  key:"TRANSMISSION",
+  pulse:2.40, amp:0.020, spin:0.058, base:82.4, ratios:[1,1.618,2,2.618,4.236],
+  anchor:"Dodecahedron",
+  physio:"Broca’s area / vagus nerve",
+  regenPrinciple:"Proportional Alignment",
+  sovereignty:"Truth and value are transmitted at full authorial fidelity without sanitizing the voice to survive an algorithm.",
+  interconnection:"Proportions agree from every perspective; the message is legible and trustworthy because stated values match internal mechanics.",
+  designStandard:"Communications and media protocols must protect context, authorial nuance, and semantic integrity from algorithmic distortion.",
+  quantum:"Quantum tunnelling — a particle passes through a barrier it has no classical right to cross because its wave function extends beyond it, and value transmitted between coherent fields operates by the same principle."
+},
+{
+  key:"EXPRESSION",
+  pulse:2.05, amp:0.032, spin:0.050, base:87.3, ratios:[1,1.125,1.25,1.5,1.875],
+  anchor:"Egg of Life",
+  physio:"Laryngeal / pharyngeal musculature",
+  regenPrinciple:"Embodied Delivery",
+  sovereignty:"Deep qualitative principles collapse into tangible, uncompromising code and tactile physical execution.",
+  interconnection:"Proves to the broader market that ethical, whole-human standards produce commercially viable, high-performance systems.",
+  designStandard:"Ethics without execution is sentimentality; whole-human architecture must ship as functional, high-craft production reality.",
+  quantum:"Wave function collapse — expression is the collapse of internal coherence into external signal: the moment the wave becomes word."
+},
+{
+  key:"STRUCTURE",
+  pulse:1.60, amp:0.018, spin:0.044, base:92.5, ratios:[1,1.4142,2,2.8284,4],
+  anchor:"Octagon",
+  physio:"Prefrontal cortex",
+  regenPrinciple:"Load-Bearing Permeability",
+  sovereignty:"Fortified custodial architecture that protects proprietary IP, human dignity, and legal autonomy against extractive commodification.",
+  interconnection:"The structure is permeable enough to be entered and engaged from multiple orientations without risking collapse.",
+  designStandard:"Governance, legal agreements, and data models must withstand external commercial compression while welcoming genuine peer contribution.",
+  quantum:"Quantum superposition — the observer holds multiple states simultaneously without collapsing into any single one: the observer of time rather than the subject of it."
+},
+{
+  key:"SOURCE",
+  pulse:1.25, amp:0.034, spin:0.030, base:98.0, ratios:[1,1.1111,1.5,2.25,3],
+  anchor:"Nonagon",
+  physio:"Adrenal glands",
+  regenPrinciple:"Origin Synthesis",
+  sovereignty:"The sovereign practitioner brings deep craft and leadership to the world without permitting oneself to be depleted or consumed.",
+  interconnection:"The entire emergence cycle folds back into the baseline, returning collective insight to the unmanifest ground for the next cycle.",
+  designStandard:"System completion is not an exit strategy; it is the capacity to renew the field with greater clarity, vitality, and peace.",
+  quantum:"Quantum non-locality — the apparent separation between systems is a feature of the noise floor, not of the underlying field."
+}
+];
+
+function mailto(subject, body){
+  return 'mailto:' + CONTACT_OBF + '?subject=' + encodeURIComponent(subject) +
+         '&body=' + encodeURIComponent(body);
+}
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function connectionLink(i){
+  const S = STATES[i];
+  return mailto(
+    'Connection: State ' + pad(i) + ' ' + S.key,
+    'State ' + pad(i) + ' — ' + S.key + ' · ' + S.regenPrinciple + '.\n\n' +
+    'What system are you exploring or architecting?\n\n' +
+    'Context & intentions:\n\n');
+}
+function collabLink(i){
+  const S = STATES[i];
+  return mailto(
+    'Inquiry: State ' + pad(i) + ' ' + S.key + ' — Collaboration & Advisory',
+    'State ' + pad(i) + ' — ' + S.key + ' · Collaboration & Advisory Inquiry.\n\n' +
+    'Focus area or system:\n\n' +
+    'Timeline & operating constraints:\n\n');
+}
+
+const pbody = document.getElementById('pbody');
+const panel = document.getElementById('panel');
+const ptab  = document.getElementById('ptab');
+
+function syncPanel(){
+  const open = panel.classList.contains('open');
+  document.body.classList.toggle('panel-open', open);
+  ptab.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function openPanel(){ panel.classList.add('open'); syncPanel(); }
+function closePanel(){ panel.classList.remove('open'); syncPanel(); }
+function togglePanel(){
+  panel.classList.toggle('open'); syncPanel();
+  announce(panel.classList.contains('open') ? 'Dossier opened.' : 'Dossier closed.');
+}
+ptab.addEventListener('click', e=>{ e.stopPropagation(); togglePanel(); });
+
+function renderPanel(i){
+  const S = STATES[i];
+  const year = new Date().getFullYear();
+
+  pbody.innerHTML = `
+    <div class="p-head">
+      <div class="p-idx">${pad(i)}</div>
+      <h2 class="p-word">${S.key}</h2>
+    </div>
+
+    <!-- Container 1: Quantum Principle, Geometric Anchor, Physiological Centre -->
+    <div class="card highlight">
+      <span class="card-label">Quantum Principle</span>
+      <p class="card-text">${S.quantum}</p>
+      
+      <div class="p-meta-group">
+        <span class="p-meta-pill">GEOMETRIC ANCHOR: <b>${S.anchor.toUpperCase()}</b></span>
+        <span class="p-meta-pill">PHYSIOLOGICAL CENTRE: <b>${S.physio.toUpperCase()}</b></span>
+      </div>
+    </div>
+
+    <!-- Container 2: Regenerative Principle, Human Design Standard, Sovereignty, Interconnection -->
+    <div class="card">
+      <div style="margin-bottom:0.9rem; font-family:var(--sans); font-size:0.85rem; color:var(--fg); line-height:1.4;">
+        <span style="font-weight:600; text-transform:uppercase; letter-spacing:0.04em; font-size:0.7rem; color:var(--state); display:inline-block; margin-right:0.35rem;">Regenerative Principle:</span>
+        <b>${S.regenPrinciple}</b>
+      </div>
+
+      <div style="margin-bottom:0.85rem;">
+        <span class="card-label">Human Design Standard</span>
+        <p class="card-text italic">${S.designStandard}</p>
+      </div>
+
+      <div style="margin-bottom:0.85rem;">
+        <span class="card-label">Sovereignty</span>
+        <p class="card-text">${S.sovereignty}</p>
+      </div>
+
+      <div>
+        <span class="card-label">Interconnection</span>
+        <p class="card-text">${S.interconnection}</p>
+      </div>
+    </div>
+
+    <!-- Explore More -->
+    <section class="p-sec">
+      <h3>Explore More</h3>
+      <div class="offers">
+        <a class="offer" href="${connectionLink(i)}"><span>Initiate connection with Deiadora</span> <span class="arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="offer secondary" href="${collabLink(i)}"><span>Inquire about collaboration or advisory</span> <span class="arrow" aria-hidden="true">&#8594;</span></a>
       </div>
     </section>
 
-    <!-- ─── selected work ─── -->
-    <section id="work" aria-labelledby="work-label">
-      <p class="section-label" id="work-label">selected work</p>
-      <p class="section-intro">
-        My portfolio shows how I've brought clarity and structure to complex content problems in different settings.
-      </p>
-      <a class="inline-link" href="https://www.deiadora.org/">Explore the case studies →</a>
-    </section>
-
-    <!-- ─── client work ─── -->
-    <section id="client" aria-labelledby="client-label">
-      <p class="section-label" id="client-label">client work</p>
-      <p class="section-intro">
-        Through techtuition, my independent consulting practice, I examine the content system behind a customer journey. Each audit gives a team a practical path forward and a clearer basis for deciding where AI can help.
-      </p>
-      <a class="inline-link" href="https://techtuition.ai/">Visit techtuition →</a>
-    </section>
-
-    <!-- ─── research ─── -->
-    <section id="research" aria-labelledby="research-label">
-      <p class="section-label" id="research-label">research</p>
-      <h2 class="section-heading">Can the qualities that support healthy human collaboration <em>be made legible to AI?</em></h2>
-      <p class="section-intro">
-        I explore how patterns grounded in human experience might inform the design and evaluation of generative AI. The larger aim is to support safer, healthier human–AI collaboration and AI-mediated communication.
-      </p>
-      <p class="section-intro">
-        My published work includes two studies developed through AI safety hackathons hosted by Apart Research.
-      </p>
-
-      <ul class="pubs">
-        <li>
-          <a href="https://zenodo.org/records/21516177">The Transmutation Gap: Cross-Lingual Coherence Evaluation in Large Language Models Using the Sovereignty–Collaboration Transmutational Arc Framework, 2026</a>
-        </li>
-        <li>
-          <a href="#">Do Secret-Loyalty Audits Generalize Across Languages? A Cross-Lingual Replication Study, 2026 (Coming Soon)</a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ─── about ─── -->
-    <section id="about" aria-labelledby="about-label">
-      <p class="section-label" id="about-label">about</p>
-      <p class="bio">
-        My career has centered on helping people understand complex systems and helping organizations communicate more coherently. That perspective now guides both my professional practice and independent research.
-      </p>
-      <p class="bio">
-        I hold an MSc in Innovation and Entrepreneurship from HEC Paris and a B.A. in Business Administration from Azusa Pacific University.
-      </p>
-      <a class="inline-link" href="https://www.deiadora.org/">View the portfolio →</a>
-    </section>
-
-    <!-- ─── contact ─── -->
-    <section id="contact" aria-labelledby="contact-h">
-      <div class="contact-card">
-        <h2 id="contact-h">Get in touch</h2>
-        <p>If something here connects with what you're working on, I'd be glad to hear from you.</p>
-        <div class="contact-row">
-          <a class="btn primary" href="mailto:herself@deiadora.com?subject=hello%20from%20deiadora.com">email me →</a>
-          <a class="btn ghost" href="https://www.deiadora.org/">portfolio</a>
-          <a class="btn ghost" href="https://techtuition.ai/">techtuition</a>
+    <footer class="p-foot">
+      <div><strong>DEIADORA</strong> — Regenerative Systems Architecture.</div>
+      <div>Sole practitioner. Thirteen years of cross-scale ethnographic field observation; M.S. Innovation &amp; Entrepreneurship.</div>
+      <div class="p-foot-expand">
+        <div>Follow along as the topology expands: music, narrative fiction, research, and more.</div>
+        <div class="p-socials">
+          <a class="social-link" href="https://linkedin.com/in/deiadora" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.63 1.63 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63Z"/>
+            </svg>
+          </a>
+          <a class="social-link" href="https://instagram.com/deiadora_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
         </div>
       </div>
-    </section>
-
-    <footer class="footer">
-      <p>deiadora · content systems for people, organizations, and AI</p>
-      <p>© <span id="year"></span> · part of the <a href="https://deiadora.com">deiadora ecosystem</a> 🌿</p>
+      <div class="p-legal-row">
+        <div>&copy; <span class="cr-year">${year}</span> Deiadora Blanche. All rights reserved.</div>
+        <button type="button" class="btn-legal-link" data-open="legal">Sovereign Terms &amp; Privacy</button>
+      </div>
     </footer>
+  `;
+  pbody.scrollTop = 0;
+}
 
-  </main>
+const R = 8.6;
+const SEG_TARGET = 1080;
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    /* ── colour theme ── */
-    const toggle  = document.getElementById("themeToggle");
-    const root    = document.documentElement;
-    const STORE   = "deiadora-theme";
-    const sysDark = window.matchMedia("(prefers-color-scheme: dark)");
-    function resolveTheme() {
-      const saved = localStorage.getItem(STORE);
-      if (saved) return saved;
-      return sysDark.matches ? "dark" : "light";
+function seg(a,b){ return [a[0],a[1],a[2], b[0],b[1],b[2]]; }
+function circleSegs(cx,cy,cz, r, axis, n){
+  const out=[]; let prev=null;
+  for(let i=0;i<=n;i++){
+    const a = i/n*Math.PI*2, c=Math.cos(a)*r, s=Math.sin(a)*r;
+    let p;
+    if(axis==='z') p=[cx+c, cy+s, cz];
+    else if(axis==='y') p=[cx+c, cy, cz+s];
+    else p=[cx, cy+c, cz+s];
+    if(prev) out.push(seg(prev,p));
+    prev=p;
+  }
+  return out;
+}
+function sphereWire(cx,cy,cz,r,rings,detail){
+  const out=[];
+  for(let k=1;k<rings;k++){
+    const phi = k/rings*Math.PI;
+    out.push(...circleSegs(cx, cy+Math.cos(phi)*r, cz, Math.sin(phi)*r, 'y', detail));
+  }
+  for(let m=0;m<rings;m++){
+    const th = m/rings*Math.PI;
+    let prev=null;
+    for(let i=0;i<=detail;i++){
+      const phi = i/detail*Math.PI*2;
+      const p=[ cx + r*Math.sin(phi)*Math.cos(th), cy + r*Math.cos(phi), cz + r*Math.sin(phi)*Math.sin(th) ];
+      if(prev) out.push(seg(prev,p));
+      prev=p;
     }
-    function applyTheme(theme) {
-      root.setAttribute("data-theme", theme);
-      const isSystem = !localStorage.getItem(STORE);
-      toggle.textContent = isSystem ? "🌗" : (theme === "dark" ? "🌙" : "☀️");
-      toggle.setAttribute("aria-label", theme === "dark" ? "switch to light mode" : "switch to dark mode");
+  }
+  return out;
+}
+function polyEdges(verts, target, tol){
+  const out=[];
+  for(let i=0;i<verts.length;i++)
+    for(let j=i+1;j<verts.length;j++){
+      const a=verts[i], b=verts[j];
+      const d=Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);
+      if(Math.abs(d-target)<tol) out.push(seg(a,b));
     }
-    applyTheme(resolveTheme());
-    toggle.addEventListener("click", () => {
-      const current = root.getAttribute("data-theme");
-      const sysTheme = sysDark.matches ? "dark" : "light";
-      const next = current === "dark" ? "light" : "dark";
-      if (next === sysTheme) { localStorage.removeItem(STORE); }
-      else { localStorage.setItem(STORE, next); }
-      applyTheme(next);
-    });
-    sysDark.addEventListener("change", () => {
-      if (!localStorage.getItem(STORE)) {
-        applyTheme(sysDark.matches ? "dark" : "light");
+  return out;
+}
+
+/* 0 · THE FIELD */
+function buildField(t){
+  const out=[]; const N=520;
+  for(let i=0;i<N;i++){
+    const y = 1 - (i/(N-1))*2;
+    const rad = Math.sqrt(Math.max(0,1-y*y));
+    const th = i * 2.399963;
+    const rr = R * (0.42 + 0.78*Math.pow((i%97)/97, 0.6));
+    const x = Math.cos(th)*rad*rr, z = Math.sin(th)*rad*rr, yy = y*rr;
+    const n = Perlin.n3(x*0.12, yy*0.12, z*0.12 + t*0.06);
+    const len = 0.16 + Math.abs(n)*0.55;
+    out.push([ x-Math.cos(n*7)*len, yy-Math.sin(n*5)*len, z-Math.cos(n*3+1.7)*len,
+               x+Math.cos(n*7)*len, yy+Math.sin(n*5)*len, z+Math.cos(n*3+1.7)*len ]);
+  }
+  return out;
+}
+/* 1 · COHERENCE */
+function buildTorus(){
+  const out=[]; const Rt=R*0.72, rt=R*0.29, NU=34, NV=12;
+  const P=(u,v)=>[ (Rt+rt*Math.cos(v))*Math.cos(u), rt*Math.sin(v), (Rt+rt*Math.cos(v))*Math.sin(u) ];
+  for(let i=0;i<NU;i++){
+    const u=i/NU*Math.PI*2;
+    for(let j=0;j<NV;j++) out.push(seg(P(u,j/NV*Math.PI*2), P(u,(j+1)/NV*Math.PI*2)));
+  }
+  for(let j=0;j<NV;j++){
+    const v=j/NV*Math.PI*2;
+    for(let i=0;i<NU;i++) out.push(seg(P(i/NU*Math.PI*2,v), P((i+1)/NU*Math.PI*2,v)));
+  }
+  return out;
+}
+/* 2 · RECOGNITION */
+function buildVesica(){
+  const r=R*0.66, d=r*0.5, out=[];
+  out.push(...sphereWire(-d,0,0, r, 6, 34));
+  out.push(...sphereWire( d,0,0, r, 6, 34));
+  const h = Math.sqrt(r*r - d*d);
+  out.push(...circleSegs(0,0,0, h, 'x', 72));
+  out.push(...circleSegs(0,0,0, h, 'z', 72));
+  return out;
+}
+/* 3 · DISCERNMENT */
+function buildTetra(){
+  const k=R*0.70;
+  const v=[[k,k,k],[k,-k,-k],[-k,k,-k],[-k,-k,k]];
+  const out=polyEdges(v, Math.hypot(2*k,2*k,0), 0.001);
+  const inv=v.map(p=>[-p[0]*0.42,-p[1]*0.42,-p[2]*0.42]);
+  out.push(...polyEdges(inv, Math.hypot(2*k*0.42,2*k*0.42,0), 0.001));
+  v.forEach(p=>out.push(seg([0,0,0],p)));
+  return out;
+}
+/* 4 · WAVE */
+function buildHex(t){
+  const out=[]; const a=R*0.168; const rings=4;
+  const cells=[];
+  for(let q=-rings;q<=rings;q++)
+    for(let s=Math.max(-rings,-q-rings); s<=Math.min(rings,-q+rings); s++)
+      cells.push([ a*1.5*q, a*Math.sqrt(3)*(s + q/2) ]);
+  const zOf=(x,y)=> Math.sin(x*0.50 - t*1.5)*1.15 + Math.cos(y*0.46 + t*1.1)*0.88;
+  cells.forEach(c=>{
+    const pts=[];
+    for(let i=0;i<6;i++){
+      const ang=Math.PI/180*(60*i);
+      const x=c[0]+a*Math.cos(ang), y=c[1]+a*Math.sin(ang);
+      pts.push([x, y, zOf(x,y)]);
+    }
+    for(let i=0;i<6;i++) out.push(seg(pts[i], pts[(i+1)%6]));
+  });
+  return out;
+}
+/* 5 · DIRECTION */
+function buildTesseract(t){
+  const s=R*0.46, out=[], v4=[];
+  for(let i=0;i<16;i++)
+    v4.push([ (i&1?1:-1)*s, (i&2?1:-1)*s, (i&4?1:-1)*s, (i&8?1:-1)*s ]);
+  const a=t*0.42, b=t*0.29;
+  const proj = p => {
+    let [x,y,z,w]=p;
+    let nx = x*Math.cos(a) - w*Math.sin(a); let nw = x*Math.sin(a) + w*Math.cos(a);
+    x=nx; w=nw;
+    let ny = y*Math.cos(b) - w*Math.sin(b); nw = y*Math.sin(b) + w*Math.cos(b);
+    y=ny; w=nw;
+    const k = 2.6/(3.2 - w/s);
+    return [x*k, y*k, z*k];
+  };
+  const p3=v4.map(proj);
+  for(let i=0;i<16;i++)
+    for(let j=i+1;j<16;j++){
+      const diff=i^j;
+      if((diff & (diff-1))===0) out.push(seg(p3[i],p3[j]));
+    }
+  return out;
+}
+/* 6 · TRANSMISSION */
+function buildDodeca(){
+  const phi=(1+Math.sqrt(5))/2, ip=1/phi, k=R*0.52, v=[];
+  for(const sx of [1,-1]) for(const sy of [1,-1]) for(const sz of [1,-1]) v.push([sx*k,sy*k,sz*k]);
+  for(const sy of [1,-1]) for(const sz of [1,-1]) v.push([0, sy*ip*k, sz*phi*k]);
+  for(const sx of [1,-1]) for(const sy of [1,-1]) v.push([sx*ip*k, sy*phi*k, 0]);
+  for(const sx of [1,-1]) for(const sz of [1,-1]) v.push([sx*phi*k, 0, sz*ip*k]);
+  const out=polyEdges(v, 2*ip*k, 0.0008*k+0.004);
+  const j=k*0.42, iv=[];
+  for(const s1 of [1,-1]) for(const s2 of [1,-1]){
+    iv.push([0, s1*j, s2*phi*j]); iv.push([s1*j, s2*phi*j, 0]); iv.push([s1*phi*j, 0, s2*j]);
+  }
+  out.push(...polyEdges(iv, 2*j, 0.004));
+  return out;
+}
+/* 7 · EXPRESSION */
+function buildEgg(){
+  const r=R*0.30, out=[], centers=[[0,0,0]];
+  for(let i=0;i<6;i++){
+    const a=i/6*Math.PI*2;
+    centers.push([Math.cos(a)*r*2, Math.sin(a)*r*2, 0]);
+  }
+  centers.push([0,0, r*1.63]);
+  centers.forEach(c=>out.push(...sphereWire(c[0],c[1],c[2], r, 4, 22)));
+  return out;
+}
+/* 8 · STRUCTURE */
+function buildOcta(){
+  const r=R*0.66, h=R*0.60, out=[], top=[], bot=[], mid=[];
+  for(let i=0;i<8;i++){
+    const a=i/8*Math.PI*2 + Math.PI/8;
+    top.push([Math.cos(a)*r,  h, Math.sin(a)*r]);
+    bot.push([Math.cos(a)*r, -h, Math.sin(a)*r]);
+    mid.push([Math.cos(a)*r*1.04, 0, Math.sin(a)*r*1.04]);
+  }
+  for(let i=0;i<8;i++){
+    out.push(seg(top[i], top[(i+1)%8]));
+    out.push(seg(bot[i], bot[(i+1)%8]));
+    out.push(seg(top[i], bot[i]));
+    out.push(seg(top[i], bot[(i+1)%8]));
+    out.push(seg(top[i], top[(i+3)%8]));
+    out.push(seg(bot[i], bot[(i+3)%8]));
+    out.push(mid[i], mid[(i+1)%8]);
+  }
+  return out;
+}
+/* 9 · SOURCE */
+function buildEnnea(){
+  const r=R*0.78, out=[];
+  const pt=i=>{
+    const a = -Math.PI/2 + (i%9)/9*Math.PI*2;
+    return [Math.cos(a)*r, Math.sin(a)*r, Math.sin(a*3)*R*0.10];
+  };
+  const hexad=[0,3,1,7,4,5,0];
+  for(let i=0;i<hexad.length-1;i++) out.push(seg(pt(hexad[i]), pt(hexad[i+1])));
+  const tri=[2,5,8,2];
+  for(let i=0;i<tri.length-1;i++) out.push(seg(pt(tri[i]), pt(tri[i+1])));
+  for(let i=0;i<9;i++){
+    out.push(seg(pt(i), pt((i+1)%9)));
+    out.push(seg([0,0,0], pt(i)));
+  }
+  out.push(...circleSegs(0,0,0, r*0.20, 'z', 48));
+  out.push(...circleSegs(0,0,0, r, 'z', 90));
+  return out;
+}
+
+const BUILDERS = [
+  {fn:buildField,     dynamic:true },
+  {fn:buildTorus,     dynamic:false},
+  {fn:buildVesica,    dynamic:false},
+  {fn:buildTetra,     dynamic:false},
+  {fn:buildHex,       dynamic:true },
+  {fn:buildTesseract, dynamic:true },
+  {fn:buildDodeca,    dynamic:false},
+  {fn:buildEgg,       dynamic:false},
+  {fn:buildOcta,      dynamic:false},
+  {fn:buildEnnea,     dynamic:false}
+];
+
+function resample(segs, target){
+  segs = segs.slice().sort((A,B)=>{
+    const am=Math.atan2((A[1]+A[4])/2,(A[0]+A[3])/2);
+    const bm=Math.atan2((B[1]+B[4])/2,(B[0]+B[3])/2);
+    if(am!==bm) return am-bm;
+    return ((A[2]+A[5])/2) - ((B[2]+B[5])/2);
+  });
+  const n=segs.length, out=new Float32Array(target*6);
+  if(n===0) return out;
+  const counts=new Array(n).fill(0);
+  for(let j=0;j<target;j++) counts[Math.floor(j*n/target)]++;
+  let o=0;
+  for(let i=0;i<n;i++){
+    const c=counts[i];
+    if(c===0) continue;
+    const s=segs[i];
+    for(let k=0;k<c && o<out.length;k++){
+      const t0=k/c, t1=(k+1)/c;
+      out[o++]=s[0]+(s[3]-s[0])*t0; out[o++]=s[1]+(s[4]-s[1])*t0; out[o++]=s[2]+(s[5]-s[2])*t0;
+      out[o++]=s[0]+(s[3]-s[0])*t1; out[o++]=s[1]+(s[4]-s[1])*t1; out[o++]=s[2]+(s[5]-s[2])*t1;
+    }
+  }
+  while(o<out.length){ out[o]=out[o-6]; o++; }
+  return out;
+}
+function bake(i, t){ return resample(BUILDERS[i].fn(t||0), SEG_TARGET); }
+
+const canvas = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x07080b, 0.0165);
+const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 400);
+camera.position.set(0, 0, 34);
+const world = new THREE.Group();
+scene.add(world);
+
+const VERT_COUNT = SEG_TARGET*2;
+const posArr  = new Float32Array(VERT_COUNT*3);
+let srcArr    = bake(0, 0);
+let tgtArr    = srcArr.slice();
+posArr.set(srcArr);
+
+const posAttr = new THREE.BufferAttribute(posArr, 3);
+posAttr.setUsage ? posAttr.setUsage(THREE.DynamicDrawUsage) : (posAttr.dynamic = true);
+
+const lineGeo = new THREE.BufferGeometry();
+lineGeo.setAttribute('position', posAttr);
+const lineMat = new THREE.LineBasicMaterial({ color:new THREE.Color(ACCENT_DARK[0]), transparent:true, opacity:0.78, depthWrite:false });
+const formLines = new THREE.LineSegments(lineGeo, lineMat);
+world.add(formLines);
+
+const haloGeo = new THREE.BufferGeometry();
+haloGeo.setAttribute('position', posAttr);
+const haloMat = new THREE.LineBasicMaterial({ color:new THREE.Color(ACCENT_DARK[0]), transparent:true, opacity:0.17, depthWrite:false });
+const formHalo = new THREE.LineSegments(haloGeo, haloMat);
+formHalo.scale.setScalar(1.035);
+world.add(formHalo);
+
+const nodeGeo = new THREE.BufferGeometry();
+nodeGeo.setAttribute('position', posAttr);
+const nodeMat = new THREE.PointsMaterial({ color:new THREE.Color(0xefe7d8), size:0.085, sizeAttenuation:true, transparent:true, opacity:0.55, depthWrite:false });
+const formNodes = new THREE.Points(nodeGeo, nodeMat);
+world.add(formNodes);
+
+/* Particles */
+const PCOUNT = 2200, PBOX = 62;
+const pPos = new Float32Array(PCOUNT*3);
+const pSeed = new Float32Array(PCOUNT);
+for(let i=0;i<PCOUNT;i++){
+  pPos[i*3]   = (Math.random()-0.5)*PBOX;
+  pPos[i*3+1] = (Math.random()-0.5)*PBOX*0.72;
+  pPos[i*3+2] = (Math.random()-0.5)*PBOX*0.6 - 8;
+  pSeed[i] = Math.random();
+}
+const pGeo = new THREE.BufferGeometry();
+const pAttr = new THREE.BufferAttribute(pPos,3);
+pAttr.setUsage ? pAttr.setUsage(THREE.DynamicDrawUsage) : (pAttr.dynamic=true);
+pGeo.setAttribute('position', pAttr);
+const pMat = new THREE.PointsMaterial({ color:new THREE.Color(0xbfb7a8), size:0.075, sizeAttenuation:true, transparent:true, opacity:0.42, depthWrite:false });
+scene.add(new THREE.Points(pGeo, pMat));
+
+/* Vector Currents */
+const CCOUNT = 460;
+const cPos = new Float32Array(CCOUNT*6);
+const cOrigin = new Float32Array(CCOUNT*3);
+for(let i=0;i<CCOUNT;i++){
+  cOrigin[i*3]   = (Math.random()-0.5)*PBOX*1.15;
+  cOrigin[i*3+1] = (Math.random()-0.5)*PBOX*0.8;
+  cOrigin[i*3+2] = (Math.random()-0.5)*40 - 18;
+}
+const cGeo = new THREE.BufferGeometry();
+const cAttr = new THREE.BufferAttribute(cPos,3);
+cAttr.setUsage ? cAttr.setUsage(THREE.DynamicDrawUsage) : (cAttr.dynamic=true);
+cGeo.setAttribute('position', cAttr);
+const cMat = new THREE.LineBasicMaterial({ color:new THREE.Color(0x6a6f82), transparent:true, opacity:0.20, depthWrite:false });
+scene.add(new THREE.LineSegments(cGeo, cMat));
+
+/* IK Serpent */
+const SJ = 78, SLEN = 0.66;
+const joints = [];
+for(let i=0;i<SJ;i++) joints.push(new THREE.Vector3(19 - i*SLEN, 6, -6));
+const sPos = new Float32Array(SJ*3);
+const sGeo = new THREE.BufferGeometry();
+const sAttr = new THREE.BufferAttribute(sPos,3);
+sAttr.setUsage ? sAttr.setUsage(THREE.DynamicDrawUsage) : (sAttr.dynamic=true);
+sGeo.setAttribute('position', sAttr);
+const sMat = new THREE.LineBasicMaterial({ color:new THREE.Color(0x9b7fd4), transparent:true, opacity:0.5, depthWrite:false });
+scene.add(new THREE.Line(sGeo, sMat));
+const sNodeMat = new THREE.PointsMaterial({ color:new THREE.Color(0xc9a227), size:0.12, sizeAttenuation:true, transparent:true, opacity:0.5, depthWrite:false });
+scene.add(new THREE.Points(sGeo, sNodeMat));
+const serpTarget = new THREE.Vector3();
+
+/* Butterfly Attractor */
+const butterfly = new THREE.Group();
+const wingMats = [];
+function wingShape(sign){
+  const s = new THREE.Shape();
+  s.moveTo(0, 0);
+  s.bezierCurveTo(sign*0.25, 0.62,  sign*1.06, 0.78,  sign*1.14, 0.20);
+  s.bezierCurveTo(sign*1.20,-0.14,  sign*0.86,-0.22,  sign*0.52,-0.10);
+  s.bezierCurveTo(sign*0.78,-0.30,  sign*0.84,-0.74,  sign*0.44,-0.80);
+  s.bezierCurveTo(sign*0.14,-0.84,  sign*0.02,-0.40,  0, 0);
+  const g = new THREE.ShapeGeometry(s, 18);
+  const m = new THREE.MeshBasicMaterial({ color:new THREE.Color(0xefe7d8), transparent:true, opacity:0.20, side:THREE.DoubleSide, depthWrite:false });
+  const pivot = new THREE.Group();
+  pivot.add(new THREE.Mesh(g, m));
+  const pts = s.getPoints(48);
+  const eg = new THREE.BufferGeometry().setFromPoints(pts.map(p=>new THREE.Vector3(p.x,p.y,0)));
+  const em = new THREE.LineBasicMaterial({ color:0xefe7d8, transparent:true, opacity:0.62, depthWrite:false });
+  pivot.add(new THREE.LineLoop(eg, em));
+  wingMats.push({fill:m, edge:em});
+  return pivot;
+}
+const wingL = wingShape(-1), wingR = wingShape(1);
+butterfly.add(wingL, wingR);
+const bodyMat = new THREE.LineBasicMaterial({ color:0xefe7d8, transparent:true, opacity:0.5, depthWrite:false });
+{
+  const bodyGeo = new THREE.BufferGeometry();
+  bodyGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0.34,0, 0,-0.46,0]),3));
+  butterfly.add(new THREE.Line(bodyGeo, bodyMat));
+}
+const sparkMat = new THREE.PointsMaterial({ color:0xc9a227, size:0.5, transparent:true, opacity:0.75, depthWrite:false });
+{
+  const sparkGeo = new THREE.BufferGeometry();
+  sparkGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0.1,0]),3));
+  butterfly.add(new THREE.Points(sparkGeo, sparkMat));
+}
+butterfly.scale.setScalar(1.15);
+scene.add(butterfly);
+const bPos = new THREE.Vector3(6, 3, 9);
+const bVel = new THREE.Vector3();
+const bTarget = new THREE.Vector3(6, 3, 9);
+
+/* Theme Engine */
+const THEMES = {
+  dark: {
+    bg:0x07080b, fog:0.0165, blend:THREE.AdditiveBlending, accents:ACCENT_DARK,
+    lineOp:0.78, haloOp:0.17, nodeC:0xefe7d8, nodeOp:0.55,
+    partC:0xbfb7a8, partOp:0.42, partMix:0.62,
+    curC:0x4a4f60,  curOp:0.20,  curMix:0.70,
+    serpC:0x9b7fd4, serpOp:0.50, serpMix:0.55, serpNodeC:0xc9a227,
+    wingFill:0.20, wingEdge:0.62, bodyOp:0.50, sparkC:0xc9a227,
+    mixTo:0xefe7d8
+  },
+  light: {
+    bg:0xf7f5f0, fog:0.0118, blend:THREE.NormalBlending, accents:ACCENT_LIGHT,
+    lineOp:0.88, haloOp:0.12, nodeC:0x1d1b18, nodeOp:0.55,
+    partC:0x8f887c, partOp:0.50, partMix:0.50,
+    curC:0xb3ac9f,  curOp:0.42,  curMix:0.55,
+    serpC:0xa2542a, serpOp:0.55, serpMix:0.50, serpNodeC:0x9a6b14,
+    wingFill:0.26, wingEdge:0.80, bodyOp:0.70, sparkC:0x9a6b14,
+    mixTo:0x1d1b18
+  }
+};
+let themeName = 'dark';
+let TH = THEMES.dark;
+const MIX_TO   = new THREE.Color(0xefe7d8);
+const PART_BASE= new THREE.Color(0xbfb7a8);
+const CUR_BASE = new THREE.Color(0x4a4f60);
+const SERP_BASE= new THREE.Color(0x9b7fd4);
+
+function hex(n){ return '#'+n.toString(16).padStart(6,'0'); }
+function ACC(i){ return TH.accents[i]; }
+
+function applyTheme(name, announceIt){
+  themeName = (name === 'light') ? 'light' : 'dark';
+  TH = THEMES[themeName];
+  document.documentElement.setAttribute('data-theme', themeName);
+
+  const blend = TH.blend;
+  [lineMat, haloMat, nodeMat, pMat, cMat, sMat, sNodeMat, bodyMat, sparkMat].forEach(m=>{
+    m.blending = blend; m.needsUpdate = true;
+  });
+  wingMats.forEach(w=>{
+    w.fill.blending = blend; w.fill.needsUpdate = true; w.fill.opacity = TH.wingFill;
+    w.edge.blending = blend; w.edge.needsUpdate = true; w.edge.opacity = TH.wingEdge;
+  });
+  nodeMat.color.set(TH.nodeC);   nodeMat.opacity = TH.nodeOp;
+  pMat.opacity = TH.partOp;      cMat.opacity = TH.curOp;
+  sMat.opacity = TH.serpOp;      sNodeMat.color.set(TH.serpNodeC);
+  bodyMat.opacity = TH.bodyOp;   sparkMat.color.set(TH.sparkC);
+
+  MIX_TO.set(TH.mixTo);
+  PART_BASE.set(TH.partC);
+  CUR_BASE.set(TH.curC);
+  SERP_BASE.set(TH.serpC);
+
+  scene.fog.density = TH.fog;
+  scene.fog.color.setHex(TH.bg);
+  renderer.setClearColor(TH.bg, 1);
+
+  col.from.setHex(ACC(current)); col.to.setHex(ACC(current)); col.cur.setHex(ACC(current));
+  lineMat.color.copy(col.cur); haloMat.color.copy(col.cur);
+  document.documentElement.style.setProperty('--state', hex(ACC(current)));
+
+  const label = themeName === 'dark' ? 'Dark' : 'Light';
+  document.getElementById('theme-label').textContent = label;
+  const tbtn = document.getElementById('btn-theme');
+  tbtn.setAttribute('aria-pressed', themeName === 'light' ? 'true' : 'false');
+  if(announceIt) announce('Theme: ' + (themeName === 'dark' ? 'dark obsidian' : 'light bone paper') + '.');
+}
+
+const Audio = (function(){
+  let ctx=null, master=null, filt=null, voices=[], started=false, muted=false;
+  const VOICES = 5;
+  const FLOOR = 0.00012;
+  const LEVEL = 0.16;
+
+  function ramp(param, target, dur){
+    const now = ctx.currentTime;
+    const from = Math.max(param.value, FLOOR);
+    param.cancelScheduledValues(now);
+    param.setValueAtTime(from, now);
+    param.exponentialRampToValueAtTime(Math.max(target, FLOOR), now + dur);
+  }
+  function init(){
+    if(started) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return;
+    try { ctx = new AC(); } catch(e){ return; }
+    master = ctx.createGain(); master.gain.value = FLOOR;
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -22; comp.ratio.value = 6;
+    filt = ctx.createBiquadFilter();
+    filt.type='lowpass'; filt.frequency.value = 760; filt.Q.value = 0.9;
+    filt.connect(master); master.connect(comp); comp.connect(ctx.destination);
+    for(let i=0;i<VOICES;i++){
+      const o = ctx.createOscillator();
+      o.type = i===0 ? 'sine' : (i%2 ? 'sine' : 'triangle');
+      o.frequency.value = 60;
+      o.detune.value = (i-2)*2.2;
+      const g = ctx.createGain(); g.gain.value = FLOOR;
+      o.connect(g); g.connect(filt); o.start();
+      voices.push({o,g});
+    }
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.055;
+    const lg = ctx.createGain(); lg.gain.value = 220;
+    lfo.connect(lg); lg.connect(filt.frequency); lfo.start();
+    started = true;
+    ramp(master.gain, LEVEL, 2.4);
+    apply(current, true);
+    ui();
+  }
+  function apply(i, hard){
+    if(!started) return;
+    const S = STATES[i], now = ctx.currentTime, tau = hard ? 0.2 : 0.75;
+    voices.forEach((v,k)=>{
+      const ratio = S.ratios[k];
+      if(ratio === undefined){ ramp(v.g.gain, FLOOR, hard ? 0.25 : 0.9); }
+      else {
+        v.o.frequency.setTargetAtTime(S.base*ratio, now, tau);
+        ramp(v.g.gain, 0.30/Math.pow(k+1,0.78), hard ? 0.25 : 0.9);
       }
     });
-    /* ── text size ── */
-    const textToggle = document.getElementById("textToggle");
-    const TEXT_STORE = "deiadora-textsize";
-    function applyTextSize(size) {
-      if (size === "large") {
-        root.setAttribute("data-textsize", "large");
-        textToggle.setAttribute("aria-pressed", "true");
-        textToggle.setAttribute("aria-label", "switch to normal text size");
-      } else {
-        root.removeAttribute("data-textsize");
-        textToggle.setAttribute("aria-pressed", "false");
-        textToggle.setAttribute("aria-label", "switch to larger text size");
-      }
+    filt.frequency.setTargetAtTime(520 + i*145, now, 1.1);
+  }
+  function toggle(){
+    if(!started){ init(); ui(); return; }
+    muted = !muted;
+    ramp(master.gain, muted ? FLOOR : LEVEL, 0.45);
+    ui();
+    announce(muted ? 'Audio paused.' : 'Audio resumed.');
+  }
+  function ui(){
+    const on = started && !muted;
+    const ro = document.getElementById('ro-audio');
+    if(ro) ro.textContent = on ? 'on' : 'off';
+    const lbl = document.getElementById('audio-label');
+    if(lbl) lbl.textContent = on ? 'Audio on' : 'Audio off';
+    const btn = document.getElementById('btn-audio');
+    if(btn) btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  function resume(){ if(ctx && ctx.state==='suspended') ctx.resume(); }
+  return { init, apply, toggle, resume, ui, get on(){ return started && !muted; } };
+})();
+document.getElementById('btn-audio').addEventListener('click', ()=>{ Audio.resume(); Audio.toggle(); });
+
+/* State Machine */
+let current = 0;
+let morphT = 1;
+let spinBoost = 0;
+let paused = false;
+let fontScale = 1;
+
+const col = { cur:new THREE.Color(ACCENT_DARK[0]), from:new THREE.Color(ACCENT_DARK[0]), to:new THREE.Color(ACCENT_DARK[0]) };
+const par = { pulse:STATES[0].pulse, amp:STATES[0].amp, spin:STATES[0].spin,
+              fPulse:STATES[0].pulse, fAmp:STATES[0].amp, fSpin:STATES[0].spin };
+
+const announcer = document.getElementById('a11y-announcer');
+function announce(msg){
+  announcer.textContent = '';
+  window.setTimeout(()=>{ announcer.textContent = msg; }, 60);
+}
+
+function morphDuration(){ return paused ? 0.45 : 1.55; }
+
+function paintHUD(i){
+  document.getElementById('bt-index').textContent = pad(i);
+  document.getElementById('bt-word').textContent  = '// ' + STATES[i].key;
+  document.getElementById('ro-state').textContent = pad(i) + ' ' + STATES[i].key;
+  document.getElementById('ro-color').textContent = SPECTRUM_NAMES[i];
+  [...document.querySelectorAll('.sel')].forEach((b,k)=>{
+    const on = k===i;
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+    b.tabIndex = on ? 0 : -1;
+  });
+  panel.setAttribute('aria-labelledby', 'tab-'+i);
+}
+
+function setState(i, initial){
+  i = ((i % 10) + 10) % 10;
+  if(i === current && !initial){ openPanel(); return; }
+  srcArr = posArr.slice();
+  tgtArr = bake(i, clock);
+  morphT = initial ? 1 : 0;
+  col.from.copy(col.cur); col.to.setHex(ACC(i));
+  par.fPulse=par.pulse; par.fAmp=par.amp; par.fSpin=par.spin;
+  current = i;
+  spinBoost = initial ? 0 : 1;
+  document.documentElement.style.setProperty('--state', hex(ACC(i)));
+  if(!paused){
+    document.body.classList.add('morphing');
+    window.setTimeout(()=>document.body.classList.remove('morphing'), morphDuration()*620);
+  }
+  paintHUD(i);
+  renderPanel(i);
+  if(!initial && window.innerWidth > 720) openPanel();
+  Audio.apply(i, false);
+  if(!initial){
+    const S = STATES[i];
+    announce('State ' + pad(i) + ', ' + S.key + ' — ' + S.regenPrinciple + '. Spectrum: ' + SPECTRUM_NAMES[i]);
+  }
+}
+
+const selNav = document.getElementById('selector');
+STATES.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='sel'; b.type='button'; b.id='tab-'+i;
+  b.setAttribute('role','tab');
+  b.setAttribute('aria-controls','panel');
+  b.setAttribute('aria-selected', i===0 ? 'true':'false');
+  b.tabIndex = i===0 ? 0 : -1;
+  b.setAttribute('aria-label', 'State ' + pad(i) + ', ' + s.key + ' — ' + s.regenPrinciple);
+  b.innerHTML = '<span class="tick" aria-hidden="true"></span><span class="num">'+pad(i)+'</span><span class="word" aria-hidden="true">'+s.key+'</span>';
+  b.addEventListener('click', e=>{ e.stopPropagation(); setState(i); });
+  selNav.appendChild(b);
+});
+selNav.addEventListener('keydown', e=>{
+  let next = null;
+  if(e.key === 'ArrowRight' || e.key === 'ArrowDown') next = current + 1;
+  else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = current - 1;
+  else if(e.key === 'Home') next = 0;
+  else if(e.key === 'End') next = 9;
+  if(next === null) return;
+  e.preventDefault(); e.stopPropagation();
+  setState(next);
+  document.getElementById('tab-'+current).focus();
+});
+
+const dialogs = {
+  about:    { scrim:document.getElementById('about-scrim'),    box:document.getElementById('about'),    trigger:document.getElementById('btn-about') },
+  dispatch: { scrim:document.getElementById('dispatch-scrim'), box:document.getElementById('dispatch'), trigger:null },
+  legal:    { scrim:document.getElementById('legal-scrim'),    box:document.getElementById('legal'),    trigger:null }
+};
+let lastFocus = null;
+let openDialogName = null;
+
+function refreshDispatch(i){
+  const idx = (i === undefined || i === null) ? current : i;
+  document.getElementById('dispatch-connection').href = connectionLink(idx);
+  document.getElementById('dispatch-collab').href     = collabLink(idx);
+  document.getElementById('dispatch-context').textContent =
+    'Regenerative Systems Architecture · State ' + pad(idx) + ' ' + STATES[idx].key;
+}
+function openDialog(name, ctx){
+  const d = dialogs[name];
+  if(!d) return;
+  if(name === 'dispatch') refreshDispatch(ctx);
+  lastFocus = document.activeElement;
+  d.scrim.classList.add('open');
+  openDialogName = name;
+  if(d.trigger) d.trigger.setAttribute('aria-expanded','true');
+  window.setTimeout(()=>{ d.box.querySelector('.close').focus(); }, 60);
+  announce(name === 'about' ? 'About dialog opened.' : (name === 'legal' ? 'Sovereign terms and privacy policy dialog opened.' : 'Direct channel opened.'));
+}
+function closeDialog(name){
+  const d = dialogs[name] || dialogs[openDialogName];
+  if(!d) return;
+  d.scrim.classList.remove('open');
+  if(d.trigger) d.trigger.setAttribute('aria-expanded','false');
+  openDialogName = null;
+  if(lastFocus && lastFocus.focus) lastFocus.focus();
+}
+Object.keys(dialogs).forEach(name=>{
+  const d = dialogs[name];
+  d.scrim.addEventListener('mousedown', e=>{ if(e.target === d.scrim) closeDialog(name); });
+  d.box.querySelector('.close').addEventListener('click', ()=>closeDialog(name));
+});
+document.getElementById('btn-about').addEventListener('click', ()=>openDialog('about'));
+document.getElementById('about-dispatch').addEventListener('click', ()=>{
+  closeDialog('about');
+  window.setTimeout(()=>openDialog('dispatch', current), 120);
+});
+
+/* Event delegation for dynamically rendered legal links */
+pbody.addEventListener('click', e=>{
+  const target = e.target.closest('[data-open="legal"]');
+  if(target){
+    e.preventDefault();
+    openDialog('legal');
+  }
+});
+
+function trapFocus(e){
+  if(!openDialogName || e.key !== 'Tab') return;
+  const box = dialogs[openDialogName].box;
+  const f = [...box.querySelectorAll('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])')]
+            .filter(el=>el.offsetParent !== null);
+  if(!f.length) return;
+  const first = f[0], last = f[f.length-1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+}
+
+function setMotion(next, announceIt){
+  paused = !next;
+  document.getElementById('ro-motion').textContent = paused ? 'paused' : 'live';
+  document.getElementById('motion-label').textContent = paused ? 'Motion off' : 'Motion on';
+  const b = document.getElementById('btn-motion');
+  b.setAttribute('aria-pressed', paused ? 'true' : 'false');
+  if(paused) document.body.classList.remove('morphing');
+  if(announceIt) announce(paused ? 'Motion paused.' : 'Motion resumed.');
+}
+document.getElementById('btn-motion').addEventListener('click', ()=>setMotion(paused, true));
+
+const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+let themeManual = false;
+document.getElementById('btn-theme').addEventListener('click', ()=>{
+  themeManual = true;
+  applyTheme(themeName === 'dark' ? 'light' : 'dark', true);
+});
+if(mqDark.addEventListener){
+  mqDark.addEventListener('change', e=>{ if(!themeManual) applyTheme(e.matches ? 'dark' : 'light', false); });
+}
+
+const FONT_MIN = 0.85, FONT_MAX = 1.50, FONT_STEP = 0.05;
+function setFontScale(v, announceIt){
+  fontScale = Math.max(FONT_MIN, Math.min(FONT_MAX, Math.round(v*100)/100));
+  document.documentElement.style.setProperty('--font-scale', String(fontScale));
+  const pct = Math.round(fontScale*100) + '%';
+  document.getElementById('font-label').textContent = pct;
+  document.getElementById('btn-fdown').disabled = fontScale <= FONT_MIN + 0.001;
+  document.getElementById('btn-fup').disabled   = fontScale >= FONT_MAX - 0.001;
+  if(announceIt) announce('Text size ' + pct + '.');
+}
+document.getElementById('btn-fdown').addEventListener('click', ()=>setFontScale(fontScale - FONT_STEP, true));
+document.getElementById('btn-fup').addEventListener('click',   ()=>setFontScale(fontScale + FONT_STEP, true));
+document.getElementById('btn-freset').addEventListener('click',()=>setFontScale(1, true));
+
+function isFormish(el){
+  return el && el.closest && !!el.closest('input,textarea,select,[contenteditable="true"]');
+}
+window.addEventListener('keydown', e=>{
+  if(openDialogName){
+    if(e.key === 'Escape'){ e.preventDefault(); closeDialog(openDialogName); return; }
+    trapFocus(e);
+    return;
+  }
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  if(isFormish(e.target)) return;
+  const k = e.key, low = typeof k === 'string' ? k.toLowerCase() : '';
+
+  if(k >= '0' && k <= '9'){ setState(parseInt(k,10)); return; }
+  if(low === 'm'){ Audio.toggle(); return; }
+  if(low === 't'){ themeManual = true; applyTheme(themeName === 'dark' ? 'light' : 'dark', true); return; }
+  if(low === 'a'){ togglePanel(); return; }
+  if(low === 'p'){ setMotion(paused, true); return; }
+  if(k === ' ' || k === 'Spacebar'){
+    if(e.target && e.target.closest && e.target.closest('button,a')) return;
+    e.preventDefault(); setMotion(paused, true); return;
+  }
+  if(k === '+' || k === '='){ e.preventDefault(); setFontScale(fontScale + FONT_STEP, true); return; }
+  if(k === '-' || k === '_'){ e.preventDefault(); setFontScale(fontScale - FONT_STEP, true); return; }
+  if(k === '?' || (k === '/' && e.shiftKey)){ e.preventDefault(); openDialog('about'); return; }
+  if(k === 'Escape'){ closePanel(); return; }
+  if(selNav.contains(e.target)) return;
+  if(k === 'ArrowRight' || k === 'ArrowDown'){ setState(current+1); }
+  if(k === 'ArrowLeft'  || k === 'ArrowUp'  ){ setState(current-1); }
+});
+
+const pointer = { nx:0, ny:0, down:false, dragged:false, sx:0, sy:0 };
+const orbit = { x:0, y:0, tx:0, ty:0 };
+window.addEventListener('pointermove', e=>{
+  pointer.nx = (e.clientX/window.innerWidth)*2 - 1;
+  pointer.ny = -((e.clientY/window.innerHeight)*2 - 1);
+  if(pointer.down){
+    pointer.dragged = true;
+    orbit.tx += (e.clientX - pointer.sx) * 0.0042;
+    orbit.ty += (e.clientY - pointer.sy) * 0.0030;
+    orbit.ty = Math.max(-0.7, Math.min(0.7, orbit.ty));
+    pointer.sx = e.clientX; pointer.sy = e.clientY;
+  }
+});
+canvas.addEventListener('pointerdown', e=>{
+  pointer.down=true; pointer.dragged=false; pointer.sx=e.clientX; pointer.sy=e.clientY;
+});
+window.addEventListener('pointerup', ()=>{ pointer.down=false; });
+canvas.addEventListener('click', ()=>{
+  if(!pointer.dragged) setState(current+1);
+});
+
+function resize(){
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w/h;
+  camera.fov = w < 700 ? 66 : 52;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+const ease = t => t<0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+const lerp = (a,b,t) => a + (b-a)*t;
+let clock = 0, last = performance.now();
+const _f = new THREE.Vector3(), _ndc = new THREE.Vector3(), _acc = new THREE.Vector3();
+
+function updateForm(dt, adt){
+  const S = STATES[current];
+  if(morphT < 1) morphT = Math.min(1, morphT + dt / morphDuration());
+  const e = ease(morphT);
+  if(BUILDERS[current].dynamic && morphT > 0.06 && (!paused || morphT < 1)) tgtArr = bake(current, clock);
+  const turb = paused ? 0 : (1 - Math.abs(2*morphT - 1)) * 1.9;
+
+  par.pulse = lerp(par.fPulse, S.pulse, e);
+  par.amp   = lerp(par.fAmp,   S.amp,   e);
+  par.spin  = lerp(par.fSpin,  S.spin,  e);
+  const amp = paused ? 0 : par.amp;
+
+  for(let i=0;i<posArr.length;i+=3){
+    let x = srcArr[i]   + (tgtArr[i]   - srcArr[i]  ) * e;
+    let y = srcArr[i+1] + (tgtArr[i+1] - srcArr[i+1]) * e;
+    let z = srcArr[i+2] + (tgtArr[i+2] - srcArr[i+2]) * e;
+    if(turb > 0.002){
+      const n = Perlin.n3(x*0.12 + clock*0.4, y*0.12, z*0.12);
+      const m = Perlin.n3(y*0.11 - clock*0.3, z*0.11, x*0.11);
+      x += n*turb; y += m*turb; z += (n+m)*0.5*turb;
     }
-    applyTextSize(localStorage.getItem(TEXT_STORE) || "normal");
-    textToggle.addEventListener("click", () => {
-      const next = root.hasAttribute("data-textsize") ? "normal" : "large";
-      if (next === "large") { localStorage.setItem(TEXT_STORE, "large"); }
-      else { localStorage.removeItem(TEXT_STORE); }
-      applyTextSize(next);
-    });
-  </script>
+    const p = 1 + amp * Math.sin(clock*par.pulse*2.6 + (x+y+z)*0.34);
+    posArr[i] = x*p; posArr[i+1] = y*p; posArr[i+2] = z*p;
+  }
+  posAttr.needsUpdate = true;
+
+  col.cur.copy(col.from).lerp(col.to, e);
+  lineMat.color.copy(col.cur);
+  haloMat.color.copy(col.cur);
+  lineMat.opacity = TH.lineOp - 0.18 + 0.18*Math.abs(Math.sin(clock*par.pulse));
+  haloMat.opacity = TH.haloOp*0.6 + TH.haloOp*0.7*(1-Math.abs(2*morphT-1));
+  nodeMat.opacity = TH.nodeOp*(0.58 + 0.42*e);
+
+  spinBoost *= Math.pow(0.16, dt);
+  const sp = par.spin * (1 + spinBoost*5.5);
+  formLines.rotation.y += sp*adt;
+  formLines.rotation.x += sp*0.31*adt;
+  formHalo.rotation.copy(formLines.rotation);
+  formNodes.rotation.copy(formLines.rotation);
+  formHalo.scale.setScalar(1.03 + (paused ? 0 : 0.02*Math.sin(clock*par.pulse*1.3)));
+
+  scene.fog.color.setHex(TH.bg);
+  renderer.setClearColor(TH.bg, 1);
+}
+
+function updateParticles(adt){
+  if(adt > 0){
+    for(let i=0;i<PCOUNT;i++){
+      const o=i*3;
+      flow(pPos[o], pPos[o+1], pPos[o+2], clock, _f);
+      const sp = 0.9 + pSeed[i]*1.5;
+      pPos[o]   += _f.x * adt * sp * 2.6;
+      pPos[o+1] += _f.y * adt * sp * 2.6 + adt*0.25;
+      pPos[o+2] += _f.z * adt * sp * 2.0;
+      if(pPos[o] >  PBOX*0.6) pPos[o] -= PBOX*1.2;
+      if(pPos[o] < -PBOX*0.6) pPos[o] -= PBOX*1.2;
+      if(pPos[o+1] >  PBOX*0.42) pPos[o+1] -= PBOX*0.84;
+      if(pPos[o+1] < -PBOX*0.42) pPos[o+1] += PBOX*0.84;
+      if(pPos[o+2] >  20) pPos[o+2] -= 56;
+      if(pPos[o+2] < -36) pPos[o+2] += 56;
+    }
+    pAttr.needsUpdate = true;
+  }
+  pMat.color.copy(col.cur).lerp(PART_BASE, TH.partMix);
+}
+
+function updateCurrents(){
+  for(let i=0;i<CCOUNT;i++){
+    const o=i*3, q=i*6;
+    const x=cOrigin[o], y=cOrigin[o+1], z=cOrigin[o+2];
+    flow(x,y,z,clock,_f);
+    const L = 1.5 + _f.length()*2.4;
+    cPos[q]=x; cPos[q+1]=y; cPos[q+2]=z;
+    cPos[q+3]=x+_f.x*L; cPos[q+4]=y+_f.y*L; cPos[q+5]=z+_f.z*L;
+  }
+  cAttr.needsUpdate = true;
+  cMat.color.copy(col.cur).lerp(CUR_BASE, TH.curMix);
+}
+
+function updateSerpent(adt){
+  if(adt > 0){
+    const a = clock*0.22;
+    const rx = 19 + Math.sin(clock*0.31)*3.4;
+    const ry = 11.5 + Math.cos(clock*0.27)*2.6;
+    serpTarget.set(
+      Math.cos(a)*rx + Perlin.n3(clock*0.3, 0, 0)*4,
+      Math.sin(a*1.31)*ry + Perlin.n3(0, clock*0.3, 0)*3.2,
+      Math.sin(a*0.7)*9 - 5
+    );
+    joints[0].lerp(serpTarget, Math.min(1, adt*2.3));
+    for(let i=1;i<SJ;i++){
+      const prev = joints[i-1], j = joints[i];
+      flow(j.x, j.y, j.z, clock, _f);
+      const und = Math.sin(clock*2.4 - i*0.30) * 2.2;
+      j.x += (_f.x*1.6 + und*0.35)*adt;
+      j.y += (_f.y*1.6 + und*0.45)*adt;
+      j.z += _f.z*adt*1.2;
+      const dx=j.x-prev.x, dy=j.y-prev.y, dz=j.z-prev.z;
+      const d=Math.hypot(dx,dy,dz) || 1e-6, k=SLEN/d;
+      j.set(prev.x + dx*k, prev.y + dy*k, prev.z + dz*k);
+      const o=i*3; sPos[o]=j.x; sPos[o+1]=j.y; sPos[o+2]=j.z;
+    }
+    sPos[0]=joints[0].x; sPos[1]=joints[0].y; sPos[2]=joints[0].z;
+    sAttr.needsUpdate = true;
+  }
+  sMat.opacity = TH.serpOp * (0.62 + (paused ? 0.25 : 0.38*Math.abs(Math.sin(clock*0.6))));
+  sMat.color.copy(col.cur).lerp(SERP_BASE, TH.serpMix);
+}
+
+function updateButterfly(dt, adt){
+  _ndc.set(pointer.nx, pointer.ny, 0.5).unproject(camera).sub(camera.position).normalize();
+  const t = (7 - camera.position.z) / (_ndc.z || -1e-6);
+  bTarget.copy(camera.position).addScaledVector(_ndc, t);
+  const halfH = Math.tan(camera.fov*Math.PI/360) * Math.abs(camera.position.z - 7);
+  const halfW = halfH * camera.aspect;
+  let rightLimit = halfW*0.86;
+  if(panel.classList.contains('open') && window.innerWidth > 920){
+    rightLimit = halfW*(1 - 2*Math.min(480, window.innerWidth*0.92)/window.innerWidth) * 0.92;
+  }
+  bTarget.x = Math.max(-halfW*0.86, Math.min(rightLimit, bTarget.x));
+  bTarget.y = Math.max(-halfH*0.80, Math.min(halfH*0.72, bTarget.y));
+
+  _acc.copy(bTarget).sub(bPos).multiplyScalar(4.4);
+  bVel.addScaledVector(_acc, dt);
+  bVel.multiplyScalar(Math.pow(0.028, dt));
+  bPos.addScaledVector(bVel, dt);
+  butterfly.position.copy(bPos);
+
+  const speed = bVel.length();
+  const flap = 0.62 + Math.min(1.5, speed*0.18);
+  const phase = paused ? 0.34 : Math.sin(clock * (7.5 + speed*1.1));
+  wingL.rotation.y =  phase*flap;
+  wingR.rotation.y = -phase*flap;
+  butterfly.rotation.z = Math.max(-0.6, Math.min(0.6, -bVel.x*0.035));
+  butterfly.rotation.x = Math.max(-0.5, Math.min(0.5,  bVel.y*0.022));
+  wingMats.forEach(w=>{
+    w.fill.color.copy(col.cur).lerp(MIX_TO, 0.55);
+    w.edge.color.copy(col.cur).lerp(MIX_TO, 0.45);
+  });
+  bodyMat.color.copy(MIX_TO);
+  butterfly.scale.setScalar(1.05 + Math.min(0.5, speed*0.02));
+}
+
+function frame(now){
+  requestAnimationFrame(frame);
+  let dt = Math.min(0.05, (now - last)/1000);
+  last = now;
+  const adt = paused ? 0 : dt;
+  clock += adt;
+
+  orbit.x += (orbit.tx + pointer.nx*0.30 - orbit.x) * Math.min(1, dt*2.4);
+  orbit.y += (orbit.ty - pointer.ny*0.20 - orbit.y) * Math.min(1, dt*2.4);
+  world.rotation.y = orbit.x;
+  world.rotation.x = orbit.y;
+
+  let shift = 0;
+  if(panel.classList.contains('open') && window.innerWidth > 920){
+    const panelPx = Math.min(480, window.innerWidth*0.92);
+    const vh = 2*Math.tan(camera.fov*Math.PI/360)*Math.abs(camera.position.z);
+    shift = -(panelPx/window.innerWidth) * (vh*camera.aspect) * 0.5;
+  }
+  world.position.x += (shift - world.position.x) * Math.min(1, dt*2.0);
+
+  updateForm(dt, adt);
+  updateParticles(adt);
+  updateCurrents();
+  updateSerpent(adt);
+  updateButterfly(Math.max(dt, 0.0001), adt);
+
+  camera.position.x += ((pointer.nx*2.4) - camera.position.x) * Math.min(1, dt*1.4);
+  camera.position.y += ((pointer.ny*1.6) - camera.position.y) * Math.min(1, dt*1.4);
+  camera.lookAt(0,0,0);
+
+  renderer.render(scene, camera);
+}
+
+/* Boot */
+(function boot(){
+  applyTheme(mqDark.matches ? 'dark' : 'light', false);
+  const mqMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  setMotion(!mqMotion.matches, false);
+  if(mqMotion.addEventListener) mqMotion.addEventListener('change', e=>setMotion(!e.matches, true));
+
+  setFontScale(1, false);
+  Audio.ui();
+  refreshDispatch(0);
+  setState(0, true);
+  requestAnimationFrame(frame);
+  window.setTimeout(()=>document.getElementById('veil').classList.add('gone'), 420);
+  window.setTimeout(()=>announce('DEIADORA Regenerative Systems Architecture. State 00: The Field loaded.'), 1200);
+})();
+
+window.SOMATIC = {
+  STATES,
+  setState, applyTheme, setMotion, setFontScale, openDialog,
+  get state(){ return current; },
+  get theme(){ return themeName; },
+  get motion(){ return paused ? 'paused' : 'live'; }
+};
+</script>
 </body>
 </html>

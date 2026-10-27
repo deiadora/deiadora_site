@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>DEIADORA — Regenerative Systems Architecture</title>
-<meta name="description" content="DEIADORA — Regenerative Systems Architecture. Designing multi-scalar ecosystems that return the human being to their own centre." />
+<meta name="description" content="DEIADORA — Regenerative Systems Architecture. The Geodesic Model: Designing multi-scalar ecosystems that return the human being to their own centre." />
 <meta name="robots" content="index, follow, noai, noimageai" />
 <meta name="tdm-reservation" content="1" />
 <meta name="color-scheme" content="dark light" />
@@ -13,7 +13,7 @@
 <link rel="icon" type="image/png" href="/deiadora_favicon.png" />
 <link rel="apple-touch-icon" href="/deiadora_favicon.png" />
 
-<!-- Open Graph / Social Sharing (Facebook, LinkedIn, iMessage, etc.) -->
+<!-- Open Graph / Social Sharing -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://deiadora.com/" />
 <meta property="og:title" content="DEIADORA — Regenerative Systems Architecture" />
@@ -562,7 +562,7 @@ body.morphing #bt-word{ opacity:0.03; letter-spacing:0.45em; }
 
     <p>When I brought that research into tech in late 2019, applying it to systems design and enterprise content operations was natural. I entered the industry with an acute sensitivity to interface mechanics: the tone of microcopy, the friction of user funnels, and the autonomic impact of digital tools. Software often designs quiet micro-hierarchies where the machine commands, the human complies, and attention is commodified.</p>
 
-    <p><strong>Regenerative Systems Architecture</strong> is the alternative. It is the discipline of engineering multi-scalar systems—digital interfaces, operating models, and team protocols—that safeguard cognitive agency, honor the nervous system, and return human beings to their own center. Today, I advise founders, engineering leaders, and ethical teams building sovereign systems engineered for mutual trust, structural clarity, and lasting viability.</p>
+    <p><strong>The Geodesic Resolution</strong> is the alternative: resolving the false choice between centralized corporate extraction and dogmatic, isolating decentralization. It is the discipline of engineering multi-scalar systems—digital interfaces, operating models, and team protocols—that safeguard cognitive agency, honor the nervous system, and return human beings to their own center. Today, I advise founders, engineering leaders, and ethical teams building sovereign systems engineered for mutual trust, structural clarity, and lasting viability.</p>
 
     <div class="offers" style="margin-top:1.4rem">
       <button class="offer" type="button" id="about-dispatch">Initiate connection with Deiadora <span class="arrow" aria-hidden="true">&#8594;</span></button>
@@ -601,7 +601,8 @@ body.morphing #bt-word{ opacity:0.03; letter-spacing:0.45em; }
     <h3>Part 1: Terms of Use &amp; Intellectual Property Custody</h3>
     <p>All content, architectural frameworks, mathematical representations, ethnographic models, case study narratives, audio compositions, and code published on <code>deiadora.com</code> and associated subdomains are the proprietary intellectual property and custodial work product of Deiadora Blanche.</p>
     <ul>
-      <li><strong>Prohibition on Automated Scraping &amp; AI Training:</strong> No portion of this site may be scraped, crawled, ingested, vectorized, tokenized, or used as training data for machine learning models or generative AI without an explicit written commercial license. Technical anti-mining protocols (<code>noai</code>, <code>noimageai</code>, <code>tdm-reservation</code>) are strictly asserted.</li>
+      <li><strong>Creative Commons License:</strong> Conceptual frameworks and open operational playbooks published under DEIADORA are licensed under <strong>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</strong>. Teams are granted free use for internal alignment provided attribution to Deiadora Blanche remains intact. Commercial resale, third-party licensing, or derivative monetization is strictly prohibited.</li>
+      <li><strong>Prohibition on Automated Scraping &amp; AI Training:</strong> No portion of this site may be scraped, crawled, ingested, vectorized, tokenized, or used as training data for machine learning models or generative AI without an explicit written commercial license. Technical anti-mining protocols (<code>noai</code>, <code>noimageai</code>, <code>tdm-reservation: 1</code>) are strictly asserted.</li>
       <li><strong>Limited Permitted Use:</strong> Visitors are granted a revocable, non-exclusive license to view materials solely for personal evaluation, peer engagement, or hiring/contract assessment. Republishing, derivative framework repackaging, or unauthorized commercial endorsement is prohibited.</li>
       <li><strong>Non-Extractive Boundaries:</strong> Reviewing materials does not establish a fiduciary or binding advisory relationship. Advisory engagements are governed strictly by separate written agreements.</li>
     </ul>
@@ -797,10 +798,12 @@ const STATES = [
   anchor:"Egg of Life",
   physio:"Laryngeal / pharyngeal musculature",
   regenPrinciple:"Embodied Delivery",
-  sovereignty:"Deep qualitative principles collapse into tangible, uncompromising code and tactile physical execution.",
-  interconnection:"Proves to the broader market that ethical, whole-human standards produce commercially viable, high-performance systems.",
+  sovereignty:"The Geodesic Resolution: Deep qualitative principles collapse into tangible, non-depleting code, clear handoffs, and tactile physical execution.",
+  interconnection:"Proves that software systems can achieve fluid, high-utility interconnection without extractive capture, and sovereign boundaries without isolated fragmentation.",
   designStandard:"Ethics without execution is sentimentality; whole-human architecture must ship as functional, high-craft production reality.",
-  quantum:"Wave function collapse — expression is the collapse of internal coherence into external signal: the moment the wave becomes word."
+  quantum:"Wave function collapse — expression is the collapse of internal coherence into external signal: the moment the wave becomes word.",
+  actionUrl:"https://techtuition.ai",
+  actionLabel:"Explore Techtuition: The Geodesic Model in practice"
 },
 {
   key:"STRUCTURE",
@@ -870,6 +873,11 @@ function renderPanel(i){
   const S = STATES[i];
   const year = new Date().getFullYear();
 
+  // Dynamic secondary CTA: If on Node 07, link directly to Techtuition!
+  const secondaryOffer = S.actionUrl 
+    ? `<a class="offer secondary" href="${S.actionUrl}" target="_blank" rel="noopener noreferrer"><span>${S.actionLabel}</span> <span class="arrow" aria-hidden="true">&#8599;</span></a>`
+    : `<a class="offer secondary" href="${collabLink(i)}"><span>Inquire about collaboration or advisory</span> <span class="arrow" aria-hidden="true">&#8594;</span></a>`;
+
   pbody.innerHTML = `
     <div class="p-head">
       <div class="p-idx">${pad(i)}</div>
@@ -915,13 +923,13 @@ function renderPanel(i){
       <h3>Explore More</h3>
       <div class="offers">
         <a class="offer" href="${connectionLink(i)}"><span>Initiate connection with Deiadora</span> <span class="arrow" aria-hidden="true">&#8594;</span></a>
-        <a class="offer secondary" href="${collabLink(i)}"><span>Inquire about collaboration or advisory</span> <span class="arrow" aria-hidden="true">&#8594;</span></a>
+        ${secondaryOffer}
       </div>
     </section>
 
     <footer class="p-foot">
       <div><strong>DEIADORA</strong> — Regenerative Systems Architecture.</div>
-      <div>Sole practitioner. Thirteen years of cross-scale ethnographic field observation; M.S. Innovation &amp; Entrepreneurship.</div>
+      <div>Sole practitioner. Thirteen years of cross-scale ethnographic field observation; M.S. Innovation &amp; Entrepreneurship. Licensed under CC BY-NC-SA 4.0.</div>
       <div class="p-foot-expand">
         <div>Follow along as the topology expands: music, narrative fiction, research, and more.</div>
         <div class="p-socials">
@@ -938,7 +946,7 @@ function renderPanel(i){
         </div>
       </div>
       <div class="p-legal-row">
-        <div>&copy; <span class="cr-year">${year}</span> Deiadora Blanche. All rights reserved.</div>
+        <div>&copy; <span class="cr-year">${year}</span> Deiadora Blanche. All rights reserved. &middot; CC BY-NC-SA 4.0</div>
         <button type="button" class="btn-legal-link" data-open="legal">Sovereign Terms &amp; Privacy</button>
       </div>
     </footer>
@@ -1151,16 +1159,16 @@ function buildEnnea(){
 }
 
 const BUILDERS = [
-  {fn:buildField,     dynamic:true },
-  {fn:buildTorus,     dynamic:false},
-  {fn:buildVesica,    dynamic:false},
-  {fn:buildTetra,     dynamic:false},
-  {fn:buildHex,       dynamic:true },
+  {fn:buildField,      dynamic:true },
+  {fn:buildTorus,      dynamic:false},
+  {fn:buildVesica,     dynamic:false},
+  {fn:buildTetra,      dynamic:false},
+  {fn:buildHex,        dynamic:true },
   {fn:buildTesseract, dynamic:true },
-  {fn:buildDodeca,    dynamic:false},
-  {fn:buildEgg,       dynamic:false},
-  {fn:buildOcta,      dynamic:false},
-  {fn:buildEnnea,     dynamic:false}
+  {fn:buildDodeca,     dynamic:false},
+  {fn:buildEgg,        dynamic:false},
+  {fn:buildOcta,       dynamic:false},
+  {fn:buildEnnea,      dynamic:false}
 ];
 
 function resample(segs, target){
@@ -1362,10 +1370,10 @@ function applyTheme(name, announceIt){
     w.fill.blending = blend; w.fill.needsUpdate = true; w.fill.opacity = TH.wingFill;
     w.edge.blending = blend; w.edge.needsUpdate = true; w.edge.opacity = TH.wingEdge;
   });
-  nodeMat.color.set(TH.nodeC);   nodeMat.opacity = TH.nodeOp;
-  pMat.opacity = TH.partOp;      cMat.opacity = TH.curOp;
-  sMat.opacity = TH.serpOp;      sNodeMat.color.set(TH.serpNodeC);
-  bodyMat.opacity = TH.bodyOp;   sparkMat.color.set(TH.sparkC);
+  nodeMat.color.set(TH.nodeC);    nodeMat.opacity = TH.nodeOp;
+  pMat.opacity = TH.partOp;       cMat.opacity = TH.curOp;
+  sMat.opacity = TH.serpOp;       sNodeMat.color.set(TH.serpNodeC);
+  bodyMat.opacity = TH.bodyOp;    sparkMat.color.set(TH.sparkC);
 
   MIX_TO.set(TH.mixTo);
   PART_BASE.set(TH.partC);
